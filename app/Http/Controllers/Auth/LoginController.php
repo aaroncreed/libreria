@@ -28,6 +28,12 @@ class LoginController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
+
+      public function username()
+    {
+        return 'Claveusr';
+    }
+
     /**
      * Create a new controller instance.
      *
@@ -37,4 +43,35 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    // public function authenticate(Request $request)
+    // {
+    //     dd($request);
+    //     $this->validateLogin($request);
+
+    //     if ($this->hasTooManyLoginAttempts($request)) {
+    //         $this->fireLockoutEvent($request);
+
+    //         $seconds = $this->limiter()->availableIn(
+    //             $this->throttleKey($request)
+    //         );
+
+    //         throw ValidationException::withMessages([
+    //             $this->username() => [Lang::get('auth.throttle', ['seconds' => $seconds])],
+    //             'seconds' => $seconds
+    //         ])->status(429);
+    //     }
+
+    //     $credentials = $request->only('correo_electronico', 'password');
+    //     $value = session('ruta');
+    //     if (Auth::attempt($credentials)) {
+    //         $request->session()->regenerate();
+    //         $this->clearLoginAttempts($request);
+    //         return response()->json(array('ok' => "si", "nombre" => Auth::User()->nombre,"dependencia"=>Auth::User()->FK_dependencia, "ruta" => $value));
+    //     } else {
+    //         $this->incrementLoginAttempts($request);
+    //         return $this->sendFailedLoginResponse($request);
+    //     }
+    // }
+   
 }

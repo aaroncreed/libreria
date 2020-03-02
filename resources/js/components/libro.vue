@@ -353,7 +353,7 @@ ref="form"
       
     ></v-text-field>
  -->
-     <v-col cols="12" lg="4">
+ <!--     <v-col cols="12" lg="4">
         <v-menu
           v-model="menu1"
           :close-on-content-click="false"
@@ -376,8 +376,8 @@ ref="form"
           </template>
           <v-date-picker v-model="fechaColofon" name="fechaColofon"  @input="menu1 = false"></v-date-picker>
         </v-menu>
-        <!-- <p>Date in ISO format: <strong>{{ fecalta }}</strong></p> -->
-      </v-col>
+      
+      </v-col> -->
   <v-col cols="12" lg="4">
         <v-menu
           v-model="menu2"
@@ -679,7 +679,7 @@ data.append('Claveunimed', this.Claveunimed.hasOwnProperty("id_medida") ? this.C
 
   data.append('Numeropag',this.Numeropag)
 
-  data.append('fechaColofon',this.fechaColofon)
+  // data.append('fechaColofon',this.fechaColofon)
 
   data.append('Tema',this.Tema)
 

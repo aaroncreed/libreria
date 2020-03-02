@@ -7,14 +7,32 @@ use App\libros as Literal;
 use App\tipocliente;
 use App\tipocobro;
 use App\casaeditorial;
+use App\proveedor;
+use App\entradas;
+use App\entradas_detalles;
+use App\tipoentrada;
 use mysql_xdevapi\Exception;
-
+use DB;
 class libros extends Controller
 {
     //
+     public function menu()
+    {
+        return view('ingresarLibro/menu');
+    }
     public function index()
     {
     	return view('ingresarLibro/libro');
+    }
+    public function ingresar()
+    {
+                $proveedor=proveedor::get();
+$libros=Literal::get();
+// $tipocliente=tipocliente::get();
+$tipoentrada=tipoentrada::get(); 
+
+
+        return view('ingresarLibro/ingresarLibros',compact("libros","proveedor","tipoentrada"));
     }
     public function vender()
     {
@@ -136,6 +154,114 @@ try{
 //            dd($e->getMessage());
             return response()->json(["resultado"=>$e->getMessage()]);
         }
+
+
+    }
+
+    public function guardarEntrada(Request $request)
+    {
+        // dd(json_decode($request->factura));
+        // dd(json_decode($request->partes));
+$id_factura=0;
+
+
+try {
+ DB::beginTransaction();
+
+$factura=json_decode($request->factura);
+$entradas=json_decode($request->partes);
+
+
+$numeroEntradas=0;
+$arreglo=[];
+foreach ($entradas as $key => $value) {
+    # code...
+$numeroEntradas=count($value);
+$arreglo[$key]=$value;
+
+}
+
+// abort(403, 'Unauthorized action.');
+
+  $flight = entradas::create([
+"ClaveEnt"=>"",
+ "Fecrecepcion"=>\Carbon\Carbon::parse($factura->fechaRecepcion)->format('Y-m-d'),
+ "Fecenvio"=>\Carbon\Carbon::parse($factura->fechaEnvio)->format('Y-m-d'),
+ "Totalfac"=>$factura->totalFactura, 
+"Referencia"=>$factura->Referencia,
+ "Clavetipent"=>$factura->tipoEntrada,
+ "Observaciones"=>$factura->Observacion,
+ "Claveprov"=>$factura->Proveedor,
+ "Usrrecibio"=>"",
+ "Fecfiniquito"=>\Carbon\Carbon::today('America/Mexico_City')->format('Y-m-d'),
+ "fecfinconsigna"=>\Carbon\Carbon::parse($factura->fechaConsignacion)->format('Y-m-d'),
+ "Usralta"=>""
+
+  ]);
+  $hoy=\Carbon\Carbon::today('America/Mexico_City')->format('Y-m-d');
+  $flight->ClaveEnt=$flight->id_entrada."-".$hoy;
+  $flight->save();
+  $id_factura=$flight->id_entrada;
+
+for ($i=0; $i < count($value); $i++) { 
+    $entradas_detalles = new entradas_detalles;
+    $entradas_detalles->Claveent=$flight->id_entrada;
+  
+    # code...
+        // dd($key,$value[$i]);
+$colofon=$entradas->fechaColofonArticulo[$i]!="" ? $entradas->fechaColofonArticulo[$i]: null;
+$entradas_detalles = entradas_detalles::create(["Claveent"=>$flight->id_entrada, 
+    "Codigobarr"=>intval($entradas->pk_libro[$i]), 
+    "Cantidad"   =>intval($entradas->cantidadArticulo[$i]), 
+    "Preciolista"=>floatval($entradas->precioUnitarioProducto[$i]),
+     "Descprov" =>floatval($entradas->descuentoCompraArticulo[$i]), 
+     "Claveprov"=>floatval($entradas->descuentoVentaArticulo[$i])
+     , "Observación"=>$entradas->ObservacionArticulo[$i]
+     , "fechaColofon"=>$colofon]);
+
+
+
+
+
+
+
+
+
+ $entradas_detalles->save();
+
+
+ $libro = Literal::where('id_libro', intval($entradas->pk_libro[$i]))->first();
+$libro->Existencia+=intval($entradas->cantidadArticulo[$i]);
+$libro->Costo=floatval($entradas->descuentoCompraArticulo[$i]);
+$libro->Preciolista=floatval($entradas->precioUnitarioProducto[$i]);
+$libro->Descuento=floatval($entradas->descuentoVentaArticulo[$i]);
+
+ $libro->save();
+    
+}
+  DB::commit();
+    
+} catch (\Exception $e) {
+    DB::rollBack();
+    return response()->json([
+"ok"=>false,
+"mensaje"=>$e->getMessage(),
+"id"=>$id_factura
+]);
+
+
+}
+
+return response()->json([
+"ok"=>true,
+"mensaje"=>"todoCorrecto",
+"id"=>$id_factura
+]);
+
+ // $entrada = entradas_detalles::create(["Claveent", "Codigobarr", "Cantidad", "Preciolista", "Descprov", "Claveprov", "Observación", "fechaColofon"]
+
+
+
 
 
     }

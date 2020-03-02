@@ -16,15 +16,17 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
+Route::post("/loguiar","Auth\CustomLoginController@authenticate");
 // Route::get('/home', 'HomeController@index')->name('home');
  Route::get('/libro', 'libros@index')->name('home');
  Route::get('/vender', 'libros@vender')->name('vender');
+ Route::get('/ingresar', 'libros@ingresar')->name('ingresar');
  Route::get('/conf', 'libros@conf')->name('conf');
-
+Route::get('/home', 'libros@menu')->name('home');
 
 
   Route::post('/guardarLibro', 'libros@guardar')->name('home');
+
 
   Route::get('/insertasEditorial', 'casaeditorial@ingresarEditorial')->name('insertasEditorial');
    Route::get('/obtenerEditorial', 'casaeditorial@obtenerEditorial')->name('obtenerEditorial');
@@ -34,7 +36,12 @@ Auth::routes();
     Route::post('/verificarExistencia','libros@verificarExistencia');
     Route::post('/verificarExistenciaFinal','libros@verificarExistenciaFinal');
 
+    Route::post('/guardarEntrada',"libros@guardarEntrada");
+
 Route::get('/ticket', 'libros@ticket')->name('ticket');
+
+
+
 
 
 

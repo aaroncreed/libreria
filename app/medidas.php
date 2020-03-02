@@ -11,7 +11,7 @@ class medidas extends Model
          protected $primaryKey = "id_medida";
     protected $table = "medidas";
     protected $fillable = ["Clavemed","Descmed"];
-
+public $timestamps = false;
 
     public static function ingresarMedida()
     {
