@@ -24,6 +24,12 @@ class libros extends Controller
     {
     	return view('ingresarLibro/libro');
     }
+    public function devoluciones()
+    {
+        $entradas=entradas::with("detalles","catalogoTipoEntrada","catalogoProveedor")->get();
+         // dd($entradas);
+        return view('ingresarLibro/devolverLibro',compact("entradas"));
+    }
     public function ingresar()
     {
                 $proveedor=proveedor::get();

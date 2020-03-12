@@ -23,7 +23,10 @@ Route::post("/loguiar","Auth\CustomLoginController@authenticate");
  Route::get('/ingresar', 'libros@ingresar')->name('ingresar');
  Route::get('/conf', 'libros@conf')->name('conf');
 Route::get('/home', 'libros@menu')->name('home');
+Route::get('/devoluciones', 'libros@devoluciones')->name('devoluciones');
 
+
+Route::get('/devolverEntrada/{id}',"entradas@devolverEntrada");
 
   Route::post('/guardarLibro', 'libros@guardar')->name('home');
 

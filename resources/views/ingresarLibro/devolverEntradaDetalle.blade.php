@@ -1,35 +1,135 @@
+
 @extends('dashboard.main')
 
 @section('content')
 <div class="container">
-	    @include('ingresarLibro/modal/ingresarlibro2')
+
+<div class="card text-center">
+  <div class="card-header">
+    Ingresar Factura
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Detalle de Factura</h5>
+  <form class="form-horizontal" role="form" id="datos_factura">
+        <div class="form-group row col-md-12">
+          <label for="Proveedor" class="col-md-2 control-label">Proveedor</label>
+          <div class="col-md-6">
+          <select class="form-control " name="Proveedor" id="Proveedor" required="true">
+             @if(!empty($proveedor))
+                @foreach($proveedor as $tipocl)
+
+      <option value="{{$tipocl->id_proveedor }}">{{$tipocl->Empresa}}</option>
+
+     @endforeach
+     @endif
+                </select>
+          </div>
+
+         </div>
+     
+         <div class="row form-group col-sm-12 h-50" id="datosCliente">
+         	          <div class="form-group row col-sm-12">
+          <label for="tipoEntrada" class="col-md-2 control-label">Tipo de Entrada</label>
+          <div class="col-md-6">
+          <select class="form-control " name="tipoEntrada" id="tipoEntrada" required="true">
+             @if(!empty($tipoentrada))
+                @foreach($tipoentrada as $tipoe)
+
+      <option value="{{$tipoe->id_tipoEntrada  }}">{{$tipoe->Desctipent}}</option>
+
+     @endforeach
+     @endif
+                </select>
+          </div>
+
+         </div>
+          <div class="row col-sm-12 h-50">
+              <div id="fechaConsignacionMostrar" class="col-sm-6 collapse show">
+               <label for="fechaConsignacion" class="col-md-6 control-label">Fecha consignacion</label>
+              <div class="col-md-6">
+                <input type="date" class="form-control " name="fechaConsignacion" id="fechaConsignacion" value="{{ Carbon\Carbon::today('America/Mexico_City')->format('Y-m-d')}}" >
+              </div>
+          </div>
+          </div>
+         </div>
 
 
-<div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <h1 class="display-4">Devoluciones</h1>
-    <div class="table-responsive">
-  <table class="table">
-   <thead>
-    <th>Escoger</th>
-     <th>"ClaveEnt"</th>
-<th> "Fecrecepcion"</th>
-<th> "Fecenvio"</th>
-<th> "Totalfac"</th>
-<th> "Referencia"</th>
-<th> "Clavetipent"</th>
-<th> "Observaciones"</th>
-<th> "Claveprov"</th>
-<th> "Usrrecibio"</th>
-<th> "Fecfiniquito"</th>
-<th> "fecfinconsigna"</th>
-<th> "Usralta</th>
-   </thead>
-   <tbody>
-     @if(!empty($entradas))
-     @foreach($entradas as $entr)
+            <div class="form-group row col-md-12">
+
+              <label for="fechaEnvio" class="col-md-2 control-label">Fecha Envio</label>
+              <div class="col-md-4">
+                <input type="date" class="form-control " name="fechaEnvio" id="fechaEnvio" value="{{ Carbon\Carbon::today('America/Mexico_City')->format('Y-m-d')}}" required="true">
+              </div>
+
+               <label for="fechaRecepcion" class="col-md-2 control-label">Fecha Recepcion</label>
+              <div class="col-md-4">
+                <input type="date" class="form-control " name="fechaRecepcion" id="fechaRecepcion" value="{{ Carbon\Carbon::today('America/Mexico_City')->format('Y-m-d')}}" required="true">
+              </div>
+
+<label for="totalFactura" class="col-md-2 control-label">Total Factura</label>
+              <div class="col-md-4">
+                <input type="number" class="form-control " name="totalFactura" id="totalFactura" value="" required="true">
+              </div>
+
+<label for="Referencia" class="col-md-2 control-label">Referencia</label>
+              <div class="col-md-4">
+                <input type="text" class="form-control " name="Referencia" id="Referencia" value="" maxlength="30" required="true">
+              </div>
+
+            </div>
+<div class="form-group row col-md-12">
+	<label for="Observacion" class="col-md-2 control-label">Observacion</label>
+              <div class="col-md-4">
+           
+                <textarea class="form-control " name="Observacion" id="Observacion" value="" maxlength="60"></textarea>
+              </div>
+</div>
+
+
+
+
+        <div class="col-md-12">
+
+          <div class="pull-right">
+            <!-- <button type="button" class="btn btn-default" data-toggle="modal" data-target="#nuevoProducto">
+             <span class="glyphicon glyphicon-plus"></span> Nuevo productobootstrap.js
+bootstrap.min.js
+            </button> -->
+          <button id="ingresarProducto" class="btn btn-primary">Ingresar Entrada</button>
+  
+
+          </div>
+        </div>
+      </form>
+   
+  </div>
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">
+             <span class="glyphicon glyphicon-search"></span> Agregar productos
+            </button>
+  <div class="card-footer text-muted">
+    <div id="resultados" class="col-md-12 table-responsive " style="margin-top:10px">
+<form id="articulosFacturaForm">
+      <table class="table" id="articulosFactura">
+      <thead>
+        <tr>
+  <th class="text-center">CODIGO</th>
+  <th class="text-center">CANT.</th>
+  <th>DESCRIPCION</th>
+    <th>Descuento Compra</th>
+  <th>Descuento venta</th>
+  <th class="text-right">PRECIO UNIT.</th>
+  <th class="text-left">OBSERVACIONES</th>
+  <th class="text-left">PRECIO TOTAL</th>
+  <th class="text-left">FECHA COLOFON</th>
+  <th>Accion</th>
+</tr>
+      </thead>
+<tbody id="ProductosNuevos">
+ @if(!empty($detalles))
+     @foreach($detalles as $entr)
+     "Claveent", "Codigobarr", "Cantidad", "Preciolista", "Descprov", "Claveprov", "Observación", "fechaColofon"
      <tr>
-      <td><a class="btn btn-info" href="/devolverEntrada/{{$entr->id_entrada}}">Devolver</a></td>
+      <td><a class="btn btn-info" href="/devolverEntradaEspecifica/{{$entr->ClaveEnt}}/{{$entr->id_detallleEntrada}}">Devolver</a></td>
        <td>{{$entr->ClaveEnt}}</td>
        <td>{{$entr->Fecrecepcion}}</td>
        <td>{{$entr->Fecenvio}}</td>
@@ -46,17 +146,27 @@
      </tr>
      @endforeach
      @endif
-   </tbody>
-  </table>
-</div>
-    <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+
+</tbody>
+<tr>
+  <td class="text-right" colspan="4">SUBTOTAL $</td>
+  <td class="text-right" id="subtotal">0.00</td>
+  <td></td>
+</tr>
+
+<tr>
+  <td class="text-right" colspan="4">TOTAL $</td>
+  <td class="text-right" id="totalCompleto">0.00</td>
+  <td></td>
+</tr>
+
+</table>
+</form>
+</div><!-- Carga los datos ajax -->
   </div>
 </div>
-
-
-	
 </div>
-    <script type="text/javascript">
+<script type="text/javascript">
     var data =  {!! json_encode(!empty($libros)? $libros: "" ) !!};
    var proveedor =  {!! json_encode(!empty($proveedor)? $proveedor: "" ) !!};
       var tipoentrada =  {!! json_encode(!empty($tipoentrada)? $tipoentrada: "" ) !!};

@@ -24,4 +24,16 @@ public $timestamps = false;
 SELECT id_medida,Clavemed,Descmed 
 FROM `medidas` ");
     }
+    public function detalles()
+    {
+        return $this->hasMany("App\\entradas_detalles","Claveent","id_entrada")->with("libro");
+    }
+    public function catalogoTipoEntrada()
+    {
+        return $this->belongsTo("App\\tipoentrada","Clavetipent");
+    }
+    public function catalogoProveedor()
+    {
+        return $this->belongsTo("App\proveedor","Claveprov");
+    }
 }

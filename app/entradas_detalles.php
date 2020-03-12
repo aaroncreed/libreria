@@ -12,4 +12,9 @@ class entradas_detalles extends Model
     protected $fillable = [ "Claveent", "Codigobarr", "Cantidad", "Preciolista", "Descprov", "Claveprov", "Observación", "fechaColofon"];
 
 public $timestamps = false;
+
+	public function libro()
+	{
+		return $this->belongsTo("App\libros","Codigobarr");
+	}
 }

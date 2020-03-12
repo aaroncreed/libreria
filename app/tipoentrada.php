@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class tipoentrada extends Model
 {
     //
-             protected $primaryKey = "id_tipoEntrada ";
+             protected $primaryKey = "id_tipoEntrada";
     protected $table = "tipoentrada";
     protected $fillable = [ 
 "Tipoent",
