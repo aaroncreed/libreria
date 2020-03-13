@@ -17,6 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::post("/loguiar","Auth\CustomLoginController@authenticate");
+Route::post('/realizarDevolucion','entradas_detalle@realizarDevolucion');
 // Route::get('/home', 'HomeController@index')->name('home');
  Route::get('/libro', 'libros@index')->name('home');
  Route::get('/vender', 'libros@vender')->name('vender');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\entradas_detalles;
+use App\entradas as entra;
 class entradas extends Controller
 {
     //
@@ -11,8 +12,9 @@ class entradas extends Controller
     {
     	
     	$detalles=entradas_detalles::with("libro")->where("Claveent",$id)->get();
-
-    	
-    	return view("ingresarLibro/devolverEntradaDetalle"compact("detalles"));
+    	$entrada=entra::with("catalogoTipoEntrada",
+"catalogoProveedor")->where("id_entrada",$id)->get();
+    	 // dd($entrada);
+    	return view("ingresarLibro/devolverEntradaDetalle",compact("detalles","entrada"));
     }
 }
