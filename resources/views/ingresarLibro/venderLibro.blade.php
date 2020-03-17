@@ -327,7 +327,7 @@ for (var i = data.length - 1; i >= 0; i--) {
           '  <td>'+data[i].Titulo+'</td>'+
             '<td class="col-ms-6">'+
            ' <div>'+
-     '       <input type="number" disabled class="form-control cantidad" style="text-align:right"  value="'+data[i].Descuento+'">'+
+     '       <input type="number" readonly class="form-control cantidad" style="text-align:right"  value="'+data[i].Descuento+'">'+
  '           </div></td>'+
           '  <td class="col-ms-6"><div class="pull-right">'+
         '    <input type="text" class="form-control precio_venta" style="text-align:right" value="'+data[i].Preciolista+'">'+

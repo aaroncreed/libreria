@@ -13,6 +13,7 @@ class tipoentrada extends Model
 "Tipoent",
 "Desctipent"	,
 "Usralta"	,
+"estatusm"
 ];
 
  public $timestamps = false;

@@ -11,7 +11,7 @@ class tipocliente extends Model
     protected $primaryKey='id_tipoCliente ';
 
        protected $fillable = [
-    	'TipoCli','Desctipo','Usralta'
+    	'TipoCli','Desctipo','Usralta','estatusm'
         
     ];
     public $timestamps = false;

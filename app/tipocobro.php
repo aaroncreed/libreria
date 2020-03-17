@@ -11,7 +11,7 @@ class tipocobro extends Model
     protected $primaryKey='id_tipoCobro';
 
        protected $fillable = [
-    	'TipoCobro','Desccobro','Usralta'
+    	'TipoCobro','Desccobro','Usralta','estatusm'
         
     ];
     public $timestamps = false;

@@ -25,5 +25,19 @@ class HomeController extends Controller
     {
         return view('home');
     }
+    public function configuracion()
+    {
+
+        $casaeditorial=\App\casaeditorial::get();
+        $clientes=\App\clientes::get();
+        $tipoCliente=\App\tipocliente::get();
+        $descuentos=\App\descuentos::get();
+        $medidas=\App\medidas::get();
+        $proveedor=\App\proveedor::get();
+        $tipocobro=\App\tipocobro::get();
+        $tipoentrada=\App\tipoentrada::get();
+        // dd($clientes);
+        return view('ingresarLibro.configuracion',compact("casaeditorial","clientes","tipoCliente","descuentos","medidas","proveedor","tipocobro","tipoentrada"));
+    }
     
 }

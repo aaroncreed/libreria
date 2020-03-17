@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class descuentos extends Model
 {
     //
-         protected $primaryKey = "id_devolucion";
-    protected $table = "devolucion";
-    protected $fillable = [ "fk_emtrada_detalle", "cantidad", "fechaDevolucion", "quien", "dinero"];
+         protected $primaryKey = "id_descuento";
+    protected $table = "descuentos";
+    protected $fillable = [ "TipoDesc", "Tipocli", "Descuento", "Usralta","estatusm"];
+
+    public $timestamps = false;
 }

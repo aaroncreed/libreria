@@ -25,7 +25,8 @@ class proveedor extends Model
 	"Email"	,
 	"Fecultcomp",
 	"Montoactual"	,
-	"Fecalta"];
+	"Fecalta",
+"estatusm"];
 
 public $timestamps = false;
     public static function ingresarProveedor()

@@ -11,7 +11,7 @@ class casaeditorial extends Model
       protected $primaryKey = "id_casaEditorial";
     protected $table = "casaeditorial";
     protected $fillable = [
-        'Clavecasedit', 'Desccasedit',
+        'Clavecasedit', 'Desccasedit','estatusm'
     ];
 
     public $timestamps = false;
