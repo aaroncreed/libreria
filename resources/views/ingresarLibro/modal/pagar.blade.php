@@ -29,19 +29,19 @@
              <div id="numeroTar" class="col-sm-8 collapse ">
             <label for="numeroTar" class="col-md-12 control-label" >No. Tarjeta, Cheque o Vale</label>
               <div class="col-md-12">
-                <input type="text" class="form-control numeroTar" name="numeroTar"  value="" >
+                <input type="text" class="form-control numeroTar" id="numeroTarjetacheque" name="numeroTar"  value="" >
               </div>
          </div>
          <div id="mesVencimiento" class="col-sm-6 collapse ">
            <label for="mesVencimiento" class="col-md-4 control-label">Mes Vencimiento</label>
               <div class="col-md-12">
-                <input type="text" class="form-control mesVencimiento" name="mesVencimiento"  value="" >
+                <input type="number" class="form-control mesVencimiento" id="mesVenci" name="mesVencimiento"  value="" >
               </div>
          </div>
          <div id="anoVencimiento" class="col-sm-6 collapse ">
            <label for="anoVencimiento" class="col-md-4 control-label">Año Vencimiento</label>
               <div class="col-md-12">
-                <input type="text" class="form-control anoVencimiento" name="anoVencimiento"  value="" >
+                <input type="number" class="form-control anoVencimiento" id="anoVenci" name="anoVencimiento"  value="" >
               </div>
          </div>
 
@@ -118,7 +118,7 @@
       </div>
       <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-      <button type="submit" class="btn btn-primary" id="guardar_datos">Cobrar</button>
+      <button type="submit" class="btn btn-primary" id="guardar_datos" disabled="true">Cobrar</button>
        <button type="button" class="btn btn-default">
               <span class="glyphicon glyphicon-print"></span> Imprimir
             </button>

@@ -143,7 +143,7 @@ try{
             $articulos[$ky]->ok=$valor;
         }else{
 
-            throw new \Exception("No se cuenta Con la existencia Solicitada de ".$art->cantidad." del libro: ".$articulo[1]."; solo Existen:".$valor["total"]);
+            throw new \Exception("No se cuenta Con la existencia Solicitada del libro '".$articulo[1]."'', por la cantidad de: ".$art->cantidad."; solo Existen: '".$valor["total"]."' en total");
         }
 
 //            $articulos[$ky]->append(json_encode(["ok"=>$valor]));

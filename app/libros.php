@@ -80,7 +80,7 @@ $resultado=[
             DB::update('update libros set Existencia = ? where id_libro= ?', [$art->ok["total"],$articulo[0]]);
         }
 
-
+          return $articulos;
 
     }
 

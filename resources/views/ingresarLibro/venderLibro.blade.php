@@ -65,7 +65,14 @@
 
             </div>
 
+   <div class="form-group row col-md-12">
 
+              <label for="prod" class="col-md-1 control-label">Producto</label>
+              <div class="col-md-4">
+                <input type="text" class="form-control " name="prod" id="prod" value="" >
+              </div>
+
+            </div>
 
 
         <div class="col-md-12">
@@ -135,6 +142,8 @@ bootstrap.min.js
   
 </div>
 <script type="text/javascript">
+
+
     var data =  {!! json_encode(!empty($libros)? $libros: "" ) !!};
     $.ajaxSetup({
         headers: {
@@ -146,36 +155,66 @@ bootstrap.min.js
 
 
 
-    console.log(data);
+    // console.log(data);
 
-function agregar(arreglo,elemento)
+$("#prod").on("blur",function(e){
+
+let producto=$(this).val();
+
+agregar(producto,null);
+
+})
+
+
+
+function agregar(producto,elemento)
     {
-console.log("click",elemento.parentElement.previousSibling.previousSibling.previousSibling.previousSibling.childNodes[1].childNodes[1].value)
 
-// elemento.parentElement.previousSibling.previousSibling.previousSibling.previousSibling.childNodes[1].childNodes[1].value cantidad
-// elemento.parentElement.previousSibling.previousSibling precio
-let cantidad=1
-// elemento.parentElement.previousSibling.previousSibling.previousSibling.previousSibling.childNodes[1].childNodes[1].value;
-let agregarNuevo=true;
-for (var i = data.length - 1; i >= 0; i--) {
+  console.log("entre",producto)
 
-    if(data[i].id_libro==arreglo){
 let tabla=$("#ProductosNuevos").get();
-console.log();
 let rowss=tabla[0].rows;
+let agregarNuevo=true;
 
-// for (var ia = rowss.length - 1; ia >= 0; ia--) {
-//     if(rowss[ia].cells[0].innerText==data[i].Codbarras)
-//     {
-// // 4
-// // 1
-// rowss[ia].cells[1].innerText=cantidad
+  for (var i = 0; i < data.length; i++) {
+   
+if(data[i].Codbarras==producto)
+{
+ for (var ia = rowss.length - 1; ia >= 0; ia--) {
+   
+    if(rowss[ia].cells[1].innerText==data[i].Codbarras)
+    {
+        agregarNuevo=false;
+        let actual=parseInt(rowss[ia].cells[2].innerText)
+
+      if( actual < parseInt(data[i].Existencia))
+      {
+        
+       actual+=1
+       rowss[ia].cells[2].innerText=actual
+ let descuento=(data[i].Preciolista*(data[i].Descuento * .01)).toFixed(2);
+    let final =(data[i].Preciolista-descuento).toFixed(2)
+
+      let precioActual=actual* final
+
+      rowss[ia].cells[6].innerText=precioActual
+      
+      }else{
+          mensaje();
+      }
+}
+// 4
+// 1
+
 // rowss[ia].cells[4].innerText=data[i].Preciolista*cantidad
-// agregarNuevo=false;
-//     }
-// }
 
-if(agregarNuevo==true)
+    }
+}
+ 
+
+
+
+        if(agregarNuevo==true && data[i].Codbarras==producto && data[i].Existencia>0)
 {
     let descuento=(data[i].Preciolista*(data[i].Descuento * .01)).toFixed(2);
     let final =(data[i].Preciolista-descuento).toFixed(2)
@@ -187,7 +226,7 @@ if(agregarNuevo==true)
     ' <tr class="productosVender">'+
         '  <td class="id_libro d-none" >'+data[i].id_libro+'</td>'+
           '  <td >'+data[i].Codbarras+'</td>'+
-          '  <td>'+cantidad+'</td>'+
+          '  <td>'+1+'</td>'+
      '  <td>'+data[i].Titulo+'</td>'+
        '  <td>'+data[i].Preciolista+'</td>'+
         '<td>'+descuento+'</td>'+
@@ -198,10 +237,13 @@ if(agregarNuevo==true)
 
             );
 
+}else if(data[i].Existencia==0 && data[i].Codbarras==producto){
+mensaje();
 }
 
-   }
-}
+  }
+
+
 
 
 let productos=$(".cantidadProducto")
@@ -221,7 +263,22 @@ let canti=parseFloat(cantid)
 
 $("#totalCompleto").text(canti.toFixed(2) );
 $("#seCobra").text(canti.toFixed(2) )
+
     }
+
+
+    function mensaje(error)
+    {
+      Swal.fire({
+  icon: 'error',
+  title: 'Aviso',
+  text: 'no se cuenta con la existencia del libro escogido',
+  // footer: '<a href>Why do I have this issue?</a>'
+})
+
+    }
+
+
     function eliminar(elemento)
     {
   elemento.parentElement.parentElement.remove();
@@ -332,7 +389,7 @@ for (var i = data.length - 1; i >= 0; i--) {
           '  <td class="col-ms-6"><div class="pull-right">'+
         '    <input type="text" class="form-control precio_venta" style="text-align:right" value="'+data[i].Preciolista+'">'+
            ' </div></td>'+
-        '    <td class="text-center"><a class="btn btn-info" href="#" onclick="agregar('+data[i].id_libro+',this)"><i class="glyphicon glyphicon-plus">+</i></a></td>'+
+        '    <td class="text-center"><a class="btn btn-info" href="#" onclick="agregar('+"'"+data[i].Codbarras+"'"+',this)"><i class="glyphicon glyphicon-plus">+</i></a></td>'+
           '</tr>'
 
 
@@ -414,16 +471,19 @@ $("#agregarPago").on("click",function(e){
 
 
 let condicioness = $("#condiciones").text();
+let condicion = $("#condiciones").val();
 let numeroTar=$(".numeroTar").val();
 let mesVencimiento=$(".mesVencimiento").val();
 let anoVencimiento=$(".anoVencimiento").val();
 let CantidadPagar =$(".CantidadPagar").val();
-
-console.log(condicioness,
-numeroTar,
-mesVencimiento,
-anoVencimiento,
-CantidadPagar);
+let numeroTarjetacheque =$("#numeroTarjetacheque").val();
+let mesVenci =$("#mesVenci").val();
+let anoVenci =$("#anoVenci").val();
+// console.log(condicioness,
+// numeroTar,
+// mesVencimiento,
+// anoVencimiento,
+// CantidadPagar);
 
 let fecha=mesVencimiento!="" && anoVencimiento!="" ? '1/'+mesVencimiento+'/'+anoVencimiento :"";
 
@@ -440,17 +500,41 @@ for (var ib = productos.length - 1; ib >= 0; ib--) {
 let total=parseFloat($("#totalCompleto").text()).toFixed(2)
 
 
-$("#seCobra").text(total)
-$("#totalPagado").text(summar)
+
 let accion =(total-summar) >0 ? true : false;
 
 let result=total-summar;
 
+
+let reultadoCondicion =  condicion != 1 && condicion!=4 && total < CantidadPagar ? false : true;
+let noSePusoCheque=condicion != 1 && condicion!=4 && condicion==5 && numeroTarjetacheque=="" && numeroTarjetacheque.length<3 ? false : true;
+
+
+let noSePusoTC=condicion != 1 && condicion!=4 && condicion!=5  && numeroTarjetacheque=="" && numeroTarjetacheque.length<3 && mesVenci=="" && anoVenci=="" && mesVenci.length<1 && anoVenci.length<4  ? false : true;
+
+
+
+
+if( !noSePusoCheque || !noSePusoTC)
+{
+      Swal.fire({
+  icon: 'error',
+  title: 'Aviso',
+  text: 'falta informacion del pago',
+  // footer: '<a href>Why do I have this issue?</a>'
+})
+$("#guardar_datos").attr("disabled",true)
+}else if (accion && reultadoCondicion)
+{
+
+
+
+
+  $("#seCobra").text(total)
+$("#totalPagado").text(summar)
 $("#cambio").text((summar-total) <0 ? summar-total : 0);
 $("#resta").text(result.toFixed(2));
 
-if (accion)
-{
     $("#pagosNuevos").append(
 
 
@@ -488,11 +572,18 @@ console.log(CantidadPagar + summar,CantidadPagar, summar,total-newpago,total,new
 
 // }
 
-
+$("#guardar_datos").attr("disabled",false)
 
 
 }else{
-    alert("no puedes poner mas de lo que estas cobrando");
+  $("#guardar_datos").attr("disabled",true)
+   
+        Swal.fire({
+  icon: 'error',
+  title: 'Aviso',
+  text: 'no puedes poner la forma de pago, ya se cubrio o debes poner la cantidad exacta',
+  // footer: '<a href>Why do I have this issue?</a>'
+})
 }
 
 
@@ -505,6 +596,7 @@ console.log(CantidadPagar + summar,CantidadPagar, summar,total-newpago,total,new
 
     function verificar(ruta)
     {
+      $("#guardar_datos").attr("disabled",true)
         let productos=$(".productosVender")
         let summar=1;
         let arreglo=[];
@@ -554,7 +646,32 @@ console.log(CantidadPagar + summar,CantidadPagar, summar,total-newpago,total,new
         });
 
         request.done(function( msg ) {
-            $( "#log" ).html( msg );
+
+          // modal id = myModal
+          if(!Array.isArray(msg.resultado))
+          {
+
+                      Swal.fire({
+  icon: 'error',
+  title: 'Aviso',
+  text:  ' '+msg.resultado+' ',
+  // footer:
+})
+                        $("#guardar_datos").attr("disabled",true)
+
+                      $('#pagar').modal('hide')
+
+          }else{
+           $("#guardar_datos").attr("disabled",true)
+            if (ruta=="verificarExistenciaFinal") 
+            {
+                     $('#pagar').modal('hide')
+            }
+               
+          }
+
+    
+      
 
         });
 
