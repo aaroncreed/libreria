@@ -50,7 +50,7 @@
               <div id="CantidadPagar" class="col-sm-4 collapse show">
               <label for="CanditadPagar" class="col-md-4 control-label ">Candidad</label>
               <div class="col-md-12">
-                <input type="text" class="form-control CantidadPagar " name="CanditadPagar" value="" required="" pattern="^[0-9]{1,5}(\.[0-9]{0,2})?$">
+                <input type="number" class="form-control CantidadPagar " name="CanditadPagar" value="" required="" pattern="^[0-9]{1,5}(\.[0-9]{0,2})?$">
               </div>
           </div>
           </div>
@@ -67,10 +67,10 @@
       <table class="table">
       <thead>
         <tr>
-  <th class="text-center">Tipo Cobro</th>
-  <th class="text-center">Monto</th>
-  <th class="text-right">Detalle de pago</th>
-  <th class="text-right">Fecha Vencimiento</th>
+  <th class="text-left">Tipo Cobro</th>
+  <th class="text-left">Monto</th>
+  <th class="text-left">Detalle de pago</th>
+  <th class="text-left">Fecha Vencimiento</th>
   <th></th>
 </tr>
       </thead>

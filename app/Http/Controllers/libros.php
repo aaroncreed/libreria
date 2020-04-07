@@ -85,6 +85,7 @@ Literal::ingresarLibro($input,$path);
 
     public function verificarExistenciaFinal(Request $request)
     {
+        // dd($request);
         $articulos=json_decode($request->productos);
         try{
 

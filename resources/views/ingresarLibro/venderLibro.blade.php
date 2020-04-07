@@ -325,8 +325,8 @@ for (var ib = productos.length - 1; ib >= 0; ib--) {
 let total=parseFloat($("#totalCompleto").text()).toFixed(2)
 
 
-$("#seCobra").text(total)
-$("#totalPagado").text(summar)
+// $("#seCobra").text(total)
+// $("#totalPagado").text(summar)
 
 
   let newpago=parseFloat(summar)
@@ -438,8 +438,10 @@ for (var i = data.length - 1; i >= 0; i--) {
 
       })
       $('#condiciones').on("change",function(e){
-
-
+$(".CantidadPagar").val('')
+$("#numeroTarjetacheque").val('')
+            $(".mesVencimiento").val('')
+              $(".anoVencimiento").val('')
 
        if($(this).val()==5 )
        {
@@ -492,16 +494,19 @@ let productos=$(".cantiPagoTipo")
 
 let summar=0;
 
+  summar=parseFloat(CantidadPagar)
+
+
 for (var ib = productos.length - 1; ib >= 0; ib--) {
     summar+=parseFloat(productos[ib].innerText);
 
 }
 
-let total=parseFloat($("#totalCompleto").text()).toFixed(2)
+let total=parseFloat($("#totalCompleto").text())
 
 
 
-let accion =(total-summar) >0 ? true : false;
+let accion =(total-summar) >=0 || condicion==1  ? true : false;
 
 let result=total-summar;
 
@@ -532,7 +537,7 @@ $("#guardar_datos").attr("disabled",true)
 
   $("#seCobra").text(total)
 $("#totalPagado").text(summar)
-$("#cambio").text((summar-total) <0 ? summar-total : 0);
+$("#cambio").text((summar-total) <0 ? summar-total : summar-total);
 $("#resta").text(result.toFixed(2));
 
     $("#pagosNuevos").append(
@@ -552,16 +557,16 @@ $("#resta").text(result.toFixed(2));
 
 
             );
-let newpago=parseFloat(CantidadPagar) + parseFloat(summar)
-    $("#totalPagado").text(newpago)
+// let newpago=parseFloat(CantidadPagar) + parseFloat(summar)
+//     $("#totalPagado").text(newpago)
 
 
-let resulta=total-newpago;
+// let resulta=total-newpago;
 
-$("#cambio").text(parseFloat(newpago-total) > 0 ? parseFloat(newpago-total) : 0);
-$("#resta").text(resulta.toFixed(2));
+// $("#cambio").text(parseFloat(newpago-total) > 0 ? parseFloat(newpago-total) : 0);
+// $("#resta").text(resulta.toFixed(2));
 
-console.log(CantidadPagar + summar,CantidadPagar, summar,total-newpago,total,newpago)
+// console.log(CantidadPagar + summar,CantidadPagar, summar,total-newpago,total,newpago)
 
 // let productos2=$(".cantiPagoTipo")
 
@@ -604,14 +609,14 @@ $("#guardar_datos").attr("disabled",false)
         for (var ib = productos.length - 1; ib >= 0; ib--) {
             let index=productos[ib].cells[0].innerText;
             // console.log(index);
-            if(arreglo.hasOwnProperty(index+"-"+productos[ib].cells[1].innerText))
-            {
-                arreglo[index+"-"+productos[ib].cells[1].innerText] =parseInt(arreglo[index+"-"+productos[ib].cells[1].innerText]) + parseInt(summar);
+            // if(arreglo.hasOwnProperty(index+"-"+productos[ib].cells[1].innerText))
+            // {
+            //     arreglo[index+"-"+productos[ib].cells[1].innerText] =parseInt(arreglo[index+"-"+productos[ib].cells[1].innerText]) + parseInt(summar);
 
-            }else{
-                arreglo[index+"-"+productos[ib].cells[1].innerText] = summar;
+            // }else{
+                arreglo[index+"-"+productos[ib].cells[1].innerText] = productos[ib].cells[2].innerText;
 
-            }
+            // }
             // var unique = arreglo.filter(function(elem, index, self) {
             //     return index === self.indexOf(elem);
             // })
@@ -631,8 +636,28 @@ $("#guardar_datos").attr("disabled",false)
 
         console.log(unico);
 
+          if (ruta=="verificarExistenciaFinal") 
+            {
+              let iva=$("#iva").val()
+              let subtotal=$("#subtotal").text()
+              let totalCompleto=$("#totalCompleto").text();
+
+
+let pagos=$("#pagosNuevos");
+
+let rows=pagos[0].rows
+let rowcontenido=[]
+
+for (var i = rows.length - 1; i >= 0; i--) {  
+ 
+  rowcontenido.push({"tipoPago": rows[i].cells[0],"monto":  rows[i].cells[1],"tarjetaChequeNumero":rows[i].cells[2],"fechaVencimiento": rows[i].cells[3]})
+}
+formData.append("pagos":JSON.stringify(rowcontenido))
+            }
+
         // let formData= new FormData();
         formData.append("productos", JSON.stringify(unico));
+
         var request = $.ajax({
             url: ruta,
             method: "Post",
