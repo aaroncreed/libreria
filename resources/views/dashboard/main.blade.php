@@ -50,28 +50,28 @@
       <div class="logo pull-left"> Libreria </div>
       <div class="header-content">
       <div class="header-date pull-left">
-        <strong>01/03/2020  1:20 am</strong>
+        <!-- <strong>01/03/2020  1:20 am</strong> -->
       </div>
       <div class="pull-right clearfix">
         <ul class="info-menu list-inline list-unstyled">
           <li class="profile">
             <a href="#" data-toggle="dropdown" class="toggle" aria-expanded="false">
-              <img src="uploads/users/pzg9wa7o1.jpg" alt="user-image" class="img-circle img-inline">
-              <span>Admin Users <i class="caret"></i></span>
+              <!-- <img src="uploads/users/pzg9wa7o1.jpg" alt="user-image" class="img-circle img-inline"> -->
+              <span>{{Auth::User()->Claveusr }} <i class="caret"></i></span>
             </a>
             <ul class="dropdown-menu">
-              <li>
+            <!--   <li>
                   <a href="profile.php?id=1">
                       <i class="glyphicon glyphicon-user"></i>
                       Perfil
                   </a>
-              </li>
-             <li>
+              </li> -->
+            <!--  <li>
                  <a href="edit_account.php" title="edit account">
                      <i class="glyphicon glyphicon-cog"></i>
                      Configuración
                  </a>
-             </li>
+             </li> -->
              <li class="last">
              	
                  <a href="{{ route('logout') }}"
@@ -125,12 +125,29 @@
        <li><a href="add_product.php">Agregar libro</a> </li>
    </ul>
   </li>
- <!--  <li>
-    <a href="/vender">
-      <i class="glyphicon glyphicon-picture"></i>
-      <span>Vender</span>
+    <li>
+    <a href="/devoluciones" class="submenu-toggle">
+      <i class="glyphicon glyphicon-th-large"></i>
+      <span>Devoluciones</span>
     </a>
-  </li> -->
+
+  </li>
+  @if(Auth::User()->Nivel==1)
+    <li>
+    <a href="/register" class="submenu-toggle">
+      <i class="glyphicon glyphicon-th-list"></i>
+       <span>Registrar Usuarios</span>
+      </a>
+  
+  </li>
+  <li>
+    <a href="/configuracion">
+      <i class="glyphicon glyphicon-picture"></i>
+      <span>configuracion</span>
+    </a>
+  </li>
+  @endif
+  @if(Auth::User()->Nivel!=3)
   <li>
     <a href="/vender" class="submenu-toggle">
       <i class="glyphicon glyphicon-th-list"></i>
@@ -141,6 +158,7 @@
          <li><a href="add_sale.php">Agregar venta</a> </li>
      </ul>
   </li>
+  @endif
   <!-- <li>
     <a href="#" class="submenu-toggle">
       <i class="glyphicon glyphicon-signal"></i>

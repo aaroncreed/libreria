@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 class proveedor extends Controller
 {
     //
+        public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
      public function obtenerproveedor($id)
     {
     	$proveedor=\App\proveedor::where("id_proveedor",$id)->get();

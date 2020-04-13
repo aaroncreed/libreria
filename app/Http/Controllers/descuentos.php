@@ -16,6 +16,16 @@ class descuentos extends Controller
 
  	]);
  }
+
+public function obetnerDescuento($id)
+{
+		$descuentos=\App\descuentos::where("Tipocli",$id)->get();
+
+ 	return response()->json([
+ 		"uss"=>$descuentos
+]);
+}
+
 public function ingresardescuentos(Request $request)
 {
 $descuentos=\App\descuentos::create([

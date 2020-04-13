@@ -27,8 +27,9 @@ class HomeController extends Controller
     }
     public function configuracion()
     {
-
-        $casaeditorial=\App\casaeditorial::get();
+        if (\Auth::User()->Nivel==1) {
+            # code...
+                $casaeditorial=\App\casaeditorial::get();
         $clientes=\App\clientes::get();
         $tipoCliente=\App\tipocliente::get();
         $descuentos=\App\descuentos::get();
@@ -38,6 +39,11 @@ class HomeController extends Controller
         $tipoentrada=\App\tipoentrada::get();
         // dd($clientes);
         return view('ingresarLibro.configuracion',compact("casaeditorial","clientes","tipoCliente","descuentos","medidas","proveedor","tipocobro","tipoentrada"));
+        }
+
+          return redirect('/login');
+
+    
     }
     
 }

@@ -96,8 +96,9 @@
              <span class="glyphicon glyphicon-plus"></span> Nuevo productobootstrap.js
 bootstrap.min.js
             </button> -->
+            @if(Auth::User()->Nivel!=3)
           <button id="ingresarProducto" class="btn btn-primary">Ingresar Entrada</button>
-  
+  @endif
 
           </div>
         </div>

@@ -17,15 +17,23 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::post("/loguiar","Auth\CustomLoginController@authenticate");
-Route::post('/realizarDevolucion','entradas_detalle@realizarDevolucion');
-// Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/register',function(){
+if (\Auth::User()->Nivel==1) {
+	return view('auth.register');
+}
+return redirect('/login');
+
+})->name('register')->middleware("auth");
  Route::get('/libro', 'libros@index')->name('home');
  Route::get('/vender', 'libros@vender')->name('vender');
  Route::get('/ingresar', 'libros@ingresar')->name('ingresar');
- Route::get('/conf', 'libros@conf')->name('conf');
+ // Route::get('/conf', 'libros@conf')->name('conf');
 Route::get('/home', 'libros@menu')->name('home');
 Route::get('/devoluciones', 'libros@devoluciones')->name('devoluciones');
 
+
+Route::post('/realizarDevolucion','entradas_detalle@realizarDevolucion');
 
 Route::get('/devolverEntrada/{id}',"entradas@devolverEntrada");
 
@@ -39,10 +47,11 @@ Route::get('/devolverEntrada/{id}',"entradas@devolverEntrada");
 
     Route::post('/verificarExistencia','libros@verificarExistencia');
     Route::post('/verificarExistenciaFinal','libros@verificarExistenciaFinal');
+    route::get('/obetnerDescuento/{id}','descuentos@obetnerDescuento');
 
     Route::post('/guardarEntrada',"libros@guardarEntrada");
 
-Route::get('/ticket', 'libros@ticket')->name('ticket');
+Route::get('/ticket/{param}/{param2}', 'libros@ticket')->name('ticket');
 
 
 

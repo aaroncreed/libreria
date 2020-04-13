@@ -11,14 +11,73 @@ use App\proveedor;
 use App\entradas;
 use App\entradas_detalles;
 use App\tipoentrada;
+use App\ventas_detalle;
+use App\ventas;
+use App\cobroventa;
 use mysql_xdevapi\Exception;
 use DB;
 class libros extends Controller
 {
     //
+        public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
+    function maxValueInArray($array, $keyToSearch)
+{
+    $currentMax = NULL;
+    $valorCompleto=[];
+    foreach($array as $arr)
+    {
+        foreach($arr as $key => $value)
+        {
+            if ($key == $keyToSearch && ($value >= $currentMax))
+            {
+                $currentMax = $value;
+                $valorCompleto=$arr;
+            }
+        }
+    }
+
+    return $valorCompleto;
+}
+
      public function menu()
     {
-        return view('ingresarLibro/menu');
+        $ventas= ventas::orderBy("id_venta","desc")->limit("5")->get();
+        // $ventas_detalle =   ventas_detalle::with("venta","libro") ->orderBy("Clavevent","desc")->orderBy("fk_libro","desc")->get();        
+$librosVendidos=[];
+        $librosNuevos=Literal::orderBy("id_libro","desc")->limit("5")->get();
+
+        $libro=Literal::with("detalleVenta")->orderBy("id_libro","desc")->get();
+ 
+foreach ($libro as $key => $value) {
+    # code...
+  
+   $cantidad=0;
+foreach ($value->detalleVenta as $k => $val) {
+    # code...
+    $cantidad+=$val->Cantidad;
+}
+
+
+    $librosVendidos[$key]=(object) [
+ "Codbarras" => $value->Codbarras,
+    "Clavecasedit" => $value->Clavecasedit,
+    "Titulo" =>$value->Titulo,
+      "Cantidad" => $cantidad
+];
+
+}
+
+$elMasvendido = $this->maxValueInArray($librosVendidos, "Cantidad");
+//  dd($elMasvendido,
+// $ventas,
+// $librosNuevos);
+
+        return view('ingresarLibro/menu',compact("elMasvendido","ventas","librosNuevos"));
     }
     public function index()
     {
@@ -69,34 +128,51 @@ $tipocobro=tipocobro::get();
     {
     	$input = $Request->all();
 
-        	$path = $Request->file('fotoportada')!=null ? $Request->file('fotoportada')->storeAs(
-    'portadas/'.$input["Codbarras"], $Request->file('fotoportada')->getClientOriginalName()
+        	$Request->file('fotoportada')!=null ? $Request->file('fotoportada')->storeAs(
+    'public/portadas/'.$input["Codbarras"], $Request->file('fotoportada')->getClientOriginalName()
 ) : "";
+            $path = 
+    'portadas/'.$input["Codbarras"]."/".$Request->file('fotoportada')->getClientOriginalName();
+
     	 // dd($input);
     		// dd($input["fotoportada"]->getClientOriginalName(),$path);
 Literal::ingresarLibro($input,$path);
 
 
     }
-    public function ticket()
+    public function ticket($valor,$valor2)
     {
-        return view('ingresarLibro/modal/ticket');
+            $producto=json_decode(base64_decode($valor));
+            $venta=json_decode(base64_decode($valor2));
+         
+            foreach ($producto as $key => $value) {
+                # code...
+                $libro=explode("-", $value->articulo);
+                $libroEncontrado=Literal::where("id_libro",$libro[0])->first();
+          
+                    $producto[$key]->titulo=$libroEncontrado->Titulo;
+            }
+               // dd($producto,$venta);
+        return view('ingresarLibro/modal/ticket',compact("producto","venta"));
     }
 
     public function verificarExistenciaFinal(Request $request)
     {
-        // dd($request);
-        $articulos=json_decode($request->productos);
+        //  dd($request);
+
+        // "pagos" => "[{"tipoPago":"TC BANAMEX","monto":"1156","tarjetaChequeNumero":"asd34","fechaVencimiento":"1/9/2020"},{"tipoPago":"Efectivo","monto":"700","tarjetaChequeNumero":"","fechaVencimiento":""}]"
         try{
-
+ DB::beginTransaction();
 //        dd(count($articulos),$articulos,"wtf");
-
+        $articulos=json_decode($request->productos);
+        $pagos=json_decode($request->pagos);
+        $venta=json_decode($request->venta);
             foreach ($articulos as $ky=>$art)
             {
 //        dd($ky,$art);
                 $articulo=explode("-",$art->articulo);
 
-                $valor=  Literal::verificarExistencia($art->cantidad,$articulo[0]);
+                $valor=  Literal::verificarExistencia($art->cantidad->cantidad,$articulo[0]);
 
                 if($valor["resultado"])
                 {
@@ -111,13 +187,57 @@ Literal::ingresarLibro($input,$path);
 
             }
 
-//    dd($articulos,"twf");
-            $cobro=Literal::Cobrar($articulos);
+   // dd($articulos,"twf");
+            $guardarVenta=[];
+            foreach ($venta as $ven => $ta) {
+                # code...
+         
+                       $guardarVenta[$ven]=ventas::create([
+        'Usrventa'=>\Auth::User()->id_usuario,
+        'Subtotal'=> $ta->subtotal,
+        'IVA'=> 16,
+        'Totalventa'=> $ta->total,
+        'Cobrado'=> $ta->cambio,
+        'Descuento'=> $ta->descuento,
+        'Tipocli'=> $ta->tipocliente,
+        'Credencial'=> $ta->credencial,
+        'Nombrecli'=> $ta->nombrecliente,
+        'Dependencia'=> $ta->dependencia,
+        
+    ]);
+            }
 
+     
+     
+            foreach ($pagos as $key => $value) {
+                # code...
+                // [{"tipoPago":"TC BANCOME","monto":"1252.80","tarjetaChequeNumero":"0899009","fechaVencimiento":"1/9/2020"}]
+               $cobro= tipocobro::where("Desccobro","like",$value->tipoPago)->get();
+                    cobroventa::create([
+        'fk_venta'=> $guardarVenta[0]->id_venta , 
+        'TipoCobro'=>$cobro[0]->id_tipoCobro,
+        'Monto'=>$value->monto,
+        'detallepago'=>$value->tarjetaChequeNumero,
+        'fechavencimiento'=>\Carbon\Carbon::parse($value->fechaVencimiento)->format("Y-m-d")
+    ]);
+            }
+        foreach ($articulos as $arti => $culos) {
+            # code...
+
+
+           $articulo=explode("-",$culos->articulo);
+                 ventas_detalle::create(['Clavevent'=> $guardarVenta[0]->id_venta ,'CodigoBar'=>$articulo[1],'Cantidad'=>$culos->cantidad->cantidad,
+                    // 'Clavecasa',
+                    'Precioventa'=>$culos->cantidad->total,'Costo'=>$culos->cantidad->precio,'Descuento'=>$culos->cantidad->descuento,'IVA'=>16,'Claveprov','fk_libro'=>$articulo[0]]);
+        }
+   
+     
+            $cobro=Literal::Cobrar($articulos);
+DB::commit();
             return response()->json(["resultado"=>$cobro]);
         }catch (\Exception $e)
         {
-
+DB::rollBack();
             return response()->json(["resultado"=>$e->getMessage()]);
         }
 
@@ -132,19 +252,20 @@ try{
 
 //        dd(count($articulos),$articulos,"wtf");
 
+
     foreach ($articulos as $ky=>$art)
     {
 //        dd($ky,$art);
         $articulo=explode("-",$art->articulo);
 
-        $valor=  Literal::verificarExistencia($art->cantidad,$articulo[0]);
+        $valor=  Literal::verificarExistencia($art->cantidad->cantidad,$articulo[0]);
 
         if($valor["resultado"])
         {
             $articulos[$ky]->ok=$valor;
         }else{
 
-            throw new \Exception("No se cuenta Con la existencia Solicitada del libro '".$articulo[1]."'', por la cantidad de: ".$art->cantidad."; solo Existen: '".$valor["total"]."' en total");
+            throw new \Exception("No se cuenta Con la existencia Solicitada del libro '".$articulo[1]."'', por la cantidad de: ".$art->cantidad->cantidad."; solo Existen: '".$valor["total"]."' en total");
         }
 
 //            $articulos[$ky]->append(json_encode(["ok"=>$valor]));

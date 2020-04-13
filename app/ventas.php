@@ -8,11 +8,11 @@ class ventas extends Model
 {
     //
       protected $table="ventas";
-    protected $primaryKey='id_tipoprecio';
+    protected $primaryKey='id_venta';
 
        protected $fillable = [
     	'Clavevent','Fecventa','Horaventa','Usrventa','Subtotal','IVA','Totalventa','Cobrado','Descuento',
-        'Tipocli','TipoCobro','Credencial','Nombrecli','Dependencia','Fecbaja','horabaja','Usrbaja','Observaciones'
+        'Tipocli','Credencial','Nombrecli','Dependencia','Fecbaja','horabaja','Usrbaja','Observaciones'
         
     ];
     public $timestamps = false;
@@ -23,12 +23,9 @@ class ventas extends Model
     {
     	return $this->hasOne("App\\tipocliente","id_tipoCliente","Tipocli");
     }
-        public function tipoCobro()
-    {
-    	return $this->hasOne("App\\tipocobro","id_tipoCobro","TipoCobro");
-    }
+   
      public function detalleVenta()
     {
-        return $this->hasMany("App\ventas_detalle","Clavevent ","id_venta");
+        return $this->hasMany("App\\ventas_detalle","Clavevent ","id_venta");
     }
 }

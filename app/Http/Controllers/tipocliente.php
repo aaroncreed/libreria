@@ -8,6 +8,11 @@ class tipocliente extends Controller
 {
     //
         //
+        public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
      public function obtenertipocliente($id)
     {
     	$tipocliente=\App\tipocliente::where("id_tipoCliente",$id)->get();

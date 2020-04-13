@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 class tipocobro extends Controller
 {
     //
+        public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
         public function obtenertipocobro($id)
     {
     	$tipocobro=\App\tipocobro::where("id_tipoCobro",$id)->get();

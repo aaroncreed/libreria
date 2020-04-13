@@ -17,4 +17,8 @@ public $timestamps = false;
 	{
 		return $this->belongsTo("App\libros","Codigobarr");
 	}
+	public function entrada()
+	{
+		return $this->belongsTo("App\\entradas","Claveent");
+	}
 }

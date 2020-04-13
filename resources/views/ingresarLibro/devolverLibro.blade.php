@@ -28,8 +28,14 @@
    <tbody>
      @if(!empty($entradas))
      @foreach($entradas as $entr)
+     @if($entr->estatusEntrada==0)
      <tr>
-      <td><a class="btn btn-info" href="/devolverEntrada/{{$entr->id_entrada}}">Devolver</a></td>
+      <td>
+@if(Auth::User()->Nivel!=3)
+        <a class="btn btn-info" href="/devolverEntrada/{{$entr->id_entrada}}">Devolver</a>
+
+@endif
+      </td>
        <td>{{$entr->ClaveEnt}}</td>
        <td>{{$entr->Fecrecepcion}}</td>
        <td>{{$entr->Fecenvio}}</td>
@@ -44,12 +50,13 @@
         <td>{{$entr->Usralta}}</td>
       
      </tr>
+     @endif
      @endforeach
      @endif
    </tbody>
   </table>
 </div>
-    <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+
   </div>
 </div>
 

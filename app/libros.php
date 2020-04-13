@@ -73,6 +73,10 @@ $resultado=[
 //    ]
 //  }
 //]
+
+
+
+
         foreach ($articulos as $key=>$art)
         {
 
@@ -138,5 +142,10 @@ $resultado=[
   $path
 
         ]);
+    }
+
+     public function detalleVenta()
+    {
+        return $this->hasMany("App\\ventas_detalle","fk_libro","id_libro");
     }
 }

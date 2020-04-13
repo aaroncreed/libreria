@@ -8,6 +8,11 @@ use App\medidas as unidadesMedicion;
 class medidas extends Controller
 {
     //
+        public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function obtenermedidasg($id)
     {
 	$medidas=\App\medidas::where("id_medida",$id)->get();

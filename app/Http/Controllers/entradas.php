@@ -8,6 +8,11 @@ use App\entradas as entra;
 class entradas extends Controller
 {
     //
+        public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function devolverEntrada($id)
     {
     	

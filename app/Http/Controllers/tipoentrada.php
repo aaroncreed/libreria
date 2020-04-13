@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 class tipoentrada extends Controller
 {
     //
+        public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
             public function obtenertipoentrada($id)
     {
     	$tipoentrada=\App\tipoentrada::where("id_tipoEntrada",$id)->get();

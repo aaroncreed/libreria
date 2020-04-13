@@ -7,6 +7,11 @@ use App\casaeditorial as editorial;
 class casaeditorial extends Controller
 {
     //
+      public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function ingresarEditorial()
     {
 editorial::ingresarNuevo();

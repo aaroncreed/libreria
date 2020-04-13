@@ -9,7 +9,7 @@ class entradas extends Model
     //
             protected $primaryKey = "id_entrada";
     protected $table = "entradas";
-    protected $fillable = [ "ClaveEnt", "Fecrecepcion", "Fecenvio", "Totalfac", "Referencia", "Clavetipent", "Observaciones", "Claveprov", "Usrrecibio", "Fecfiniquito", "fecfinconsigna", "Usralta"];
+    protected $fillable = [ "ClaveEnt", "Fecrecepcion", "Fecenvio", "Totalfac", "Referencia", "Clavetipent", "Observaciones", "Claveprov", "Usrrecibio", "Fecfiniquito", "fecfinconsigna", "Usralta","estatusEntrada"];
 
 public $timestamps = false;
     public static function ingresarMedida()

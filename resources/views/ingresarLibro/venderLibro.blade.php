@@ -18,6 +18,7 @@
           <label for="nombre_cliente" class="col-md-1 control-label">Tipo Cliente</label>
           <div class="col-md-6">
           <select class="form-control " name="tipocliente" id="tipocliente">
+               <option value="0" selected="true" disabled="true">escoger una opcion</option>
              @if(!empty($tipocliente))
                 @foreach($tipocliente as $tipocl)
 
@@ -142,7 +143,7 @@ bootstrap.min.js
   
 </div>
 <script type="text/javascript">
-
+let descuentoActual=0;
 
     var data =  {!! json_encode(!empty($libros)? $libros: "" ) !!};
     $.ajaxSetup({
@@ -259,11 +260,11 @@ summar)
 $("#subtotal").text(parseFloat(summar))
 
 let cantid = iva==0 ? summar : (iva*summar) + summar
-let canti=parseFloat(cantid)
+let canti=parseFloat(cantid - (cantid *(descuentoActual * .010)))
 
 $("#totalCompleto").text(canti.toFixed(2) );
 $("#seCobra").text(canti.toFixed(2) )
-
+$(".CantidadPagar").val(canti.toFixed(2));
     }
 
 
@@ -301,9 +302,11 @@ let iva=$("#iva").val()!="" ?  parseFloat($("#iva").val() * .010) : 0;
 $("#subtotal").text(total.toFixed(2))
 
         let completoConIva=iva==0 ? total.toFixed(2) : parseFloat(iva*total) + parseFloat(total)
-        $("#totalCompleto").text(completoConIva.toFixed(2));
-$("#seCobra").text(completoConIva.toFixed(2)  )
 
+       let completocondescuento= parseFloat(completoConIva - (completoConIva *(descuentoActual * .010)))
+        $("#totalCompleto").text(completocondescuento.toFixed(2));
+$("#seCobra").text(completocondescuento.toFixed(2)  )
+$(".CantidadPagar").val(completocondescuento.toFixed(2));
         console.log(elemento.parentElement.parentElement,"click")
     }
 
@@ -407,10 +410,53 @@ for (var i = data.length - 1; i >= 0; i--) {
 
  // $(document).ready(function () {
       $('select').selectize({
-          sortField: 'text'
+          sortField: 'value'
       });
 
       $('#tipocliente').on("change",function(e){
+
+
+          
+
+        var request = $.ajax({
+            url: "/obetnerDescuento/"+$(this).val()+"",
+            method: "get",       
+            dataType: "json",
+            cache: false,
+            async: true,
+            contentType: false,
+            processData: false,
+            enctype: 'multipart/form-data',
+        });
+
+        request.done(function( msg ) {
+
+          // modal id = myModal
+   
+      console.log(msg.uss[0].Descuento);
+      descuentoActual=msg.uss[0].Descuento
+  
+
+let iva=$("#iva").val()!="" ?  parseFloat($("#iva").val() * .010) : 0;
+
+let summar=parseFloat($("#subtotal").text());
+
+let cantid = iva==0 ? summar : (iva*summar) + summar
+let canti=parseFloat(cantid - (cantid *(descuentoActual * .010)))
+
+$("#totalCompleto").text(canti.toFixed(2) );
+$("#seCobra").text(canti.toFixed(2) )
+$(".CantidadPagar").val(canti.toFixed(2));
+
+
+
+
+        });
+
+        request.fail(function( jqXHR, textStatus ) {
+            alert( "Request failed: " + textStatus );
+        });
+
 
        if($(this).val()==5 || $(this).val()==4)
        {
@@ -487,7 +533,7 @@ let anoVenci =$("#anoVenci").val();
 // anoVencimiento,
 // CantidadPagar);
 
-let fecha=mesVencimiento!="" && anoVencimiento!="" ? '1/'+mesVencimiento+'/'+anoVencimiento :"";
+let fecha=mesVencimiento!="" && anoVencimiento!="" ? anoVencimiento+'-'+mesVencimiento+'-1' :"";
 
 
 let productos=$(".cantiPagoTipo")
@@ -599,6 +645,16 @@ $("#guardar_datos").attr("disabled",false)
 
 })
 
+  function imprimir(venta,productos)
+  {
+let name="imprimir"
+
+let configuracion_ventana = "menubar=bo,location=yes,resizable=yes,scrollbars=yes,status=yes,height=500,width=516";
+ window.open("/ticket/"+window.btoa(JSON.stringify(productos))+"/"+window.btoa(JSON.stringify(venta))+"",name,configuracion_ventana);
+
+setTimeout(function () { location.reload(); }, 500);
+  }
+
     function verificar(ruta)
     {
       $("#guardar_datos").attr("disabled",true)
@@ -606,6 +662,7 @@ $("#guardar_datos").attr("disabled",false)
         let summar=1;
         let arreglo=[];
         let unico=[];
+        let venta=[]
         for (var ib = productos.length - 1; ib >= 0; ib--) {
             let index=productos[ib].cells[0].innerText;
             // console.log(index);
@@ -614,7 +671,7 @@ $("#guardar_datos").attr("disabled",false)
             //     arreglo[index+"-"+productos[ib].cells[1].innerText] =parseInt(arreglo[index+"-"+productos[ib].cells[1].innerText]) + parseInt(summar);
 
             // }else{
-                arreglo[index+"-"+productos[ib].cells[1].innerText] = productos[ib].cells[2].innerText;
+                arreglo[index+"-"+productos[ib].cells[1].innerText] = {"cantidad":productos[ib].cells[2].innerText,"precio":productos[ib].cells[4].innerText,"descuento":productos[ib].cells[5].innerText,"total":productos[ib].cells[6].innerText};
 
             // }
             // var unique = arreglo.filter(function(elem, index, self) {
@@ -650,9 +707,34 @@ let rowcontenido=[]
 
 for (var i = rows.length - 1; i >= 0; i--) {  
  
-  rowcontenido.push({"tipoPago": rows[i].cells[0],"monto":  rows[i].cells[1],"tarjetaChequeNumero":rows[i].cells[2],"fechaVencimiento": rows[i].cells[3]})
+  rowcontenido.push({"tipoPago": rows[i].cells[0].innerText,"monto":  rows[i].cells[1].innerText,"tarjetaChequeNumero":rows[i].cells[2].innerText,"fechaVencimiento": rows[i].cells[3].innerText})
 }
-formData.append("pagos":JSON.stringify(rowcontenido))
+let convertido=JSON.stringify(rowcontenido);
+formData.append("pagos",convertido)
+
+let cl=$("#tipocliente").val()
+let cr=$("#Credencial").val()
+let nombrecl=            $("#Nombrecli").val()
+let depen=              $("#Dependencia").val()
+let subt=              $("#subtotal").text()
+let tot=              $("#totalCompleto").text()
+let cam=              $("#cambio").text()
+              venta.push({
+            "tipocliente":    cl,
+            "credencial": cr,
+            "nombrecliente":nombrecl,
+            "dependencia":depen,
+            "subtotal": subt,
+            "total":tot,
+            "cambio":cam,
+            "descuento":descuentoActual,
+
+              })
+formData.append("venta",JSON.stringify(venta));
+
+
+
+
             }
 
         // let formData= new FormData();
@@ -690,7 +772,8 @@ formData.append("pagos":JSON.stringify(rowcontenido))
            $("#guardar_datos").attr("disabled",true)
             if (ruta=="verificarExistenciaFinal") 
             {
-                     $('#pagar').modal('hide')
+                     // $('#pagar').modal('hide')
+                     imprimir(venta,unico)
             }
                
           }

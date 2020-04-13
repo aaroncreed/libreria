@@ -1,5 +1,5 @@
-@extends('layouts.app')
-
+<!-- extends('layouts.app') -->
+@extends('dashboard.main')
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -30,7 +30,7 @@
                             <div class="col-md-6">
                                 <input id="email " type="email " class="form-control @error('email ') is-invalid @enderror" name="email" value="{{ old('email ') }}" required autocomplete="email ">
 
-                                @error('email ')
+                                @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -43,7 +43,7 @@
                             <div class="col-md-6">
                                 <input id="Claveusr " type="Claveusr " class="form-control @error('Claveusr ') is-invalid @enderror" name="Claveusr" value="{{ old('Claveusr ') }}" required autocomplete="Claveusr ">
 
-                                @error('Claveusr ')
+                                @error('Claveusr')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -70,6 +70,18 @@
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">Escoger Nivel</label>
+
+                            <div class="col-md-6">
+                                <select id="nivel" class="form-control" name="nivel" required>
+                                   <option value="1">administrador</option>  
+                                  <option value="2">vendedor</option>
+                                    <option value="3">consulta</option>
+                                </select> 
                             </div>
                         </div>
 
