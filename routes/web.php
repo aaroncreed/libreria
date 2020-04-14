@@ -30,12 +30,19 @@ return redirect('/login');
  Route::get('/ingresar', 'libros@ingresar')->name('ingresar');
  // Route::get('/conf', 'libros@conf')->name('conf');
 Route::get('/home', 'libros@menu')->name('home');
+
+
+
 Route::get('/devoluciones', 'libros@devoluciones')->name('devoluciones');
-
-
 Route::post('/realizarDevolucion','entradas_detalle@realizarDevolucion');
-
 Route::get('/devolverEntrada/{id}',"entradas@devolverEntrada");
+Route::get('/reporteSalida/{id}',"entradas@reporteSalida");
+Route::get('/reporteEntrada/{id}',"entradas@reporteEntrada");
+
+
+
+
+
 
   Route::post('/guardarLibro', 'libros@guardar')->name('home');
 

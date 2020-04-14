@@ -28,6 +28,10 @@ FROM `medidas` ");
     {
         return $this->hasMany("App\\entradas_detalles","Claveent","id_entrada")->with("libro");
     }
+    public function detalleDevolucion()
+    {
+       return $this->hasMany("App\\entradas_detalles","Claveent","id_entrada")->with("libro","devolucion"); 
+    }
     public function catalogoTipoEntrada()
     {
         return $this->belongsTo("App\\tipoentrada","Clavetipent");

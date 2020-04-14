@@ -21,4 +21,8 @@ public $timestamps = false;
 	{
 		return $this->belongsTo("App\\entradas","Claveent");
 	}
+	public function devolucion()
+	{
+		return $this->hasMany("App\devolucion","fk_emtrada_detalle","id_detallleEntrada");
+	}
 }

@@ -1,8 +1,20 @@
 @extends('dashboard.main')
 
 @section('content')
-<div class="container">
-	    @include('ingresarLibro/modal/ingresarlibro2')
+
+<ul class="nav nav-pills justify-content-center">
+<li class="nav-item"><a class="nav-link active show" data-toggle="tab" href="#devolucionesPendientes">Devoluciones Pendientes</a></li>
+  
+    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#devolucionesTerminadas">Devoluciones Terminadas</a></li>
+
+        
+   
+</ul>
+<div class="tab-content">
+
+    <div id="devolucionesPendientes" class="tab-pane fade in active show">
+   <div class="container">
+
 
 
 <div class="jumbotron jumbotron-fluid">
@@ -33,6 +45,7 @@
       <td>
 @if(Auth::User()->Nivel!=3)
         <a class="btn btn-info" href="/devolverEntrada/{{$entr->id_entrada}}">Devolver</a>
+                 <a class="btn btn-info" href="/reporteEntrada/{{$entr->id_entrada}}">Reporte de Entrada</a>
 
 @endif
       </td>
@@ -61,8 +74,82 @@
 </div>
 
 
-	
+  
 </div>
+    </div>
+
+       <div id="devolucionesTerminadas" class="tab-pane fade in">
+   <div class="container">
+
+
+
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Devoluciones</h1>
+    <div class="table-responsive">
+  <table class="table">
+   <thead>
+    <th>Escoger</th>
+     <th>"ClaveEnt"</th>
+<th> "Fecrecepcion"</th>
+<th> "Fecenvio"</th>
+<th> "Totalfac"</th>
+<th> "Referencia"</th>
+<th> "Clavetipent"</th>
+<th> "Observaciones"</th>
+<th> "Claveprov"</th>
+<th> "Usrrecibio"</th>
+<th> "Fecfiniquito"</th>
+<th> "fecfinconsigna"</th>
+<th> "Usralta</th>
+   </thead>
+   <tbody>
+     @if(!empty($entradas))
+     @foreach($entradas as $entr)
+     @if($entr->estatusEntrada==1)
+     <tr>
+      <td>
+@if(Auth::User()->Nivel!=3)
+        <a class="btn btn-info" href="/reporteSalida/{{$entr->id_entrada}}">Reporte de Devolucion</a>
+         <a class="btn btn-info" href="/reporteEntrada/{{$entr->id_entrada}}">Reporte de Entrada</a>
+
+@endif
+      </td>
+       <td>{{$entr->ClaveEnt}}</td>
+       <td>{{$entr->Fecrecepcion}}</td>
+       <td>{{$entr->Fecenvio}}</td>
+       <td>{{$entr->Totalfac}}</td>
+       <td>{{$entr->Referencia}}</td>
+       <td>{{ isset($entr->catalogoTipoEntrada->Desctipent) ? $entr->catalogoTipoEntrada->Desctipent : "" }}</td>
+       <td>{{$entr->Observaciones}}</td>
+       <td>{{isset($entr->catalogoProveedor->Empresa) ? $entr->catalogoProveedor->Empresa : ""}}</td>
+       <td>{{$entr->Usrrecibio}}</td>
+       <td>{{$entr->Fecfiniquito}}</td>
+       <td>{{$entr->fecfinconsigna}}</td>
+        <td>{{$entr->Usralta}}</td>
+      
+     </tr>
+     @endif
+     @endforeach
+     @endif
+   </tbody>
+  </table>
+</div>
+
+  </div>
+</div>
+
+
+  
+</div>
+    </div>
+</div>
+
+
+
+
+
+
     <script type="text/javascript">
     var data =  {!! json_encode(!empty($libros)? $libros: "" ) !!};
    var proveedor =  {!! json_encode(!empty($proveedor)? $proveedor: "" ) !!};
