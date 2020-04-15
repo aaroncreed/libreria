@@ -26,6 +26,11 @@ class ventas extends Model
    
      public function detalleVenta()
     {
-        return $this->hasMany("App\\ventas_detalle","Clavevent ","id_venta");
+        return $this->hasMany("App\\ventas_detalle","Clavevent","id_venta");
+    }
+
+    public function detalleVentaLibro()
+    {
+         return $this->hasMany("App\\ventas_detalle","Clavevent","id_venta")->with("libro");
     }
 }

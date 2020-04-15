@@ -148,4 +148,9 @@ $resultado=[
     {
         return $this->hasMany("App\\ventas_detalle","fk_libro","id_libro");
     }
+
+    public function casaedit()
+    {
+      return $this->hasOne("App\casaeditorial","id_casaEditorial","Clavecasedit");
+    }
 }

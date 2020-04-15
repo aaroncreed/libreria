@@ -59,7 +59,7 @@ Route::get('/reporteEntrada/{id}',"entradas@reporteEntrada");
     Route::post('/guardarEntrada',"libros@guardarEntrada");
 
 Route::get('/ticket/{param}/{param2}', 'libros@ticket')->name('ticket');
-
+Route::get('/generarTicket/{id}','ventas@generarTicket');
 
 
 route::get("/configuracion","HomeController@configuracion");
@@ -107,4 +107,6 @@ route::post("/tipoentrada_add","tipoentrada@ingresartipoentrada");
 route::post("/tipoentrada_addupdate","tipoentrada@actualizar");
 route::get("/eli_tipoentrada/{id}","tipoentrada@baja");
 
+
+route::post("/reporteVenta","ventas_detalle@reporteVenta");
 // Route::get('/{any}', 'SinglePageController@index')->where('any', '.*');

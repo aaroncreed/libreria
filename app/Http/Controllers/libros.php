@@ -46,7 +46,10 @@ class libros extends Controller
 
      public function menu()
     {
+
+        $casaeditorial= casaeditorial::orderBy("Desccasedit","ASC")->get();
         $ventas= ventas::orderBy("id_venta","desc")->limit("5")->get();
+        $ventash= ventas::orderBy("id_venta","desc")->get();
         // $ventas_detalle =   ventas_detalle::with("venta","libro") ->orderBy("Clavevent","desc")->orderBy("fk_libro","desc")->get();        
 $librosVendidos=[];
         $librosNuevos=Literal::orderBy("id_libro","desc")->limit("5")->get();
@@ -77,7 +80,7 @@ $elMasvendido = $this->maxValueInArray($librosVendidos, "Cantidad");
 // $ventas,
 // $librosNuevos);
 
-        return view('ingresarLibro/menu',compact("elMasvendido","ventas","librosNuevos"));
+        return view('ingresarLibro/menu',compact("elMasvendido","ventas","ventash","librosNuevos","casaeditorial"));
     }
     public function index()
     {
