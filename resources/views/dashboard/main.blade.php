@@ -47,12 +47,25 @@
 
   
       <header id="header">
-      <div class="logo pull-left"> Libreria </div>
-      <div class="header-content">
-      <div class="header-date pull-left">
-        <!-- <strong>01/03/2020  1:20 am</strong> -->
+      <div class="logo pull-left ">  
+    <div style="width: 95%">
+           <img src="{{asset('img/logo.png')}}" style="width: 100%">
+         
+        </div>
+   
+        
       </div>
-      <div class="pull-right clearfix">
+      <div class="header-content">
+  
+        <div class="header-date pull-left ">
+        <!-- <strong>01/03/2020  1:20 am</strong> -->
+ 
+    
+
+      </div>
+
+      <div class="pull-right clearfix d-flex justify-content-end">
+             
         <ul class="info-menu list-inline list-unstyled">
           <li class="profile">
             <a href="#" data-toggle="dropdown" class="toggle" aria-expanded="false">
@@ -87,6 +100,9 @@
            </ul>
           </li>
         </ul>
+         <div style="width:17%">
+                  <img src="{{asset('img/escudo.png')}}" style="width: 100%">
+        </div>
       </div>
      </div>
     </header>

@@ -31,17 +31,30 @@
 
 
 <header id="header">
-      <div class="logo pull-left"> Libreria </div>
-      <div class="header-content">
-      <div class="header-date pull-left">
-        <!-- <strong>01/03/2020  1:20 am</strong> -->
+     <div class="logo pull-left ">  
+    <div style="width: 95%">
+           <img src="{{asset('img/logo.png')}}" style="width: 100%">
+         
+        </div>
+   
+        
       </div>
-      <div class="pull-right clearfix">
+      <div class="header-content">
+  
+        <div class="header-date pull-left ">
+        <!-- <strong>01/03/2020  1:20 am</strong> -->
+ 
+    
+
+      </div>
+
+      <div class="pull-right clearfix d-flex justify-content-end">
+             
         <ul class="info-menu list-inline list-unstyled">
           <li class="profile">
             <a href="#" data-toggle="dropdown" class="toggle" aria-expanded="false">
-              <!-- <img src="uploads/users/pzg9wa7o1.jpg" class="img-circle img-inline"> -->
-              <span>{{Auth::User()->Claveusr }}<i class="caret"></i></span>
+              <!-- <img src="uploads/users/pzg9wa7o1.jpg" alt="user-image" class="img-circle img-inline"> -->
+              <span>{{Auth::User()->Claveusr }} <i class="caret"></i></span>
             </a>
             <ul class="dropdown-menu">
             <!--   <li>
@@ -49,15 +62,16 @@
                       <i class="glyphicon glyphicon-user"></i>
                       Perfil
                   </a>
-              </li>
-             <li>
+              </li> -->
+            <!--  <li>
                  <a href="edit_account.php" title="edit account">
                      <i class="glyphicon glyphicon-cog"></i>
                      Configuración
                  </a>
              </li> -->
              <li class="last">
-              <a href="{{ route('logout') }}"
+              
+                 <a href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                      <i class="glyphicon glyphicon-off"></i>
@@ -70,6 +84,9 @@
            </ul>
           </li>
         </ul>
+         <div style="width:17%">
+                  <img src="{{asset('img/escudo.png')}}" style="width: 100%">
+        </div>
       </div>
      </div>
     </header>
