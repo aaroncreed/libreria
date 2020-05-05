@@ -84,8 +84,25 @@ $elMasvendido = $this->maxValueInArray($librosVendidos, "Cantidad");
     }
     public function index()
     {
-    	return view('ingresarLibro/libro');
+         $libros= Literal::orderBy("id_libro","desc")->get();
+    	return view('ingresarLibro/libroMenu',compact("libros"));
     }
+    public function nuevo()
+    {
+        $libro=null;
+        return view('ingresarLibro/libroNuevo',compact("libro"));
+    }
+
+    public function editar($id)
+    {
+        $libro=Literal::where("id_libro",$id)->first();
+        // dd($id,$libro);
+        return view('ingresarLibro/libroNuevo',compact("libro"));
+    }
+
+
+
+
     public function devoluciones()
     {
         $entradas=entradas::with("detalles","catalogoTipoEntrada","catalogoProveedor")->get();

@@ -25,11 +25,23 @@ if (\Auth::User()->Nivel==1) {
 return redirect('/login');
 
 })->name('register')->middleware("auth");
- Route::get('/libro', 'libros@index')->name('home');
+
  Route::get('/vender', 'libros@vender')->name('vender');
  Route::get('/ingresar', 'libros@ingresar')->name('ingresar');
  // Route::get('/conf', 'libros@conf')->name('conf');
 Route::get('/home', 'libros@menu')->name('home');
+
+
+ Route::get('/Nuevolibro', 'libros@nuevo')->name('home');
+  Route::post('/guardarLibro', 'libros@guardar')->name('glibro');
+ Route::get('/editarLibro/{id}','libros@editar');
+  Route::post('/actualizarLibro', 'libros@actualizar')->name('dlibro');
+ 
+ Route::get('/libro','libros@index');
+
+
+
+
 
 
 
@@ -44,7 +56,7 @@ Route::get('/reporteEntrada/{id}',"entradas@reporteEntrada");
 
 
 
-  Route::post('/guardarLibro', 'libros@guardar')->name('home');
+ 
 
 
   Route::get('/insertasEditorial', 'casaeditorial@ingresarEditorial')->name('insertasEditorial');

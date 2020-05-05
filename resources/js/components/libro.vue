@@ -147,6 +147,7 @@ ref="form"
 <v-text-field
       v-model="Existencia"
       name="Existencia"
+      ref="Existencia"
       :rules="rulesRequeridas"
       :counter="32"
       :clearable="true"
@@ -162,6 +163,7 @@ ref="form"
 <!-- punto de orden para saber cuando pedir mas -->
 <v-text-field
       v-model="Puntoreorden"
+      ref="Puntoreorden"
       name="Puntoreorden"
       :rules="rulesRequeridas"
       :counter="32"
@@ -177,6 +179,7 @@ ref="form"
 <v-text-field
       v-model="Costo"
       name="Costo"
+  
       :rules="rulesRequeridasNumero"
       ref="Costo"
       :counter="300"
@@ -226,6 +229,7 @@ ref="form"
     <v-text-field
       v-model="Numeropag"
       name="Numeropag"
+      ref="Numeropag"
       :rules="rulesRequeridas"
       :counter="300"
       :clearable="true"
@@ -422,7 +426,7 @@ ref="form"
      
  ></v-file-input>
 </v-col>
-<v-col>
+<v-col class="d-inline-flex">
   <v-avatar
             class="profile"
             color="grey"
@@ -434,10 +438,22 @@ ref="form"
 
             <v-img  v-bind:src="fotourl" ref="fotoCargada" id="fotoCargada"></v-img>
           </v-avatar>
+            <v-avatar
+            class="profile"
+            color="grey"
+            size="500"
+            tile
+            v-if="fotoCargadaEditar"
+
+          >
+
+            <v-img  v-bind:src="fotourlEditar" ref="fotoCargadaEditar" ></v-img>
+          </v-avatar>
 </v-col>
 </v-row>
 
-    <v-btn class="mr-4" @click="submit">Guardar</v-btn>
+    <v-btn v-if="!fotoCargadaEditar" class="mr-4" @click="submit(1)">Guardar</v-btn>
+    <v-btn v-if="fotoCargadaEditar" class="mr-4" @click="submit(2)">Actualizar</v-btn>
     <v-btn @click="clear">Limpiar</v-btn>
   </v-form>
 </template>
@@ -447,6 +463,7 @@ ref="form"
   import { required, maxLength, email } from 'vuelidate/lib/validators'
  import {VMoney} from 'v-money'
 import {mask} from 'vue-the-mask'
+// import {sweet} from ''
 
   export default {
     mixins: [validationMixin],
@@ -462,7 +479,11 @@ import {mask} from 'vue-the-mask'
       },
     },
        directives: {money: VMoney,mask: mask},
-    
+    props: [
+        
+             'libroDato','url-base'
+   
+    ],
 
     data: vm => ({
       rules: [
@@ -492,7 +513,7 @@ valid:true,
       select: null,
       items: [],
       checkbox: false,
-      id_libro: '',
+      id_libro: 0,
 
 money: {
           decimal: '.',
@@ -551,7 +572,9 @@ medidas:[],
 
   fotoportada:{},
   fotoCargada:false,
+  fotoCargadaEditar:false,
   fotourl:"",
+  fotourlEditar:""
     }),
 
     computed: {
@@ -643,11 +666,11 @@ if( val!=undefined)
 
 
     methods: {
-      submit () {
+
+      submit (tipo) {
                 // let form = document.getElementById('form');
-                
-   if (this.$refs.form.validate()) {
-let data= new FormData();
+
+                let data= new FormData();
 
 data.append('id_libro', this.id_libro)
 
@@ -696,12 +719,14 @@ data.append('Claveunimed', this.Claveunimed.hasOwnProperty("id_medida") ? this.C
   data.append('Usralta',this.Usralta)
 
   data.append('fotoportada',this.fotoportada)
-
-
-
-  const config = {
+            
+                  const config = {
             headers: { 'content-type': 'multipart/form-data' }
         }
+            if (tipo==1) {
+   if (this.$refs.form.validate()) {
+
+
 
                         axios.post('/guardarLibro',data,config )
                             .then(function (response) {
@@ -711,6 +736,19 @@ data.append('Claveunimed', this.Claveunimed.hasOwnProperty("id_medida") ? this.C
                       console.log(error);
                             });
                           }
+                }
+                if (tipo==2) {
+
+
+                        axios.post('/actualizarLibro',data,config )
+                            .then(function (response) {
+                             console.log(response);
+                            })
+                            .catch(function (error) {
+                      console.log(error);
+                            });
+                }
+
       },
       handleFileUpload(){
         console.log(this.$refs.fotoportada);
@@ -727,7 +765,83 @@ data.append('Claveunimed', this.Claveunimed.hasOwnProperty("id_medida") ? this.C
       resetValidation () {
         this.$refs.form.resetValidation()
       },
+       llenar (){
+ console.log("llegue");
+        if(this.libroDato!="" && this.libroDato.length>0)
+        {
+          this.fotoCargadaEditar=true;
+
+let libro = JSON.parse(this.libroDato)
+
+
+// libro.descatalogado
+
+// libro.fecedicion
+// libro.fechaColofon
+
+
+ this.id_libro=libro.id_libro
+
+
+this.Codbarras=libro.Codbarras
+
+this.Clavecasedit = libro.Clavecasedit
+
+this.Titulo=libro.Titulo
+
+this.Autor=libro.Autor
+
+this.ClaveInterna=libro.ClaveInterna
+
+this.ISBN=libro.ISBN
+
+this.Inventariable=libro.Inventariable
+
+this.Claveunimed =libro.Claveunimed
+
+this.Existencia=libro.Existencia.toString()
+
+this.Puntoreorden=libro.Puntoreorden.toString()
+
+
+this.Costo=libro.Costo.toString()
+
+this.Preciolista=libro.Preciolista.toString()
+
+this.Peso=libro.Peso.toString()
+
+this.Numeropag=libro.Numeropag.toString()
+
+this.fechaColofon=
+
+this.Tema=libro.Tema
+
+this.fecalta=libro.fecalta
+
+this.Descuento=libro.Descuento
+
+this.Ultimoprov=libro.Ultimoprov
+
+this.Sinopsis  =libro.Sinopsis
+
+this.Ubicacion=
+libro.Ubicacion
+  this.$refs.Costo.$el.getElementsByTagName('input')[0].value = libro.Costo;
+    this.$refs.Preciolista.$el.getElementsByTagName('input')[0].value = libro.Preciolista;
+    this.$refs.Peso.$el.getElementsByTagName('input')[0].value = libro.Peso;
+    this.$refs.Descuento.$el.getElementsByTagName('input')[0].value = libro.Descuento;
+this.$refs.Puntoreorden.$el.getElementsByTagName('input')[0].value=libro.Puntoreorden
+this.$refs.Existencia.$el.getElementsByTagName('input')[0].value=libro.Existencia
+this.$refs.Numeropag.$el.getElementsByTagName('input')[0].value=libro.Numeropag
+// this.Usralta=
+// libro.Usralta
+
+this.fotourlEditar=  this.urlBase+"/"+libro.fotoportada
+
+        }
+      },
       clear () {
+         
                 this.$refs.form.reset()
                   this.$refs.form.resetValidation()
 //               this.id_libro= '';
@@ -867,6 +981,8 @@ let self=this;
             window.vm = this;
 this.obtenerEditoriales()
 this.obtenerMedidas();
+this.clear()
+this.llenar()
         }
   }
 </script>
