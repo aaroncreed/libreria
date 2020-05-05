@@ -59,12 +59,13 @@ librosNuevos -->
   <div class="row">
 
  
-  <div class="col-md-4">
+  <div class="col-md-8">
     <div class="panel panel-default">
       <div class="panel-heading">
         <strong>
      
           <span>Libros</span>
+          <span><a class="btn btn-primary" href="/Nuevolibro">Nuevo</a></span>
         </strong>
       </div>
       <div class="panel-body">
@@ -77,6 +78,7 @@ librosNuevos -->
            <th>Titulo</th>
            <th>Fecha</th>
                       <th>Portada</th>
+                      <th></th>
          </tr>
        </thead>
        <tbody>
@@ -90,8 +92,11 @@ librosNuevos -->
                <td>
              
 <img src="{{asset('storage/'.$lbb->fotoportada.'')}}" style="
-    width: 60%;
+    width: 30%;
 ">
+                </td>
+                <td>
+                  <a class="btn btn-primary" href="/editarLibro/{{$lbb->id_libro}}">Editar</a>
                 </td>
           </tr>
         @endforeach
@@ -126,6 +131,14 @@ function dateDiffInDays(a, b) {
   return Math.floor((utc2 - utc1) / _MS_PER_DAY);
 }
        
+       function editar()
+       {
+
+       }
+       function eliminar()
+       {
+
+       }
 
      </script>
 @endsection

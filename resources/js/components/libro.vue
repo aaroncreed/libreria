@@ -463,8 +463,8 @@ ref="form"
   import { required, maxLength, email } from 'vuelidate/lib/validators'
  import {VMoney} from 'v-money'
 import {mask} from 'vue-the-mask'
-// import {sweet} from ''
-
+import VueSweetalert2 from 'vue-sweetalert2';
+Vue.use(VueSweetalert2)
   export default {
     mixins: [validationMixin],
 
@@ -668,6 +668,8 @@ if( val!=undefined)
     methods: {
 
       submit (tipo) {
+        let self=this;
+        const  base_url = location.origin;
                 // let form = document.getElementById('form');
 
                 let data= new FormData();
@@ -716,7 +718,7 @@ data.append('Claveunimed', this.Claveunimed.hasOwnProperty("id_medida") ? this.C
 
   data.append('Ubicacion',this.Ubicacion)
 
-  data.append('Usralta',this.Usralta)
+  // data.append('Usralta',this.Usralta)
 
   data.append('fotoportada',this.fotoportada)
             
@@ -730,9 +732,13 @@ data.append('Claveunimed', this.Claveunimed.hasOwnProperty("id_medida") ? this.C
 
                         axios.post('/guardarLibro',data,config )
                             .then(function (response) {
-                             console.log(response);
+                                 self.$swal('Guardado!!!');
+                                 
+                                      location.href = base_url+"/libro";
+
                             })
                             .catch(function (error) {
+                                 self.$swal('Error!!!');
                       console.log(error);
                             });
                           }
@@ -743,8 +749,12 @@ data.append('Claveunimed', this.Claveunimed.hasOwnProperty("id_medida") ? this.C
                         axios.post('/actualizarLibro',data,config )
                             .then(function (response) {
                              console.log(response);
+                             self.$swal('Actualizado!!!');
+
+                             location.href = base_url+"/libro";
                             })
                             .catch(function (error) {
+                                     self.$swal('Error!!!');
                       console.log(error);
                             });
                 }

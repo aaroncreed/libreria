@@ -144,6 +144,27 @@ $tipocobro=tipocobro::get();
     $art="empiezo";
     return view("conf",compact("mesas","menu","tipopre","senesp","tipoart","art"));
     }
+
+    public function actualizar(Request $Request)
+    {
+
+        $input = $Request->all();
+
+            $Request->file('fotoportada')!=null ? $Request->file('fotoportada')->storeAs(
+    'public/portadas/'.$input["Codbarras"], $Request->file('fotoportada')->getClientOriginalName()
+) : "";
+            $path =   $Request->file('fotoportada')!=null ?
+    'portadas/'.$input["Codbarras"]."/".$Request->file('fotoportada')->getClientOriginalName() : false;
+
+         // dd($input);
+            // dd($input["fotoportada"]->getClientOriginalName(),$path);
+    Literal::editarLibro($input,$path);
+
+
+return response()->json(["mes"=>"ok"]);
+
+    }
+
     public function guardar(Request $Request)
     {
     	$input = $Request->all();
@@ -157,6 +178,8 @@ $tipocobro=tipocobro::get();
     	 // dd($input);
     		// dd($input["fotoportada"]->getClientOriginalName(),$path);
 Literal::ingresarLibro($input,$path);
+
+return response()->json(["mes"=>"ok"]);
 
 
     }

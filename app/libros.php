@@ -87,7 +87,73 @@ $resultado=[
           return $articulos;
 
     }
+    public static function editarLibro($arreglo,$path)
+    {
 
+      $dato=[
+        "Codbarras" => $arreglo["Codbarras" ],
+"Clavecasedit" => 
+  $arreglo["Clavecasedit"],
+"Titulo" =>
+  $arreglo["Titulo" ],
+"Autor" =>  $arreglo["Autor" ],
+"ClaveInterna" => $arreglo["ClaveInterna" ],
+"ISBN" =>$arreglo["ISBN" ],
+"Inventariable"=> $arreglo["Inventariable"] , 
+"Claveunimed" => $arreglo["Claveunimed"],
+"Existencia" =>
+  $arreglo["Existencia" ],
+"Puntoreorden" => $arreglo["Puntoreorden" ],
+"Costo" =>  $arreglo["Costo" ],
+"Preciolista" =>  $arreglo["Preciolista" ],
+"Peso" =>  $arreglo["Peso" ],
+"Numeropag" => $arreglo["Numeropag" ],
+// "fechaColofon" =>  $arreglo["fechaColofon" ],
+"Tema" =>  $arreglo["Tema" ],
+// "fecalta" =>  $arreglo["fecalta" ],
+"Descuento" =>  $arreglo["Descuento" ],
+"Ultimoprov" =>
+  $arreglo["Ultimoprov" ],
+"Sinopsis" =>  $arreglo["Sinopsis" ],
+"Ubicacion" =>  $arreglo["Ubicacion" ],
+// "Usralta" =>  $arreglo["Usralta" ],
+"fotoportada"=>  $path
+
+      ];
+      $otro=[
+        "Codbarras" => $arreglo["Codbarras" ],
+"Clavecasedit" => 
+  $arreglo["Clavecasedit"],
+"Titulo" =>
+  $arreglo["Titulo" ],
+"Autor" =>  $arreglo["Autor" ],
+"ClaveInterna" => $arreglo["ClaveInterna" ],
+"ISBN" =>$arreglo["ISBN" ],
+"Inventariable"=> $arreglo["Inventariable"] , 
+"Claveunimed" => $arreglo["Claveunimed"],
+"Existencia" =>
+  $arreglo["Existencia" ],
+"Puntoreorden" => $arreglo["Puntoreorden" ],
+"Costo" =>  $arreglo["Costo" ],
+"Preciolista" =>  $arreglo["Preciolista" ],
+"Peso" =>  $arreglo["Peso" ],
+"Numeropag" => $arreglo["Numeropag" ],
+// "fechaColofon" =>  $arreglo["fechaColofon" ],
+"Tema" =>  $arreglo["Tema" ],
+// "fecalta" =>  $arreglo["fecalta" ],
+"Descuento" =>  $arreglo["Descuento" ],
+"Ultimoprov" =>
+  $arreglo["Ultimoprov" ],
+"Sinopsis" =>  $arreglo["Sinopsis" ],
+"Ubicacion" =>  $arreglo["Ubicacion" ],
+// "Usralta" =>  $arreglo["Usralta" ],
+// "fotoportada"=>  $path
+
+      ];
+            $direccion=$path!=false? $dato : $otro;
+      return DB::table('libros')->where('id_libro',$arreglo["id_libro"])->update($direccion);
+
+    }
     public static function ingresarLibro($arreglo,$path)
     {
         return DB::insert('insert into `libros`(
