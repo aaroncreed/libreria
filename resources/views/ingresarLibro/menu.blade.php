@@ -176,7 +176,8 @@ librosNuevos -->
           </strong>
         </div>
         <div class="panel-body">
-          <table class="table table-striped table-bordered table-condensed">
+          <table class="table table-striped table-bordered table-condensed" data-toggle="table" data-pagination="true"
+  data-search="true" data-locale="es-MX">
        <thead>
          <tr>
            <th class="text-center" style="width: 50px;"># venta</th>
@@ -309,41 +310,28 @@ if (difference<0 || isNaN(difference))
         formData.append("fechainicio", inicio);
         formData.append("fechafin", fin);
         formData.append("proveedor", proveedores);
-        var request = $.ajax({
-            url: "/reporteVenta",
-            method: "Post",
-            xhrFields: {
-            responseType: 'blob'
-        },
-            data: formData,
-            dataType: "json",
-            cache: false,
-            async: true,
-            contentType: false,
-            processData: false,
-            enctype: 'multipart/form-data',
-        });
+          var a = document.createElement('a');
+            var url = "/reporteVenta/"+inicio+"/"+fin+"/"+proveedores+"";
+            a.href = url;
 
-        request.done(function( msg ) {
-            // $( "#log" ).html( msg );
-  // var a = document.createElement('a');
-  //           var url = window.URL.createObjectURL(msg);
-  //           a.href = url;
-  //           a.download = 'myfile.pdf';
-  //           document.body.append(a);
-  //           a.click();
-  //           a.remove();
-            // window.URL.revokeObjectURL(url);
-
-        });
-
-        request.fail(function( jqXHR, textStatus ) {
-          console.log(textStatus,jqXHR);
-        });
+            // a.download = 'reporte.pdf';
+            document.body.append(a);
+            a.click();
+            a.remove();
+   
 
 }
 
 
   })
+
+
+
+
+
+
+
+
+
      </script>
 @endsection

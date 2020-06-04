@@ -35,7 +35,7 @@ class proveedor extends Controller
 "Telefono"=>$request->Telefono,
 "RFC"=>$request->RFC,
 "Curp"=>$request->Curp,
-"Email"=>$request->Email,
+"Email"=>$request->Emailp,
 "Fecultcomp"=>$request->Fecultcomp,
 "Montoactual"=>$request->Montoactual,
 "Fecalta"=>\Carbon\Carbon::now()->format('Y-m-d'),
@@ -44,7 +44,9 @@ class proveedor extends Controller
 
     	return response()->json([
 
-    		"uss"=>$proveedor
+    		"uss"=>$proveedor,
+            "donde"=>"#proveedor"
+
     	]);
     }
     public function actualizar(Request $request)
@@ -62,7 +64,7 @@ class proveedor extends Controller
 "Telefono"=>$request->Telefono,
 "RFC"=>$request->RFC,
 "Curp"=>$request->Curp,
-"Email"=>$request->Email,
+"Email"=>$request->Emailp,
 "Fecultcomp"=>$request->Fecultcomp,
 "Montoactual"=>$request->Montoactual,
 "Fecalta"=>\Carbon\Carbon::now()->format('Y-m-d'),
@@ -71,7 +73,8 @@ class proveedor extends Controller
 
     	return response()->json([
 
-    		"uss"=>$proveedor
+    		"uss"=>$proveedor,
+            "donde"=>"#proveedor"
     	]);
     }
     public function baja($id)
@@ -82,7 +85,8 @@ class proveedor extends Controller
 
     	return response()->json([
 
-    		"uss"=>$proveedor
+    		"uss"=>$proveedor,
+            "donde"=>"#proveedor"
     	]);
     }
 }

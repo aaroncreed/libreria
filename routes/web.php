@@ -120,5 +120,5 @@ route::post("/tipoentrada_addupdate","tipoentrada@actualizar");
 route::get("/eli_tipoentrada/{id}","tipoentrada@baja");
 
 
-route::post("/reporteVenta","ventas_detalle@reporteVenta");
+route::get("/reporteVenta/{inicio}/{fin}/{proveedores}","ventas_detalle@reporteVenta");
 // Route::get('/{any}', 'SinglePageController@index')->where('any', '.*');

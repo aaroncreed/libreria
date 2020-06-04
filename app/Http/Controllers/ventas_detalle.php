@@ -8,21 +8,24 @@ use App\ventas;
 class ventas_detalle extends Controller
 {
     //
-    public function reporteVenta(Request $request)
+    public function reporteVenta($inicio,$fin,$proveedores)
     {
     	
     	 //  "fechainicio" => "2020-04-15"
       // "fechafin" => "2020-04-17"
       // "proveedor" 
-    	$proveedor=$request->proveedor;
-    	$from = date($request->fechainicio);
-		$to = date($request->fechafin);
+    	$proveedor=$proveedores;
+    	$from = date($inicio);
+		$to = date($fin);
+    // dd($proveedor,$from,$to);
     	$entrada=ventas::with("detalleVentaLibro","tipoCliente")->whereBetween('Fecventa', [$from, $to])->get();
-    	
+    
+
     	$filtered = $entrada->filter(function ($value, $key) use($proveedor) {
 
    return $value->detalleVentaLibro[0]->libro[0]->Clavecasedit==$proveedor;
 });
+        $resultado= !empty($proveedor) && $proveedor!="" ? $filtered : $entrada;
         // dd($filtered);
         $cantidad=0;
         $total=0;
@@ -32,7 +35,7 @@ class ventas_detalle extends Controller
            $data = [
           'title' => 'Reporte de venta',
           'heading' => 'Reporte de Venata',
-          'content' => $filtered,  
+          'content' => $resultado,  
           // 'cantidad'=> $cantidad,  
           // 'total' => $total,
           // 'descuento'=>$descuento,
@@ -40,7 +43,8 @@ class ventas_detalle extends Controller
           // 'pagar'=>$pagar
             ];
 // return view('ingresarLibro.pdf.reporteSalida',compact("data"));
+            // dd($filtered);
         $pdf = \PDF::loadView('ingresarLibro.pdf.reporteVentas', $data);
-return $pdf->download(''.$request->fechainicio.'.pdf');
+return $pdf->download(''.$inicio.'.pdf');
     }
 }

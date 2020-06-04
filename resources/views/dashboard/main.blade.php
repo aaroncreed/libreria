@@ -1,5 +1,6 @@
 
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}"><head>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
 	
 
   <meta charset="utf-8">
@@ -26,8 +27,10 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css">
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>
     <style type="text/css">
 
         .bootstrap-select[class*=col-] .dropdown-toggle {
@@ -201,5 +204,6 @@
   
 
 
-</body></html>
+</body>
+</html>
 

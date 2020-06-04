@@ -4,7 +4,7 @@
 <div class="container">
 	<div class="card-deck mb-3 text-center">
       
-        <div class="container content-area">
+   <!--      <div class="container content-area">
             <div class="row">
 
                 <div class="col-12">
@@ -29,7 +29,7 @@
 
 
             </div>
-        </div>
+        </div> -->
             <!--  -->
   <article>
 
@@ -38,9 +38,9 @@
 
 
  
-  <div class="tab-content">
+  <div class="tab-content1">
 
-    <div id="casaeditorial" class="tab-pane fade in active show">
+    <div id="casaeditorial" class=" in active show">
       
       
 
@@ -53,12 +53,15 @@
   <div class="panel-body">
     <div class="table-responsive">
 
-      <table  class="usuariot table display cell-border compact" id="usuariot" >
+      <table data-toggle="table" data-pagination="true"   data-page-size="5"
+  data-search="true" data-locale="es-MX"  class="usuariot table display cell-border compact" id="usuariot" >
     <thead>
  
 <!-- <th>id_casaEditorial</th> -->
 <th data-priority="1">Alias casaeditorial</th>
 <th data-priority="1">Descripcion</th>
+<th></th>
+<th></th>
     </thead>
     <tbody>
   @if(!empty($casaeditorial))@foreach($casaeditorial as $mwn)
@@ -72,15 +75,11 @@
   
             <td>
 
-              <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="id_casaEditorialMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    opciones
-  </button>
+   
   <div class="dropdown-menu" aria-labelledby="id_casaEditorialMenuButton">
-       <a value="{{$mwn->id_casaEditorial}}" id="casaeditorial_" class="vn dropdown-item" data-toggle="modal" data-target="#casaeditorial_modal">Editar</a>
-           <a value="{{$mwn->id_casaEditorial}}" id="eli_casaeditorial" class="vne dropdown-item" data-toggle="modal" data-target="#elimu">Baja</a> 
-  </div>
-</div>
+       <a value="{{$mwn->id_casaEditorial}}" tipo="casaeditorial_" class="vn btn btn-info " data-toggle="modal" data-target="#casaeditorial_modal">Editar</a>
+           <a value="{{$mwn->id_casaEditorial}}" tipo="eli_casaeditorial" class="vne btn btn-info " data-toggle="modal" data-target="#elimu">Baja</a> 
+
          
       </td>
 
@@ -98,7 +97,7 @@
 <!-- div home-->
     </div>
       <!-- provee -->
-  <div id="clientes" class="tab-pane fade in">
+  <div id="clientes" class=" in">
       
   
         <button class="btn btn-primary btn-lg new" value="clientes_" id="new_clientes" data-toggle="modal" data-target="#clientes_alta"> Ingresar clientes</button>
@@ -108,7 +107,8 @@
   <div class="panel-heading">Clientes</div>
   <div class="panel-body">
   	<div class="table-responsive">
-      <table  class="proveemt table display cell-border compact" id="proveemt">
+      <table data-toggle="table" data-pagination="true"   data-page-size="5"
+  data-search="true" data-locale="es-MX"  class="proveemt table display cell-border compact" id="proveemt">
     <thead>
 <!-- <th>idmenu</th> -->
 <th>#</th>
@@ -137,15 +137,10 @@
     <tr>
     <!-- <td>{{$mwn->idmenu}}</td> -->
      <td>
-              <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="clientesMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    opciones
-  </button>
-  <div class="dropdown-menu" aria-labelledby="clientesMenuButton">
-     <a value="{{$mwn->id_claveCliente }}" id="clientes_" class="vn dropdown-item" data-toggle="modal" data-target="#clientes_modal">Editar</a>
-           <a value="{{$mwn->id_claveCliente }}" id="eli_clientes" class="vne dropdown-item" data-toggle="modal" data-target="#elimu">Baja</a>  
-  </div>
-</div>
+        
+     <a value="{{$mwn->id_claveCliente }}" tipo="clientes_" class="vn btn btn-info " data-toggle="modal" data-target="#clientes_modal">Editar</a>
+           <a value="{{$mwn->id_claveCliente }}" tipo="eli_clientes" class="vne btn btn-info " data-toggle="modal" data-target="#elimu">Baja</a>  
+
           
       </td>
       <td>{{$mwn->estatusm == 1 ? "Activo" : "Baja"}}</td>  
@@ -180,7 +175,7 @@
 </div>
 <!-- end -->
   <!-- marca -->
-  <div id="descuentos" class="tab-pane fade in">
+  <div id="descuentos" class=" in">
       
    
         <button class="btn btn-primary btn-lg new" value="descuentos_" id="new_descuentos" data-toggle="modal" data-target=".descuentos_modal"> descuentos new</button>
@@ -189,13 +184,16 @@
   @include('ingresarLibro/modalConfiguracion/descuentos_modal')
   <div class="panel-heading">descuentos</div>
   <div class="panel-body">
-      <table  class="marcat table display cell-border compact" id="marcat">
+      <table data-toggle="table" data-pagination="true"   data-page-size="5"
+  data-search="true" data-locale="es-MX"  class="marcat table display cell-border compact" id="marcat">
     <thead>
 <!-- <th>id_descuento</th> -->
 <th>TipoDesc</th>
  <th>Tipocli</th>
  <th>Descuento</th>
  <th>Usralta</th>
+ <th></th>
+ <th></th>
 
     </thead>
     <tbody>
@@ -214,15 +212,10 @@
  
   
             <td>
-              <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="id_descuentoMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    opciones
-  </button>
-  <div class="dropdown-menu" aria-labelledby="id_descuentoMenuButton">
-   <a value="{{$tipop->id_descuento}}" id="descuentos_" class="vn dropdown-item" data-toggle="modal" data-target="#descuentos_modal">Editar</a>
-           <a value="{{$tipop->id_descuento}}" id="eli_descuento" class="vne dropdown-item" data-toggle="modal" data-target="#elimu">Baja</a>  
-  </div>
-</div>
+
+   <a value="{{$tipop->id_descuento}}" tipo="descuentos_" class="vn btn btn-info " data-toggle="modal" data-target="#descuentos_modal">Editar</a>
+           <a value="{{$tipop->id_descuento}}" tipo="eli_descuento" class="vne btn btn-info " data-toggle="modal" data-target="#elimu">Baja</a>  
+
         
       </td>
 
@@ -238,7 +231,7 @@
 <!-- end -->
   
   <!-- menu 2 -->
-  <div id="medidas" class="tab-pane fade in">
+  <div id="medidas" class=" in">
      
   
         <button class="btn btn-primary btn-lg new" value="medidas_" id="new_medidas" data-toggle="modal" data-target=".medidas_modal"> Ingresar medidas</button>
@@ -247,7 +240,8 @@
   @include('ingresarLibro/modalConfiguracion/medidas_modal')
   <div class="panel-heading">medidas</div>
   <div class="panel-body">
-      <table  class="vehiculot table display cell-border compact" id="vehiculot">
+      <table data-toggle="table" data-pagination="true"   data-page-size="5"
+  data-search="true" data-locale="es-MX"  class="vehiculot table display cell-border compact" id="vehiculot">
     <thead>
 <!-- <th>id_medidas</th> -->
 <th>Clavemed</th>
@@ -267,15 +261,10 @@
      <td>{{$sene->estatusm == 1 ? "Activo" : "Baja"}}</td>  	
      
             <td>
-              <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="idmedidasMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    opciones
-  </button>
-  <div class="dropdown-menu" aria-labelledby="idmedidasMenuButton">
-   <a value="{{$sene->id_medida }}" id="medidas_" class="vn dropdown-item" data-toggle="modal" data-target="#medidas_modal">Editar</a>
-           <a value="{{$sene->id_medida }}" id="eli_medidas" class="vne dropdown-item" data-toggle="modal" data-target="#elimu">Baja</a>  
-  </div>
-</div>
+           
+   <a value="{{$sene->id_medida }}" tipo="medidas_" class="vn btn btn-info " data-toggle="modal" data-target="#medidas_modal">Editar</a>
+           <a value="{{$sene->id_medida }}" tipo="eli_medidas" class="vne btn btn-info " data-toggle="modal" data-target="#elimu">Baja</a>  
+
            
       </td>
 
@@ -292,7 +281,7 @@
  
 
 
-<div id="proveedor" class="tab-pane fade in">
+<div id="proveedor" class=" in">
       
      
       <button class="btn btn-primary btn-lg new" value="proveedor_" id="new_proveedor" data-toggle="modal" data-target=".proveedor_modal"> Ingresar nuevo proveedor</button>
@@ -305,7 +294,8 @@
   <div class="panel-heading">Proveedor</div>
   <div class="panel-body">
     <div class="table-responsive">
-      <table  class="sucurll table display cell-border compact" id="sucurll" >
+      <table data-toggle="table" data-pagination="true"   data-page-size="5"
+  data-search="true" data-locale="es-MX"  class="sucurll table display cell-border compact" id="sucurll" >
       <thead>
 <!-- <th>id_proveedor</th> -->
 <th></th>
@@ -334,15 +324,10 @@
    
  
             <td>
-              <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="id_proveedorMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    opciones
-  </button>
-  <div class="dropdown-menu" aria-labelledby="id_proveedorMenuButton">
-    <a value="{{$tipopr->id_proveedor}}" id="proveedor_" class="vn dropdown-item" data-toggle="modal" data-target="#proveedor_modal">Editar</a>
-           <a value="{{$tipopr->id_proveedor}}" id="eli_proveedor" class="vne dropdown-item" data-toggle="modal" data-target="#elimu">Baja</a>  
-  </div>
-</div>
+    
+    <a value="{{$tipopr->id_proveedor}}" tipo="proveedor_" class="vn btn btn-info " data-toggle="modal" data-target=".proveedor_modal">Editar</a>
+           <a value="{{$tipopr->id_proveedor}}" tipo="eli_proveedor" class="vne btn btn-info " data-toggle="modal" data-target="#elimu">Baja</a>  
+
            
       </td>
 <td>{{$tipopr->estatusm==1 ? "Activo" : "Baja"}}</td>
@@ -376,7 +361,7 @@
 <!-- end -->
 
 
-<div id="tipocliente" class="tab-pane fade in">
+<div id="tipocliente" class=" in">
       
      
       <button class="btn btn-primary btn-lg new" value="tipocliente_" id="new_tipocliente" data-toggle="modal" data-target=".tipocliente_modal"> Ingresar nuevo tipo de cliente</button>
@@ -389,7 +374,8 @@
   <div class="panel-heading">Tipo Cliente</div>
   <div class="panel-body">
     <div class="table-responsive">
-      <table  class="sucurll table display cell-border compact" id="sucurll" >
+      <table data-toggle="table" data-pagination="true"   data-page-size="5"
+  data-search="true" data-locale="es-MX"  class="sucurll table display cell-border compact" id="sucurll" >
       <thead>
 <!-- <th>id_proveedor</th> -->
 
@@ -410,15 +396,10 @@
  <td>{{$tipoclient->estatusm==1 ? "Activo" : "Baja"}}</td>
 
             <td>
-              <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="id_tipoclienteMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    opciones
-  </button>
-  <div class="dropdown-menu" aria-labelledby="id_tipoclienteMenuButton">
-    <a value="{{$tipoclient->id_tipoCliente}}" id="tipocliente_" class="vn dropdown-item" data-toggle="modal" data-target="#tipocliente_modal">Editar</a>
-           <a value="{{$tipoclient->id_tipoCliente}}" id="eli_tipocliente" class="vne dropdown-item" data-toggle="modal" data-target="#elimu">Baja</a>  
-  </div>
-</div>
+  
+    <a value="{{$tipoclient->id_tipoCliente}}" tipo="tipocliente_" class="vn btn btn-info " data-toggle="modal" data-target="#tipocliente_modal">Editar</a>
+           <a value="{{$tipoclient->id_tipoCliente}}" tipo="eli_tipocliente" class="vne btn btn-info " data-toggle="modal" data-target="#elimu">Baja</a>  
+
            
       </td>
 
@@ -437,7 +418,7 @@
 <!-- end -->
 
 
-<div id="tipocobro" class="tab-pane fade in">
+<div id="tipocobro" class=" in">
       
      
       <button class="btn btn-primary btn-lg new" value="tipocobro_" id="new_tipocobro" data-toggle="modal" data-target=".tipocobro_modal"> Ingresar nuevo tipo de cliente</button>
@@ -450,7 +431,8 @@
   <div class="panel-heading">Tipo Cliente</div>
   <div class="panel-body">
     <div class="table-responsive">
-      <table  class="sucurll table display cell-border compact" id="sucurll" >
+      <table data-toggle="table" data-pagination="true"   data-page-size="5"
+  data-search="true" data-locale="es-MX"  class="sucurll table display cell-border compact" id="sucurll" >
       <thead>
 <!-- <th>id_proveedor</th> -->
 
@@ -471,15 +453,11 @@
  <td>{{$tipoco->estatusm==1 ? "Activo" : "Baja"}}</td>
 
             <td>
-              <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="id_tipoCobroMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    opciones
-  </button>
-  <div class="dropdown-menu" aria-labelledby="id_tipoCobroMenuButton">
-    <a value="{{$tipoco->id_tipoCobro}}" id="tipocobro_" class="vn dropdown-item" data-toggle="modal" data-target="#tipocobro_modal">Editar</a>
-           <a value="{{$tipoco->id_tipoCobro}}" id="eli_tipocobro" class="vne dropdown-item" data-toggle="modal" data-target="#elimu">Baja</a>  
-  </div>
-</div>
+     
+
+    <a value="{{$tipoco->id_tipoCobro}}" tipo="tipocobro_" class="vn btn btn-info " data-toggle="modal" data-target="#tipocobro_modal">Editar</a>
+           <a value="{{$tipoco->id_tipoCobro}}" tipo="eli_tipocobro" class="vne btn btn-info " data-toggle="modal" data-target="#elimu">Baja</a>  
+
            
       </td>
 
@@ -496,7 +474,7 @@
    
 </div>
 <!-- end -->
-<div id="tipoentrada" class="tab-pane fade in">
+<div id="tipoentrada" class=" in">
       
      
       <button class="btn btn-primary btn-lg new" value="tipoentrada_" id="new_tipoentrada" data-toggle="modal" data-target=".tipoentrada_modal"> Ingresar nuevo tipo de cliente</button>
@@ -509,7 +487,8 @@
   <div class="panel-heading">Tipo Cliente</div>
   <div class="panel-body">
     <div class="table-responsive">
-      <table  class="sucurll table display cell-border compact" id="sucurll" >
+      <table data-toggle="table" data-pagination="true"   data-page-size="5"
+  data-search="true" data-locale="es-MX"  class="sucurll table display cell-border compact" id="sucurll" >
       <thead>
 <!-- <th>id_proveedor</th> -->
 
@@ -530,15 +509,10 @@
  <td>{{$tipocos->estatusm==1 ? "Activo" : "Baja"}}</td>
 
             <td>
-              <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="id_tipoEntradaMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    opciones
-  </button>
-  <div class="dropdown-menu" aria-labelledby="id_tipoEntradaMenuButton">
-    <a value="{{$tipocos->id_tipoEntrada}}" id="tipoentrada_" class="vn dropdown-item" data-toggle="modal" data-target="#tipoentrada_modal">Editar</a>
-           <a value="{{$tipocos->id_tipoEntrada}}" id="eli_tipoentrada" class="vne dropdown-item" data-toggle="modal" data-target="#elimu">Baja</a>  
-  </div>
-</div>
+
+    <a value="{{$tipocos->id_tipoEntrada}}" tipo="tipoentrada_" class="vn btn btn-info " data-toggle="modal" data-target="#tipoentrada_modal">Editar</a>
+           <a value="{{$tipocos->id_tipoEntrada}}" tipo="eli_tipoentrada" class="vne btn btn-info " data-toggle="modal" data-target="#elimu">Baja</a>  
+
            
       </td>
 
@@ -610,6 +584,7 @@
 
 </div>
 <script type="text/javascript">
+  const baseUrl = window.location.origin;
 $(document).ready(function() {
 	 $.ajaxSetup({
         headers: {
@@ -620,77 +595,14 @@ $(document).ready(function() {
    $('#menupre').selectize({
     sortField:'text',
    });
-});
-      
-      // Holder.addTheme('thumb', {
-      //   bg: '#55595c',
-      //   fg: '#eceeef',
-      //   text: 'Thumbnail'
-      // });
-
-function pedido(dato,total)
-{
 
 
-}
-
-
-
-
-
-      $(".pedi").on("click",function(e){
-var user_id = $(this).closest("form").attr('id');
-           var  formData = new FormData($('#'+user_id+'')[0]);
-           var que=$(".iden").val();
-           var url="";
-           if(que==1)
-           {
-            url="/"+user_id;
-           }else{
-            url="/"+user_id+"update";
-           }
-
-var data=$('#menuenv').serialize();
-
-          var request = $.ajax({
-  url: url,
-  method: "Post",
- data: formData,
-  dataType: "json",
-  cache: false,
-  async: true,
-            contentType: false,
-            processData: false,
-            enctype: 'multipart/form-data',
-});
- 
-request.done(function( msg ) {
-  $( "#log" ).html( msg );
-
-});
- 
-request.fail(function( jqXHR, textStatus ) {
-  alert( "Request failed: " + textStatus );
-});
-
-      });
-
-      $(".new").on("click",function(e){
-
-        val=$(this).attr("value");
-
-        $('#'+val+'dide').val("");
-        console.log('#'+val+'add');
-        $('#'+val+'add')[0].reset();
-   $('.iden').val(1).trigger('true');
-         $("#menupre").val(null).trigger('change');
-      })
 
 $('.vn').on('click',function(e){
-
+// alert("aqui");
 e.preventDefault();
 var val=$(this).attr("value");
-      var tipo=$(this).attr("id");
+      var tipo=$(this).attr("tipo");
       console.log(val,tipo);
 $('.iden').val(2).trigger('true');
   var viaje =tipo; 
@@ -734,6 +646,10 @@ console.log(tipo);
     }else
     {
       console.log("entre al else: #"+a+'');
+      if ($('#'+a+'p').length > 0 ) 
+       {
+         $('#'+a+'p').val(b);
+       }
 //       if (a=="idmedidas") 
 //       {
 //         $("#medidaspre").val(b);
@@ -772,7 +688,7 @@ $('.vne').on('click',function(e){
 
 e.preventDefault();
 var val=$(this).attr("value");
-      var tipo=$(this).attr("id");
+      var tipo=$(this).attr("tipo");
       console.log(val,tipo);
 $('.iden').val(2).trigger('true');
   var viaje =tipo; 
@@ -814,6 +730,10 @@ console.log(url);
 
     }else
     {
+       if ($('#'+a+'p').length > 0 ) 
+       {
+         $('#'+a+'p').val(b);
+       }
       console.log("entre al else");
     }
    
@@ -837,6 +757,93 @@ console.log("se supone que termino el for");
     });
 
 });
+
+
+    $(".pedi").on("click",function(e){
+var user_id = $(this).closest("form").attr('id');
+           var  formData = new FormData($('#'+user_id+'')[0]);
+           var que=$(".iden").val();
+           var url="";
+           if(que==1)
+           {
+            url="/"+user_id;
+           }else{
+            url="/"+user_id+"update";
+           }
+
+var data=$('#menuenv').serialize();
+
+          var request = $.ajax({
+  url: url,
+  method: "Post",
+ data: formData,
+  dataType: "json",
+  cache: false,
+  async: true,
+            contentType: false,
+            processData: false,
+            enctype: 'multipart/form-data',
+});
+ 
+request.done(function( msg ) {
+  // $( "#log" ).html( msg );
+  if(msg.hasOwnProperty("donde"))
+  {
+window.location.replace(baseUrl+"/configuracion"+msg.donde)
+    window.location.href =baseUrl+"/configuracion"+msg.donde;
+    window.location = baseUrl+"/configuracion"+msg.donde;
+    location.reload();
+
+  }
+
+});
+ 
+request.fail(function( jqXHR, textStatus ) {
+  alert( "Request failed: " + textStatus );
+});
+
+      });
+
+      $(".new").on("click",function(e){
+
+        val=$(this).attr("value");
+
+        $('#'+val+'dide').val("");
+        console.log('#'+val+'add');
+        $('#'+val+'add')[0].reset();
+   $('.iden').val(1).trigger('true');
+         $("#menupre").val(null).trigger('change');
+      })
+
+
+});
+      
+      // Holder.addTheme('thumb', {
+      //   bg: '#55595c',
+      //   fg: '#eceeef',
+      //   text: 'Thumbnail'
+      // });
+
+function pedido(dato,total)
+{
+
+
+}
+
+
+
+
+
+  
+
+// let as=$('.vn');
+// for (var i = as.length - 1; i >= 0; i--) {
+//   as[i].addEventListener("click", console.log("hola"), false); 
+
+// }
+
+
+
 
 $(".caja").on("click",function(e){
 

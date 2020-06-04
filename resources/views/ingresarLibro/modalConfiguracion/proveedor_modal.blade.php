@@ -3,7 +3,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Casa Editorial</h5>
+        <h5 class="modal-title">Proveedor</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -18,56 +18,56 @@
 <input id="Claveprov" name="Claveprov" class="form-control">
 </div>
 <div class="form-group col-sm-6">
-<label for="Empresa">"Empresa"</label>
-<input id="Empresa" name="Empresa" class="form-control">
+<label for="Empresap">"Empresa"</label>
+<input id="Empresap" name="Empresa" class="form-control">
 </div>
 <div class="form-group col-sm-6">
-<label for="Contacto">"Contacto"</label>
-<input id="Contacto" name="Contacto" class="form-control">
+<label for="Contactop">"Contacto"</label>
+<input id="Contactop" name="Contacto" class="form-control">
 </div>
 <div class="form-group col-sm-6">
-<label for="Domicilio">"Domicilio"</label>
-<input id="Domicilio" name="Domicilio" class="form-control">
+<label for="Domiciliop">"Domicilio"</label>
+<input id="Domiciliop" name="Domicilio" class="form-control">
 </div>
 <div class="form-group col-sm-6">
-<label for="Codpostal">"Codpostal"</label>
-<input type="number"  id="Codpostal" name="Codpostal" class="form-control">
+<label for="Codpostalp">"Codpostal"</label>
+<input type="number"  id="Codpostalp" name="Codpostal" class="form-control">
 </div>
 <div class="form-group col-sm-6">
-<label for="Municipio">"Municipio"</label>
-<input id="Municipio" name="Municipio" class="form-control">
+<label for="Municipiop">"Municipio"</label>
+<input id="Municipiop" name="Municipio" class="form-control">
 </div>
 <div class="form-group col-sm-6">
-<label for="Ciudad">"Ciudad"</label>
-<input id="Ciudad" name="Ciudad" class="form-control">
+<label for="Ciudadp">"Ciudad"</label>
+<input id="Ciudadp" name="Ciudad" class="form-control">
 </div>
 <div class="form-group col-sm-6">
-<label for="Estado">"Estado"</label>
-<input id="Estado" name="Estado" class="form-control">
+<label for="Estadop">"Estado"</label>
+<input id="Estadop" name="Estado" class="form-control">
 </div>
 <div class="form-group col-sm-6">
-<label for="Telefono">"Telefono"</label>
-<input type="number" id="Telefono" name="Telefono" class="form-control">
+<label for="Telefonop">"Telefono"</label>
+<input type="number" id="Telefonop" name="Telefono" class="form-control">
 </div>
 <div class="form-group col-sm-6">
-<label for="RFC">"RFC"</label>
-<input id="RFC" name="RFC" class="form-control">
+<label for="RFCp">"RFC"</label>
+<input id="RFCp" name="RFC" class="form-control">
 </div>
 <div class="form-group col-sm-6">
-<label for="Curp">"Curp"</label>
-<input id="Curp" name="Curp" class="form-control">
+<label for="Curpp">"Curp"</label>
+<input id="Curpp" name="Curp" class="form-control">
 </div>
 <div class="form-group col-sm-6">
-<label for="Email">"Email"</label>
-<input type="email" id="Email" name="Email" class="form-control">
+<label for="Emailp">"Email"</label>
+<input type="email" id="Emailp" name="Emailp" class="form-control">
 </div>
 <div class="form-group col-sm-6">
 <label for="Fecultcomp">"Fecultcomp"</label>
 <input id="Fecultcomp" name="Fecultcomp" class="form-control">
 </div>
 <div class="form-group col-sm-6">
-<label for="Montoactual">"Montoactual"</label>
-<input id="Montoactual" name="Montoactual" class="form-control">
+<label for="Montoactualp">"Montoactual"</label>
+<input id="Montoactualp" name="Montoactual" class="form-control">
 </div>
 <!-- <div class="form-group col-sm-6">
 <label for="Fecalta">"Fecalta"</label>
