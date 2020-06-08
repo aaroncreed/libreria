@@ -67,13 +67,15 @@
 
       </div>
 
+
       <div class="pull-right clearfix d-flex justify-content-end">
-             
+           <H1  style="    position: absolute;
+    left: 43%;">Sistema de libreria CEPHCIS</H1>  
         <ul class="info-menu list-inline list-unstyled">
           <li class="profile">
             <a href="#" data-toggle="dropdown" class="toggle" aria-expanded="false">
               <!-- <img src="uploads/users/pzg9wa7o1.jpg" alt="user-image" class="img-circle img-inline"> -->
-              <span>{{Auth::User()->Claveusr }} <i class="caret"></i></span>
+              <span>{{Auth::User()->Nombre }} <i class="caret"></i></span>
             </a>
             <ul class="dropdown-menu">
             <!--   <li>

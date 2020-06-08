@@ -15,8 +15,8 @@
 
 td.producto,
 th.producto {
-    width: 75px;
-    max-width: 75px;
+    width: 100px;
+    max-width: 100px;
 }
 
 td.cantidad,
@@ -28,8 +28,8 @@ th.cantidad {
 
 td.precio,
 th.precio {
-    width: 40px;
-    max-width: 40px;
+    width: 100px;
+    max-width: 100px;
     word-break: break-all;
 }
 
@@ -39,13 +39,17 @@ th.precio {
 }
 
 .ticket {
-    width: 155px;
-    max-width: 155px;
+    width: 250px;
+    max-width: 250px;
 }
 
 .img {
     max-width: inherit;
     width: inherit;
+}
+.tama{
+    font-size: 10px;
+    margin: 0;
 }
 
 @media print {

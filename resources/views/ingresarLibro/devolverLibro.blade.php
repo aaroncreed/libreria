@@ -21,21 +21,22 @@
   <div class="container">
     <h1 class="display-4">Devoluciones</h1>
     <div class="table-responsive">
-  <table class="table">
+  <table class="table" data-toggle="table" data-pagination="true"   data-page-size="10"
+  data-search="true" data-locale="es-MX" >
    <thead>
     <th>Escoger</th>
-     <th>"ClaveEnt"</th>
-<th> "Fecrecepcion"</th>
-<th> "Fecenvio"</th>
-<th> "Totalfac"</th>
-<th> "Referencia"</th>
-<th> "Clavetipent"</th>
-<th> "Observaciones"</th>
-<th> "Claveprov"</th>
-<th> "Usrrecibio"</th>
-<th> "Fecfiniquito"</th>
-<th> "fecfinconsigna"</th>
-<th> "Usralta</th>
+     <th>Clave Entrada</th>
+<th> Fecha de Recepcion</th>
+<th> Fecha de envio</th>
+<th> Total de factura</th>
+<th> Referencia</th>
+<th> Clave tipo de entrada</th>
+<th> Observaciones</th>
+<th> Clave proveedor</th>
+<th> Usuario de recibio</th>
+<th> Fecha de finiquito</th>
+<th> Fecha de fin de consigna</th>
+<th> Usuario alta</th>
    </thead>
    <tbody>
      @if(!empty($entradas))
@@ -87,21 +88,22 @@
   <div class="container">
     <h1 class="display-4">Devoluciones</h1>
     <div class="table-responsive">
-  <table class="table">
+  <table class="table"  class="table" data-toggle="table" data-pagination="true"   data-page-size="10"
+  data-search="true" data-locale="es-MX">
    <thead>
     <th>Escoger</th>
-     <th>"ClaveEnt"</th>
-<th> "Fecrecepcion"</th>
-<th> "Fecenvio"</th>
-<th> "Totalfac"</th>
-<th> "Referencia"</th>
-<th> "Clavetipent"</th>
-<th> "Observaciones"</th>
-<th> "Claveprov"</th>
-<th> "Usrrecibio"</th>
-<th> "Fecfiniquito"</th>
-<th> "fecfinconsigna"</th>
-<th> "Usralta</th>
+     <th>Clave Entrada</th>
+<th> Fecha de recepcion</th>
+<th> Fecha de envio</th>
+<th> Total de factura</th>
+<th> Referencia</th>
+<th> Clave tipo entrada</th>
+<th> Observaciones</th>
+<th> Clave proveedores</th>
+<th> Ususario que recibio</th>
+<th> Fecha de finiquito</th>
+<th> Fecha de fin de consigna</th>
+<th> Usuario alta</th>
    </thead>
    <tbody>
      @if(!empty($entradas))
