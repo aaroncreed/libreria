@@ -43,7 +43,7 @@ class entradas extends Controller
 // return view('ingresarLibro.pdf.reporteEntrada',compact("data"));
 
         $pdf = \PDF::loadView('ingresarLibro.pdf.reporteEntrada', $data);
-return $pdf->download(''.$id.'.pdf');
+return $pdf->setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->download(''.$id.'.pdf');
     }
     public function reporteSalida($id)
     {
@@ -67,6 +67,6 @@ return $pdf->download(''.$id.'.pdf');
             ];
 // return view('ingresarLibro.pdf.reporteSalida',compact("data"));
         $pdf = \PDF::loadView('ingresarLibro.pdf.reporteSalida', $data);
-return $pdf->download(''.$id.'.pdf');
+return $pdf->setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->download(''.$id.'.pdf');
     }
 }

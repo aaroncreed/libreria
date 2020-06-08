@@ -8,7 +8,7 @@
                 <div class="card-header"></div>
  <img src="{{asset('img/escudo.png')}}" style=" padding-top: 10px;
     margin: 0 auto;
-    width: 10%;">
+    width: 20%;">
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf

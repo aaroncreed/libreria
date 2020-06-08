@@ -12,6 +12,10 @@
   }
 </style>
 <body>
+    <img src="{{public_path('img/escudo.png')}}" style=" 
+    position: absolute;
+    top: 0;
+    width: 7%;">
   <h3 style="width: 100%; text-align: center;">{{ $heading}}</h3>
   
   <table width="100%" style="width:100%" border="0">
