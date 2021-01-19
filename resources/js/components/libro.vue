@@ -674,7 +674,35 @@ if( val!=undefined)
 
                 let data= new FormData();
 
-data.append('id_libro', this.id_libro)
+// this.id_libro==undefined ?  self.$swal('No ha colocado!!!') : "";
+                                 
+let proseguir=true;
+proseguir=this.Codbarras==undefined ?  false : true;
+proseguir=this.Clavecasedit==undefined ? false : true;
+proseguir=this.Titulo==undefined ? false : true;
+proseguir=this.Autor==undefined ? false : true;
+proseguir=this.ClaveInterna==undefined ? false : true;
+proseguir=this.ISBN==undefined ? false : true;
+proseguir=this.Inventariable==undefined ? false : true;
+proseguir=this.Claveunimed==undefined ? false : true;
+proseguir=this.Existencia==undefined ? false : true;
+proseguir=this.Puntoreorden==undefined ? false : true;
+proseguir=this.Costo==undefined ? false : true;
+proseguir=this.Preciolista==undefined ? false : true;
+proseguir=this.Peso==undefined ? false : true;
+proseguir=this.Numeropag==undefined ? false : true;
+proseguir=this.Tema==undefined ? false : true;
+proseguir=this.fecalta==undefined ? false : true;
+proseguir=this.Descuento==undefined ? false : true;
+proseguir=this.Ultimoprov==undefined ? false : true;
+proseguir=this.Sinopsis==undefined ? false : true;
+proseguir=this.Ubicacion==undefined ? false : true;
+proseguir=this.fotoportada==undefined ? false : true;
+// 
+
+if(proseguir)
+{
+  data.append('id_libro', this.id_libro)
 
 data.append('Codbarras',this.Codbarras)
 
@@ -758,6 +786,11 @@ data.append('Claveunimed', this.Claveunimed.hasOwnProperty("id_medida") ? this.C
                       console.log(error);
                             });
                 }
+              }else
+              {
+                self.$swal('Alto!!!','No ha colocado toda la informacion','warning')
+              }
+
 
       },
       handleFileUpload(){

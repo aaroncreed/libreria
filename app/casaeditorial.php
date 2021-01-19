@@ -23,7 +23,12 @@ SELECT id_casaEditorial,Clavecasedit,Desccasedit
 FROM `casaeditorial` ");
     }
 
-
+ public static function obtenerCasaEditorialTodasTablas()
+{
+     return DB::select("
+SELECT id_casaEditorial,Clavecasedit,Desccasedit,estatusm
+FROM `casaeditorial` ");
+}
     public static function ingresarNuevo()
     {
         return DB::insert('insert into `casaeditorial`(`Clavecasedit`,`Desccasedit`) 

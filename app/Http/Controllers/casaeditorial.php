@@ -26,6 +26,19 @@ editorial::ingresarNuevo();
 ]);
     	
     }
+    public function obtenerEditorialTabla()
+    {
+      $editorial=editorial::obtenerCasaEditorialTodasTablas();
+      foreach ($editorial as $key => $value) {
+        // dd($editorial[$key]->estatusm);
+        $editorial[$key]->estatusm=$value->estatusm==1 ? "Activo" : "Baja";
+      }
+      return response()->json(
+   $editorial
+ 
+);
+      
+    }
 
     public function obtenerEditorialEspecifica($id)
     {
@@ -66,7 +79,7 @@ editorial::ingresarNuevo();
     public function actualizar(Request $request)
     {
         $editorial=   editorial::where("id_casaEditorial",$request->id_casaEditorial)->update([   "Clavecasedit" =>$request->Clavecasedit,
-      "Desccasedit" => $request->Desccasedit]);
+      "Desccasedit" => $request->Desccasedit,"estatusm"=>1]);
       return response()->json([
    "uss"=>$editorial   
    ]);

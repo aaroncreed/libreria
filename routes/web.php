@@ -61,6 +61,7 @@ Route::get('/reporteEntrada/{id}',"entradas@reporteEntrada");
 
   Route::get('/insertasEditorial', 'casaeditorial@ingresarEditorial')->name('insertasEditorial');
    Route::get('/obtenerEditorial', 'casaeditorial@obtenerEditorial')->name('obtenerEditorial');
+   Route::get('/obtenerEditorialTabla', 'casaeditorial@obtenerEditorialTabla')->name('obtenerEditorialTabla');
 
     Route::get('/obtenerMedidas', 'medidas@obtenerMedidas')->name('obtenerMedidas');
 

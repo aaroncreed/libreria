@@ -51,23 +51,24 @@
     @include('ingresarLibro/modalConfiguracion/casaeditorial_modal')
   <div class="panel-heading">casaeditorial</div>
   <div class="panel-body">
-    <div class="table-responsive">
+    <div class="table-responsive" >
 
-      <table data-toggle="table" data-pagination="true"   data-page-size="5"
-  data-search="true" data-locale="es-MX"  class="usuariot table display cell-border compact" id="usuariot" >
+      <table data-toggle="table" data-pagination="true"   data-page-size="5"  data-height="428"
+  data-search="true" data-locale="es-MX"  class="usuariot table display cell-border compact" id="usuariot" 
+   data-url="/obtenerEditorialTabla">
     <thead>
  
-<!-- <th>id_casaEditorial</th> -->
-<th data-priority="1">Alias casaeditorial</th>
-<th data-priority="1">Descripcion</th>
-<th></th>
-<th></th>
+<!-- <th></th> -->
+<th data-field="Clavecasedit">Alias casaeditorial</th>
+<th data-field="Desccasedit">Descripcion</th>
+<th data-field="estatusm">Estatus</th>
+<th data-field="id_casaEditorial" data-formatter="operateFormatter" data-events="operateEvents"></th>
     </thead>
     <tbody>
   @if(!empty($casaeditorial))@foreach($casaeditorial as $mwn)
   
-    <tr>
-    <!-- <td>{{$mwn->id_casaEditorial}}</td> -->
+<!--     <tr>
+
     <td>{{$mwn->Clavecasedit}}</td>  
     <td>{{$mwn->Desccasedit}}</td>
     <td>@if($mwn->estatusm==1)Activo @else Inactiva @endif</td>  
@@ -76,14 +77,13 @@
             <td>
 
    
-  <div class="dropdown-menu" aria-labelledby="id_casaEditorialMenuButton">
+  
        <a value="{{$mwn->id_casaEditorial}}" tipo="casaeditorial_" class="vn btn btn-info " data-toggle="modal" data-target="#casaeditorial_modal">Editar</a>
            <a value="{{$mwn->id_casaEditorial}}" tipo="eli_casaeditorial" class="vne btn btn-info " data-toggle="modal" data-target="#elimu">Baja</a> 
 
-         
       </td>
 
-      </tr>
+      </tr> -->
       
       @endforeach
       @endif
@@ -106,9 +106,9 @@
    @include('ingresarLibro/modalConfiguracion/clientes_modal')
   <div class="panel-heading">Clientes</div>
   <div class="panel-body">
-  	<div class="table-responsive">
-      <table data-toggle="table" data-pagination="true"   data-page-size="5"
-  data-search="true" data-locale="es-MX"  class="proveemt table display cell-border compact" id="proveemt">
+  	<div class="table-responsive" >
+      <table data-toggle="table" data-pagination="true"   data-page-size="5"  data-height="428"
+  data-search="true" data-locale="es-MX"  class="proveemt table display cell-border compact" id="proveemt" >
     <thead>
 <!-- <th>idmenu</th> -->
 <th>#</th>
@@ -183,9 +183,9 @@
   <!-- Default panel contents -->
   @include('ingresarLibro/modalConfiguracion/descuentos_modal')
   <div class="panel-heading">descuentos</div>
-  <div class="panel-body">
-      <table data-toggle="table" data-pagination="true"   data-page-size="5"
-  data-search="true" data-locale="es-MX"  class="marcat table display cell-border compact" id="marcat">
+  <div class="panel-body" >
+      <table data-toggle="table" data-pagination="true"   data-page-size="5"  data-height="428"
+  data-search="true" data-locale="es-MX"  class="marcat table display cell-border compact" id="marcat" >
     <thead>
 <!-- <th>id_descuento</th> -->
 <th>TipoDesc</th>
@@ -239,9 +239,9 @@
   <!-- Default panel contents -->
   @include('ingresarLibro/modalConfiguracion/medidas_modal')
   <div class="panel-heading">medidas</div>
-  <div class="panel-body">
-      <table data-toggle="table" data-pagination="true"   data-page-size="5"
-  data-search="true" data-locale="es-MX"  class="vehiculot table display cell-border compact" id="vehiculot">
+  <div class="panel-body" >
+      <table data-toggle="table" data-pagination="true"   data-page-size="5"  data-height="428"
+  data-search="true" data-locale="es-MX"  class="vehiculot table display cell-border compact" id="vehiculot" >
     <thead>
 <!-- <th>id_medidas</th> -->
 <th>Clavemed</th>
@@ -293,8 +293,8 @@
     @include('ingresarLibro/modalConfiguracion/proveedor_modal')
   <div class="panel-heading">Proveedor</div>
   <div class="panel-body">
-    <div class="table-responsive">
-      <table data-toggle="table" data-pagination="true"   data-page-size="5"
+    <div class="table-responsive" >
+      <table data-toggle="table" data-pagination="true"   data-page-size="5"  data-height="428"
   data-search="true" data-locale="es-MX"  class="sucurll table display cell-border compact" id="sucurll" >
       <thead>
 <!-- <th>id_proveedor</th> -->
@@ -373,9 +373,9 @@
     @include('ingresarLibro/modalConfiguracion/tipocliente_modal')
   <div class="panel-heading">Tipo Cliente</div>
   <div class="panel-body">
-    <div class="table-responsive">
-      <table data-toggle="table" data-pagination="true"   data-page-size="5"
-  data-search="true" data-locale="es-MX"  class="sucurll table display cell-border compact" id="sucurll" >
+    <div class="table-responsive" >
+      <table data-toggle="table" data-pagination="true"   data-page-size="5"  data-height="428"
+  data-search="true" data-locale="es-MX"  class="sucurll table display cell-border compact" id="sucurll"  >
       <thead>
 <!-- <th>id_proveedor</th> -->
 
@@ -430,9 +430,9 @@
     @include('ingresarLibro/modalConfiguracion/tipocobro_modal')
   <div class="panel-heading">Tipo Cliente</div>
   <div class="panel-body">
-    <div class="table-responsive">
-      <table data-toggle="table" data-pagination="true"   data-page-size="5"
-  data-search="true" data-locale="es-MX"  class="sucurll table display cell-border compact" id="sucurll" >
+    <div class="table-responsive" >
+      <table data-toggle="table" data-pagination="true"   data-page-size="5"  data-height="428"
+  data-search="true" data-locale="es-MX"  class="sucurll table display cell-border compact" id="sucurll"  >
       <thead>
 <!-- <th>id_proveedor</th> -->
 
@@ -486,8 +486,8 @@
     @include('ingresarLibro/modalConfiguracion/tipoentrada_modal')
   <div class="panel-heading">Tipo Cliente</div>
   <div class="panel-body">
-    <div class="table-responsive">
-      <table data-toggle="table" data-pagination="true"   data-page-size="5"
+    <div class="table-responsive" >
+      <table data-toggle="table" data-pagination="true"   data-page-size="5"  data-height="428"
   data-search="true" data-locale="es-MX"  class="sucurll table display cell-border compact" id="sucurll" >
       <thead>
 <!-- <th>id_proveedor</th> -->
@@ -832,7 +832,32 @@ function pedido(dato,total)
 
 
 
+  function operateFormatter(value, row, index) {
+    return [
+      // '<a class="like" href="javascript:void(0)" title="Like">',
+      // '<i class="fa fa-heart"></i>',
+      // '</a>  ',
+      // '<a class="remove" href="javascript:void(0)" title="Remove">',
+      // '<i class="fa fa-trash"></i>',
+      // '</a>'
+      ' <a value="" tipo="casaeditorial_" class="vn btn btn-info " data-toggle="modal" data-target="#casaeditorial_modal">Editar</a>',
+           '<a value="" tipo="eli_casaeditorial" class="vne btn btn-info " data-toggle="modal" data-target="#elimu">Baja</a> '
+    ].join('')
+  }
 
+  window.operateEvents = {
+    'click .vn': function (e, value, row, index) {
+      alert('You click like action, row: ' + JSON.stringify(row))
+      console.log(value, row, index);
+    },
+    'click .vne': function (e, value, row, index) {
+      // $usuariot.bootstrapTable('remove', {
+      //   field: 'id',
+      //   values: [row.id]
+      // })
+      console.log(value, row, index);
+    }
+  }
 
   
 

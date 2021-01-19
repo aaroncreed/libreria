@@ -27,6 +27,10 @@
 {
 width: 10%;
 }
+.bootstrap-table .bootstrap4
+{
+  height: 250px;
+}
     </style>
   </head>
 
