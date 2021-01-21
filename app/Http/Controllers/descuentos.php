@@ -16,6 +16,20 @@ class descuentos extends Controller
 
  	]);
  }
+ public function todosDescuentos()
+ {
+ 		$descuentos=\App\descuentos::get();
+
+ 	 foreach ($descuentos as $key => $value) {
+        // dd($editorial[$key]->estatusm);
+        $descuentos[$key]->estatusm=$value->estatusm==1 ? "Activo" : "Baja";
+      }
+      return response()->json(
+   $descuentos
+ 
+);
+
+ }
 
 public function obetnerDescuento($id)
 {
@@ -50,7 +64,8 @@ $descuentos=\App\descuentos::where("id_descuento",$request->id_descuento)->updat
 "TipoDesc"=>$request->TipoDesc,
  "Tipocli"=>$request->Tipocli,
  "Descuento"=>$request->Descuento,
- "Usralta"=>\Auth::User()->id_usuario
+ "Usralta"=>\Auth::User()->id_usuario,
+ "estatusm"=>1
 
 ]
 )

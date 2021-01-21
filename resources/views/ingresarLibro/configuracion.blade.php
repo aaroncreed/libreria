@@ -108,27 +108,28 @@
   <div class="panel-body">
   	<div class="table-responsive" >
       <table data-toggle="table" data-pagination="true"   data-page-size="5"  data-height="428"
-  data-search="true" data-locale="es-MX"  class="proveemt table display cell-border compact" id="proveemt" >
+  data-search="true" data-locale="es-MX"  data-url="/clientes_get_all" class="proveemt table display cell-border compact" id="proveemt" >
     <thead>
-<!-- <th>idmenu</th> -->
-<th>#</th>
-<th>Estatus</th>
-<th>Razsocial</th>
-<th>Apepat</th>
-<th>Apemat</th>
-<th>Nombre</th>
-<th>Domicilio</th>
-<th>Codpostal</th>
-<th>Municipio</th>
-<th>Colonia</th>
-<th>Estado</th>
-<th>Telefono</th>
-<th>RFC</th>
-<th>Email</th>
-<th>Fecalta</th>
-<th>Fecultventa</th>
-<th>Diascre</th>
-<th>Limitecre</th>
+
+<th data-field="id_claveCliente" data-formatter="clienteFormatter" data-events="clienteFormatterEvent"></th>
+<th data-field="estatusm">Estatus</th>
+<th data-field="Razsocial">Razsocial</th>
+<th data-field='Apemat'>Apemat</th>
+<th data-field='Nombre'>Nombre</th>
+<th data-field='Domicilio'>Domicilio</th>
+<th data-field='Codpostal'>Codpostal</th>
+<th data-field='Municipio'>Municipio</th>
+<th data-field='Colonia'>Colonia</th>
+<th data-field='Estado'>Estado</th>
+<th data-field='Telefono'>Telefono</th>
+<th data-field='RFC'>RFC</th>
+<th data-field='Email'>Email</th>
+<th data-field='Fecalta'>Fecalta</th>
+<th data-field='Fecultventa'>Fecultventa</th>
+<th data-field='Diascre'>Diascre</th>
+<th data-field='Limitecre'>Limitecre</th>
+
+
 
     </thead>
     <tbody>
@@ -136,10 +137,9 @@
   
     <tr>
     <!-- <td>{{$mwn->idmenu}}</td> -->
-     <td>
+<!--      <td>
         
-     <a value="{{$mwn->id_claveCliente }}" tipo="clientes_" class="vn btn btn-info " data-toggle="modal" data-target="#clientes_modal">Editar</a>
-           <a value="{{$mwn->id_claveCliente }}" tipo="eli_clientes" class="vne btn btn-info " data-toggle="modal" data-target="#elimu">Baja</a>  
+
 
           
       </td>
@@ -164,7 +164,7 @@
          
 
       </tr>
-      
+       -->
       @endforeach
       @endif
     </tbody>
@@ -185,22 +185,23 @@
   <div class="panel-heading">descuentos</div>
   <div class="panel-body" >
       <table data-toggle="table" data-pagination="true"   data-page-size="5"  data-height="428"
-  data-search="true" data-locale="es-MX"  class="marcat table display cell-border compact" id="marcat" >
+  data-search="true" data-locale="es-MX"  class="marcat table display cell-border compact"  data-url="/todosDescuentos"  id="marcat" >
     <thead>
-<!-- <th>id_descuento</th> -->
-<th>TipoDesc</th>
- <th>Tipocli</th>
- <th>Descuento</th>
- <th>Usralta</th>
- <th></th>
- <th></th>
+<!-- "id_descuento"
+"TipoDesc", "Tipocli", "Descuento", "Usralta","estatusm" -->
+  <th data-field="TipoDesc">TipoDesc</th>
+ <th data-field="Tipocli">Tipocli</th>
+ <th data-field="Descuento">Descuento</th>
+ <th data-field="Usralta">Usralta</th>
+ <th data-field="estatusm">estatusm</th>
+ <th data-field="id_descuento" data-formatter="descuentosFormatter" data-events="descuentosFormatterEvent"></th>
 
     </thead>
     <tbody>
     @if(!empty($descuentos))
     @foreach($descuentos as $tipop)
   
-    <tr>
+ <!--    <tr>
       
 
 <td>{{$tipop->TipoDesc}}</td>
@@ -219,7 +220,7 @@
         
       </td>
 
-      </tr>
+      </tr> -->
       
       @endforeach
       @endif
@@ -241,21 +242,20 @@
   <div class="panel-heading">medidas</div>
   <div class="panel-body" >
       <table data-toggle="table" data-pagination="true"   data-page-size="5"  data-height="428"
-  data-search="true" data-locale="es-MX"  class="vehiculot table display cell-border compact" id="vehiculot" >
+  data-search="true" data-locale="es-MX"   data-url="/medidasTodas" class="vehiculot table display cell-border compact" id="vehiculot" >
     <thead>
-<!-- <th>id_medidas</th> -->
-<th>Clavemed</th>
-<th>Descmed</th>
-<th></th>
-<th></th>
 
+<th data-field="Clavemed">Clavemed</th>
+<th data-field="Descmed">Descmed</th>
+ <th data-field="estatusm">estatusm</th>
+<th data-field="id_medida" data-formatter="medidasFormatter" data-events="medidasFormatterEvent"></th>
     </thead>
     <tbody>
 
      @if(!empty($medidas))@foreach($medidas as $sene)
   
-    <tr>
-    <!-- <td>{{$sene->id_medidas}}</td> -->
+<!--     <tr>
+    
     <td>{{$sene->Clavemed}}</td> 
     <td>{{$sene->Descmed}}</td>  
      <td>{{$sene->estatusm == 1 ? "Activo" : "Baja"}}</td>  	
@@ -268,7 +268,7 @@
            
       </td>
 
-      </tr>
+      </tr> -->
       
       @endforeach
       @endif
@@ -295,32 +295,32 @@
   <div class="panel-body">
     <div class="table-responsive" >
       <table data-toggle="table" data-pagination="true"   data-page-size="5"  data-height="428"
-  data-search="true" data-locale="es-MX"  class="sucurll table display cell-border compact" id="sucurll" >
+  data-search="true" data-locale="es-MX" data-url="/proveedorTodas"   class="sucurll table display cell-border compact" id="sucurll" >
       <thead>
 <!-- <th>id_proveedor</th> -->
-<th></th>
-<th></th>
-<th>"Claveprov"</th>
-<th>"Empresa"</th>
-<th>"Contacto"</th>
-<th>"Domicilio"</th>
-<th>"Codpostal"</th>
-<th>"Municipio"</th>
-<th>"Ciudad"</th>
-<th>"Estado"</th>
-<th>"Telefono"</th>
-<th>"RFC"</th>
-<th>"Curp"</th>
-<th>"Email"</th>
-<th>"Fecultcomp"</th>
-<th>"Montoactual"</th>
-<th>"Fecalta"</th>
-<th></th>
+<th data-field="id_proveedor" data-formatter="proveedorFormatter" data-events="proveedorFormatterEvent"></th>
+ <th data-field="estatusm">estatusm</th>
+<th data-field="Claveprov" >"Claveprov"</th>
+<th data-field="Empresa" >"Empresa"</th>
+<th data-field="Contacto" >"Contacto"</th>
+<th data-field="Domicilio" >"Domicilio"</th>
+<th data-field="Codpostal" >"Codpostal"</th>
+<th data-field="Municipio" >"Municipio"</th>
+<th data-field="Ciudad" >"Ciudad"</th>
+<th data-field="Estado" >"Estado"</th>
+<th data-field="Telefono" >"Telefono"</th>
+<th data-field="RFC" >"RFC"</th>
+<th data-field="Curp" >"Curp"</th>
+<th data-field="Email" >"Email"</th>
+<th data-field="Fecultcomp" >"Fecultcomp"</th>
+<th data-field="Montoactual" >"Montoactual"</th>
+<th data-field="Fecalta" >"Fecalta"</th>
+
     </thead>
     <tbody>
         @if(!empty($proveedor))@foreach($proveedor as $tipopr)
   
-    <tr>
+<!--     <tr>
    
  
             <td>
@@ -347,7 +347,7 @@
 <td>{{$tipopr->Montoactual}}</td>
 <td>{{$tipopr->Fecalta}}</td>
 
-      </tr>
+      </tr> -->
       
       @endforeach
       @endif
@@ -604,6 +604,8 @@ e.preventDefault();
 var val=$(this).attr("value");
       var tipo=$(this).attr("tipo");
       console.log(val,tipo);
+
+
 $('.iden').val(2).trigger('true');
   var viaje =tipo; 
   var url="/"+viaje+"get/"+val+"";
@@ -764,6 +766,7 @@ var user_id = $(this).closest("form").attr('id');
            var  formData = new FormData($('#'+user_id+'')[0]);
            var que=$(".iden").val();
            var url="";
+           let tablaActual=$(".iden").attr("tabla-actual")
            if(que==1)
            {
             url="/"+user_id;
@@ -787,14 +790,7 @@ var data=$('#menuenv').serialize();
  
 request.done(function( msg ) {
   // $( "#log" ).html( msg );
-  if(msg.hasOwnProperty("donde"))
-  {
-window.location.replace(baseUrl+"/configuracion"+msg.donde)
-    window.location.href =baseUrl+"/configuracion"+msg.donde;
-    window.location = baseUrl+"/configuracion"+msg.donde;
-    location.reload();
-
-  }
+  $("#"+tablaActual).bootstrapTable('refresh')
 
 });
  
@@ -844,17 +840,405 @@ function pedido(dato,total)
            '<a value="" tipo="eli_casaeditorial" class="vne btn btn-info " data-toggle="modal" data-target="#elimu">Baja</a> '
     ].join('')
   }
+  function clienteFormatter(value, row, index) {
+    return [
+      // '<a class="like" href="javascript:void(0)" title="Like">',
+      // '<i class="fa fa-heart"></i>',
+      // '</a>  ',
+      // '<a class="remove" href="javascript:void(0)" title="Remove">',
+      // '<i class="fa fa-trash"></i>',
+      // '</a>'
+           '<a value="" tipo="clientes_" class="vn btn btn-info " data-toggle="modal" data-target="#clientes_modal">Editar</a>',
+           '<a value="" tipo="eli_clientes" class="vne btn btn-info " data-toggle="modal" data-target="#elimu">Baja</a> ' 
+      
+    ].join('')
+  }
 
-  window.operateEvents = {
-    'click .vn': function (e, value, row, index) {
-      alert('You click like action, row: ' + JSON.stringify(row))
+  function descuentosFormatter(value, row, index) {
+    return [
+      // '<a class="like" href="javascript:void(0)" title="Like">',
+      // '<i class="fa fa-heart"></i>',
+      // '</a>  ',
+      // '<a class="remove" href="javascript:void(0)" title="Remove">',
+      // '<i class="fa fa-trash"></i>',
+      // '</a>'
+      // ' <a value="" tipo="casaeditorial_" class="vn btn btn-info " data-toggle="modal" data-target="#casaeditorial_modal">Editar</a>',
+      //      '<a value="" tipo="eli_casaeditorial" class="vne btn btn-info " data-toggle="modal" data-target="#elimu">Baja</a> '
+             '<a value="" tipo="descuentos_" class="vn btn btn-info " data-toggle="modal" data-target="#descuentos_modal">Editar</a>',
+           '<a value="" tipo="eli_descuento" class="vne btn btn-info " data-toggle="modal" data-target="#elimu">Baja</a>'  
+    ].join('')
+  }
+  function medidasFormatter(value, row, index) {
+    return [
+      // '<a class="like" href="javascript:void(0)" title="Like">',
+      // '<i class="fa fa-heart"></i>',
+      // '</a>  ',
+      // '<a class="remove" href="javascript:void(0)" title="Remove">',
+      // '<i class="fa fa-trash"></i>',
+      // '</a>'
+    '<a value="" tipo="medidas_" class="vn btn btn-info " data-toggle="modal" data-target="#medidas_modal">Editar</a>',
+           '<a value="" tipo="eli_medidas" class="vne btn btn-info " data-toggle="modal" data-target="#elimu">Baja</a>'  
+    ].join('')
+  }
+  function proveedorFormatter(value, row, index) {
+    return [
+      // '<a class="like" href="javascript:void(0)" title="Like">',
+      // '<i class="fa fa-heart"></i>',
+      // '</a>  ',
+      // '<a class="remove" href="javascript:void(0)" title="Remove">',
+      // '<i class="fa fa-trash"></i>',
+      // '</a>'
+    '<a value="" tipo="proveedor_" class="vn btn btn-info " data-toggle="modal" data-target=".proveedor_modal">Editar</a>',
+           '<a value="" tipo="eli_proveedor" class="vne btn btn-info " data-toggle="modal" data-target="#elimu">Baja</a>'  
+    ].join('')
+  }
+  function tipoClienteFormatter(value, row, index) {
+    return [
+      // '<a class="like" href="javascript:void(0)" title="Like">',
+      // '<i class="fa fa-heart"></i>',
+      // '</a>  ',
+      // '<a class="remove" href="javascript:void(0)" title="Remove">',
+      // '<i class="fa fa-trash"></i>',
+      // '</a>'
+      ' <a value="" tipo="casaeditorial_" class="vn btn btn-info " data-toggle="modal" data-target="#casaeditorial_modal">Editar</a>',
+           '<a value="" tipo="eli_casaeditorial" class="vne btn btn-info " data-toggle="modal" data-target="#elimu">Baja</a> '
+    ].join('')
+  }
+  function tipoCobroFormatter(value, row, index) {
+    return [
+      // '<a class="like" href="javascript:void(0)" title="Like">',
+      // '<i class="fa fa-heart"></i>',
+      // '</a>  ',
+      // '<a class="remove" href="javascript:void(0)" title="Remove">',
+      // '<i class="fa fa-trash"></i>',
+      // '</a>'
+      ' <a value="" tipo="casaeditorial_" class="vn btn btn-info " data-toggle="modal" data-target="#casaeditorial_modal">Editar</a>',
+           '<a value="" tipo="eli_casaeditorial" class="vne btn btn-info " data-toggle="modal" data-target="#elimu">Baja</a> '
+    ].join('')
+  }
+  function tipoEntradaFormatter(value, row, index) {
+    return [
+      // '<a class="like" href="javascript:void(0)" title="Like">',
+      // '<i class="fa fa-heart"></i>',
+      // '</a>  ',
+      // '<a class="remove" href="javascript:void(0)" title="Remove">',
+      // '<i class="fa fa-trash"></i>',
+      // '</a>'
+      ' <a value="" tipo="casaeditorial_" class="vn btn btn-info " data-toggle="modal" data-target="#casaeditorial_modal">Editar</a>',
+           '<a value="" tipo="eli_casaeditorial" class="vne btn btn-info " data-toggle="modal" data-target="#elimu">Baja</a> '
+    ].join('')
+  }
+
+function ponerBaja(val,tipo,e,tabla)
+{
+
+
+      
+$('.iden').val(2).trigger('true');
+  var viaje =tipo; 
+  var url="/"+viaje+"/"+val+"";
+
+ $( '#tipo' ).val("2"); 
+ $('#'+tipo+'dide').val(val);
+ var values = {};
+ console.log("entrando a "+'#'+viaje+'alta');
+console.log(url);
+/// ajax
+   $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            }
+        })
+   $.ajax({
+       
+        type: "GET",
+            url: url,
+            data: false,
+            dataType: 'json',
+            cache: false,
+            contentType: false,
+            processData: false,
+            enctype: 'multipart/form-data',
+        // async:false, //<------This is the option you must add
+        success:function(response){
+      
+      console.log(response);
+       tabla.bootstrapTable('refresh')
+   $.each(response.uss[0], function(a,b) {
+    console.log(a+':'+b);
+    console.log('#'+a+'');
+
+    if ($('#'+a+'').length > 0 ) 
+    {
+      console.log("entre a ingresar el valor");
+       $('#'+a+'').val(b);
+
+    }else
+    {
+       if ($('#'+a+'p').length > 0 ) 
+       {
+         $('#'+a+'p').val(b);
+       }
+      console.log("entre al else");
+    }
+   
+});
+     
+// console.log("se supone que termino el for");
+          
+
+          // console.log(response);
+          //   console.log("entre response"+response.uss[0]);
+         
+        
+          
+        
+        },
+        error:function (response){
+        console.log(response);
+        $('#mmos').hide();
+              $('#mmosm').show();
+        }
+    });
+
+
+}
+  function llenarEditar(val,tipo,e,tabla)
+  {
+
+    $('.iden').val(2).trigger('true');
+    $(".iden").attr("tabla-actual",tabla)
+  var viaje =tipo; 
+  var url="/"+viaje+"get/"+val+"";
+
+ $( '#tipo' ).val("2"); 
+ $('#'+tipo+'dide').val(val);
+ var values = {};
+ console.log("entrando a "+'#'+viaje+'alta');
+console.log(url);
+console.log(tipo);
+/// ajax
+   $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            }
+        })
+   $.ajax({
+       
+        type: "GET",
+            url: url,
+            data: false,
+            dataType: 'json',
+            cache: false,
+            contentType: false,
+            processData: false,
+            enctype: 'multipart/form-data',
+        // async:false, //<------This is the option you must add
+        success:function(response){
+      
+      console.log(response);
+   $.each(response.uss[0], function(a,b) {
+    // console.log(a+':'+b);
+    // console.log('#'+a+'');
+
+    if ($('#'+a+'').length > 0 ) 
+    {
+      console.log("entre a ingresar el valor: #"+a+"");
+       $('#'+a+'').val(b);
+
+    }else
+    {
+      console.log("entre al else: #"+a+'');
+      if ($('#'+a+'p').length > 0 ) 
+       {
+         $('#'+a+'p').val(b);
+       }
+//       if (a=="idmedidas") 
+//       {
+//         $("#medidaspre").val(b);
+//       }
+//       if (a=="idmenu") 
+//       {
+//         $('#menupre').val(b); // Select the option with a value of '1'
+// $('#menupre').trigger('change'); 
+     
+//       }
+    }
+
+   
+});
+     $('#'+viaje+'alta').modal("show");
+     // tabla.bootstrapTable('refresh')
+console.log("se supone que termino el for");
+          
+
+          // console.log(response);
+          //   console.log("entre response"+response.uss[0]);
+         
+          
+          
+        
+        },
+        error:function (response){
+        console.log(response);
+        $('#mmos').hide();
+              $('#mmosm').show();
+        }
+    });
+
+    }
+
+    window.proveedorFormatterEvent={
+
+            'click .vn': function (e, value, row, index) {
+      // alert('You click like action, row: ' + JSON.stringify(row))
       console.log(value, row, index);
+            let thisElement=e.currentTarget;
+var val=$(thisElement).attr("value");
+      var tipo=$(thisElement).attr("tipo");
+      let tabla="sucurll"
+     llenarEditar(value,tipo,e,tabla);
+
+
+
+$('.iden').val(2).trigger('true');
+
     },
     'click .vne': function (e, value, row, index) {
       // $usuariot.bootstrapTable('remove', {
       //   field: 'id',
       //   values: [row.id]
       // })
+      let thisElement=e.currentTarget;
+var val=$(thisElement).attr("value");
+      var tipo=$(thisElement).attr("tipo");
+      let tabla=$("#sucurll")
+     ponerBaja(value,tipo,e,tabla);
+
+
+      console.log(value, row, index);
+    }
+    }
+
+    window.medidasFormatterEvent ={
+
+            'click .vn': function (e, value, row, index) {
+      // alert('You click like action, row: ' + JSON.stringify(row))
+      console.log(value, row, index);
+            let thisElement=e.currentTarget;
+var val=$(thisElement).attr("value");
+      var tipo=$(thisElement).attr("tipo");
+      let tabla="vehiculot"
+     llenarEditar(value,tipo,e,tabla);
+
+
+
+$('.iden').val(2).trigger('true');
+
+    },
+    'click .vne': function (e, value, row, index) {
+      // $usuariot.bootstrapTable('remove', {
+      //   field: 'id',
+      //   values: [row.id]
+      // })
+      let thisElement=e.currentTarget;
+var val=$(thisElement).attr("value");
+      var tipo=$(thisElement).attr("tipo");
+      let tabla=$("#vehiculot")
+     ponerBaja(value,tipo,e,tabla);
+
+
+      console.log(value, row, index);
+    }
+    }
+
+    window.descuentosFormatterEvent ={
+            'click .vn': function (e, value, row, index) {
+      // alert('You click like action, row: ' + JSON.stringify(row))
+      console.log(value, row, index);
+            let thisElement=e.currentTarget;
+var val=$(thisElement).attr("value");
+      var tipo=$(thisElement).attr("tipo");
+      let tabla="marcat"
+     llenarEditar(value,tipo,e,tabla);
+
+
+
+$('.iden').val(2).trigger('true');
+
+    },
+    'click .vne': function (e, value, row, index) {
+      // $usuariot.bootstrapTable('remove', {
+      //   field: 'id',
+      //   values: [row.id]
+      // })
+      let thisElement=e.currentTarget;
+var val=$(thisElement).attr("value");
+      var tipo=$(thisElement).attr("tipo");
+      let tabla=$("#marcat")
+     ponerBaja(value,tipo,e,tabla);
+
+
+      console.log(value, row, index);
+    }
+    }
+   window.clienteFormatterEvent ={
+         'click .vn': function (e, value, row, index) {
+      // alert('You click like action, row: ' + JSON.stringify(row))
+      console.log(value, row, index);
+            let thisElement=e.currentTarget;
+var val=$(thisElement).attr("value");
+      var tipo=$(thisElement).attr("tipo");
+      let tabla="proveemt"
+     llenarEditar(value,tipo,e,tabla);
+
+
+
+$('.iden').val(2).trigger('true');
+
+    },
+    'click .vne': function (e, value, row, index) {
+      // $usuariot.bootstrapTable('remove', {
+      //   field: 'id',
+      //   values: [row.id]
+      // })
+      let thisElement=e.currentTarget;
+var val=$(thisElement).attr("value");
+      var tipo=$(thisElement).attr("tipo");
+      let tabla=$("#proveemt")
+     ponerBaja(value,tipo,e,tabla);
+
+
+      console.log(value, row, index);
+    }
+   } 
+  window.operateEvents = {
+    'click .vn': function (e, value, row, index) {
+      // alert('You click like action, row: ' + JSON.stringify(row))
+      console.log(value, row, index);
+            let thisElement=e.currentTarget;
+var val=$(thisElement).attr("value");
+      var tipo=$(thisElement).attr("tipo");
+      let tabla="usuariot"
+     llenarEditar(value,tipo,e,tabla);
+
+
+
+$('.iden').val(2).trigger('true');
+
+    },
+    'click .vne': function (e, value, row, index) {
+      // $usuariot.bootstrapTable('remove', {
+      //   field: 'id',
+      //   values: [row.id]
+      // })
+      let thisElement=e.currentTarget;
+var val=$(thisElement).attr("value");
+      var tipo=$(thisElement).attr("tipo");
+      let tabla=$("#usuariot")
+     ponerBaja(value,tipo,e,tabla);
+
+
       console.log(value, row, index);
     }
   }

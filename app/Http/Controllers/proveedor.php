@@ -21,6 +21,19 @@ class proveedor extends Controller
     		"uss"=>$proveedor
     	]);
     }
+    public function proveedorTodas()
+    {
+        $proveedor=\App\proveedor::get();
+
+             foreach ($proveedor as $key => $value) {
+        // dd($editorial[$key]->estatusm);
+        $proveedor[$key]->estatusm=$value->estatusm==1 ? "Activo" : "Baja";
+      }
+      return response()->json(
+   $proveedor
+ 
+);
+    }
     public function ingresarproveedor(Request $request)
     {
     	$proveedor=\App\proveedor::create([

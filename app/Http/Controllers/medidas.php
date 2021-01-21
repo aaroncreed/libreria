@@ -21,6 +21,21 @@ class medidas extends Controller
  
 ]);
     }
+    public function medidasTodas()
+    {
+            $medidas=\App\medidas::get();
+            
+ foreach ($medidas as $key => $value) {
+        // dd($editorial[$key]->estatusm);
+        $medidas[$key]->estatusm=$value->estatusm==1 ? "Activo" : "Baja";
+      }
+      return response()->json(
+   $medidas
+ 
+);
+    }
+
+
      public function obtenerMedidas()
     {
 	$medidas=unidadesMedicion::obtenerMedidas();
@@ -51,7 +66,7 @@ $medidas=\App\medidas::where("id_medida",$request->id_medida)->update(
 [
 "Clavemed"=>$request->Clavemed,
  "Descmed"=>$request->Descmed,
-
+"estatusm"=>1
 
 ]
 )

@@ -83,24 +83,30 @@ route::get("/eli_casaeditorial/{id}","casaeditorial@cambiarEstatus");
 route::post("/casaeditorial_addupdate","casaeditorial@actualizar");
 
 route::get("/clientes_get/{id}","clientes@obtenerClientes");
+route::get("/clientes_get_all","clientes@obtenerClientesTodos");
 route::post("/clientes_add","clientes@ingresarclientes");
 route::post("/clientes_addupdate","clientes@actualizar");
 route::get("/eli_clientes/{id}","clientes@baja");
 
 
 route::get("/descuentos_get/{id}","descuentos@obtenerdescuentos");
+route::get("/todosDescuentos","descuentos@todosDescuentos");
+
 route::post("/descuentos_add","descuentos@ingresardescuentos");
 route::post("/descuentos_addupdate","descuentos@actualizar");
 route::get("/eli_descuento/{id}","descuentos@baja");
 
 
 route::get("/medidas_get/{id}","medidas@obtenermedidasg");
+route::get("/medidasTodas","medidas@medidasTodas");
 route::post("/medidas_add","medidas@ingresarmedidas");
 route::post("/medidas_addupdate","medidas@actualizar");
 route::get("/eli_medidas/{id}","medidas@baja");
 
 
 route::get("/proveedor_get/{id}","proveedor@obtenerproveedor");
+route::get("/proveedorTodas","proveedor@proveedorTodas");
+
 route::post("/proveedor_add","proveedor@ingresarproveedor");
 route::post("/proveedor_addupdate","proveedor@actualizar");
 route::get("/eli_proveedor/{id}","proveedor@baja");

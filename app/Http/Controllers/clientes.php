@@ -21,6 +21,19 @@ class clientes extends Controller
     		"uss"=>$clientes
     	]);
     }
+      public function obtenerClientesTodos()
+    {
+        $clientes=\App\clientes::get();
+
+   foreach ($clientes as $key => $value) {
+        // dd($editorial[$key]->estatusm);
+        $clientes[$key]->estatusm=$value->estatusm==1 ? "Activo" : "Baja";
+      }
+      return response()->json(
+   $clientes
+ 
+);
+    }
     public function ingresarclientes(Request $request)
     {
     	$clientes=\App\clientes::create([
