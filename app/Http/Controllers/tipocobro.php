@@ -21,6 +21,20 @@ class tipocobro extends Controller
     		"uss"=>$tipocobro
     	]);
     }
+    public function tipocobroTablaTodas()
+    {
+            $tipocobro=\App\tipocobro::get();
+
+     
+             foreach ($tipocobro as $key => $value) {
+        // dd($editorial[$key]->estatusm);
+        $tipocobro[$key]->estatusm=$value->estatusm==1 ? "Activo" : "Baja";
+      }
+      return response()->json(
+   $tipocobro
+ 
+);
+    }
     public function ingresartipocobro(Request $request)
     {
     	$tipocobro=\App\tipocobro::create([

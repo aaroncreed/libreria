@@ -22,6 +22,20 @@ class tipocliente extends Controller
     		"uss"=>$tipocliente
     	]);
     }
+    public function tipoClienteTablaTodas()
+    {
+        $tipocliente=\App\tipocliente::get();
+
+    
+             foreach ($tipocliente as $key => $value) {
+        // dd($editorial[$key]->estatusm);
+        $tipocliente[$key]->estatusm=$value->estatusm==1 ? "Activo" : "Baja";
+      }
+      return response()->json(
+   $tipocliente
+ 
+);
+    }
     public function ingresartipocliente(Request $request)
     {
     	$tipocliente=\App\tipocliente::create([

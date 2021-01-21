@@ -375,20 +375,20 @@
   <div class="panel-body">
     <div class="table-responsive" >
       <table data-toggle="table" data-pagination="true"   data-page-size="5"  data-height="428"
-  data-search="true" data-locale="es-MX"  class="sucurll table display cell-border compact" id="sucurll"  >
+  data-search="true" data-locale="es-MX" data-url="/tipoClienteTablaTodas"  class="tipoClienteTabla table display cell-border compact" id="tipoClienteTabla"  >
       <thead>
-<!-- <th>id_proveedor</th> -->
+<!-- <th>'TipoCli','Desctipo','Usralta',''</th> -->
+<th data-field="id_tipoCliente" data-formatter="tipoClienteFormatter" data-events="tipoClienteFormatterEvent"></th>
+<th data-field='TipoCli'>'TipoCli'</th>
+<th data-field='Desctipo'>'Desctipo'</th>
+<th data-field='Usralta'>'Usralta'</th>
+<th data-field="estatusm">estatusm</th>
 
-<th>'TipoCli'</th>
-<th>'Desctipo'</th>
-<th>'Usralta'</th>
-<th></th>
-<th></th>
     </thead>
     <tbody>
         @if(!empty($tipoCliente))@foreach($tipoCliente as $tipoclient)
   
-    <tr>
+<!--     <tr>
    <td>{{$tipoclient->TipoCli}}</td>
 <td>{{$tipoclient->Desctipo}}</td>
 <td>{{$tipoclient->Usralta}}</td>
@@ -404,7 +404,7 @@
       </td>
 
 
-      </tr>
+      </tr> -->
       
       @endforeach
       @endif
@@ -428,24 +428,24 @@
        <div class="panel panel-default">
   <!-- Default panel contents -->
     @include('ingresarLibro/modalConfiguracion/tipocobro_modal')
-  <div class="panel-heading">Tipo Cliente</div>
+  <div class="panel-heading">Tipo Cobro</div>
   <div class="panel-body">
     <div class="table-responsive" >
       <table data-toggle="table" data-pagination="true"   data-page-size="5"  data-height="428"
-  data-search="true" data-locale="es-MX"  class="sucurll table display cell-border compact" id="sucurll"  >
+  data-search="true" data-locale="es-MX" data-url="/tipocobroTablaTodas"   class="tipocobroTabla table display cell-border compact" id="tipocobroTabla"  >
       <thead>
 <!-- <th>id_proveedor</th> -->
 
-<th>'TipoCobro'</th>
-<th>'Desccobro'</th>
-<th>'Usralta'</th>
-<th></th>
-<th></th>
+<th data-field="TipoCobro">'TipoCobro'</th>
+<th data-field="Desccobro">'Desccobro'</th>
+<th data-field="Usralta">'Usralta'</th>
+<th data-field="estatusm">estatusm</th>
+<th data-field="id_tipoCobro" data-formatter="tipoCobroFormatter" data-events="tipoCobroFormatterEvent"></th>
     </thead>
     <tbody>
         @if(!empty($tipocobro))@foreach($tipocobro as $tipoco)
   
-    <tr>
+<!--     <tr>
    <td>{{$tipoco->TipoCobro}}</td>
 <td>{{$tipoco->Desccobro}}</td>
 <td>{{$tipoco->Usralta}}</td>
@@ -462,7 +462,7 @@
       </td>
 
 
-      </tr>
+      </tr> -->
       
       @endforeach
       @endif
@@ -484,24 +484,30 @@
        <div class="panel panel-default">
   <!-- Default panel contents -->
     @include('ingresarLibro/modalConfiguracion/tipoentrada_modal')
-  <div class="panel-heading">Tipo Cliente</div>
+  <div class="panel-heading">Tipo Entrada</div>
   <div class="panel-body">
     <div class="table-responsive" >
       <table data-toggle="table" data-pagination="true"   data-page-size="5"  data-height="428"
-  data-search="true" data-locale="es-MX"  class="sucurll table display cell-border compact" id="sucurll" >
+  data-search="true" data-locale="es-MX" data-url="/tipoentradaTablaTodas"  class="tipoentradaTabla table display cell-border compact" id="tipoentradaTabla" >
       <thead>
-<!-- <th>id_proveedor</th> -->
+<!-- Desctipent: "Solicitud Especial"
+Tipoent: "7"
+Usralta: "6"
+estatusm: "Baja"
+id_tipoEntrada: 6 -->
+<!-- <th data-field="id_tipoEntrada" data-formatter="tipoentradaFormatter" data-events="tipoentradaFormatterEvent"> </th> -->
+<th data-field="id_tipoEntrada" data-formatter="tipoEntradasFormatter" data-events="tipoEntradasFormatterEvent"></th>
+<th  data-field="Tipoent">'Tipoent'</th>
+<th  data-field="Desctipent">'Desctipent'</th>
+<th  data-field="Usralta">'Usralta'</th>
+<th data-field="estatusm">estatusm</th>
 
-<th>'Tipoent'</th>
-<th>'Desctipent'</th>
-<th>'Usralta'</th>
-<th></th>
-<th></th>
     </thead>
     <tbody>
-        @if(!empty($tipoentrada))@foreach($tipoentrada as $tipocos)
+        @if(!empty($tipoentrada))
+        @foreach($tipoentrada as $tipocos)
   
-    <tr>
+ <!--    <tr>
    <td>{{$tipocos->Tipoent}}</td>
 <td>{{$tipocos->Desctipent}}</td>
 <td>{{$tipocos->Usralta}}</td>
@@ -517,7 +523,7 @@
       </td>
 
 
-      </tr>
+      </tr> -->
       
       @endforeach
       @endif
@@ -900,8 +906,8 @@ function pedido(dato,total)
       // '<a class="remove" href="javascript:void(0)" title="Remove">',
       // '<i class="fa fa-trash"></i>',
       // '</a>'
-      ' <a value="" tipo="casaeditorial_" class="vn btn btn-info " data-toggle="modal" data-target="#casaeditorial_modal">Editar</a>',
-           '<a value="" tipo="eli_casaeditorial" class="vne btn btn-info " data-toggle="modal" data-target="#elimu">Baja</a> '
+       '<a value="" tipo="tipocliente_" class="vn btn btn-info " data-toggle="modal" data-target="#tipocliente_modal">Editar</a>',
+           '<a value="" tipo="eli_tipocliente" class="vne btn btn-info " data-toggle="modal" data-target="#elimu">Baja</a>'  
     ].join('')
   }
   function tipoCobroFormatter(value, row, index) {
@@ -912,11 +918,11 @@ function pedido(dato,total)
       // '<a class="remove" href="javascript:void(0)" title="Remove">',
       // '<i class="fa fa-trash"></i>',
       // '</a>'
-      ' <a value="" tipo="casaeditorial_" class="vn btn btn-info " data-toggle="modal" data-target="#casaeditorial_modal">Editar</a>',
-           '<a value="" tipo="eli_casaeditorial" class="vne btn btn-info " data-toggle="modal" data-target="#elimu">Baja</a> '
+      '<a value="" tipo="tipocobro_" class="vn btn btn-info " data-toggle="modal" data-target="#tipocobro_modal">Editar</a>',
+           '<a value="" tipo="eli_tipocobro" class="vne btn btn-info " data-toggle="modal" data-target="#elimu">Baja</a>'  
     ].join('')
   }
-  function tipoEntradaFormatter(value, row, index) {
+    function tipoEntradasFormatter(value, row, index) {
     return [
       // '<a class="like" href="javascript:void(0)" title="Like">',
       // '<i class="fa fa-heart"></i>',
@@ -924,10 +930,22 @@ function pedido(dato,total)
       // '<a class="remove" href="javascript:void(0)" title="Remove">',
       // '<i class="fa fa-trash"></i>',
       // '</a>'
-      ' <a value="" tipo="casaeditorial_" class="vn btn btn-info " data-toggle="modal" data-target="#casaeditorial_modal">Editar</a>',
-           '<a value="" tipo="eli_casaeditorial" class="vne btn btn-info " data-toggle="modal" data-target="#elimu">Baja</a> '
+      '<a value="" tipo="tipoentrada_" class="vn btn btn-info " data-toggle="modal" data-target="#tipoentrada_modal">Editar</a>',
+           '<a value="" tipo="eli_tipoentrada" class="vne btn btn-info " data-toggle="modal" data-target="#elimu">Baja</a>'  
     ].join('')
   }
+  // function tipoEntradaFormatter(value, row, index) {
+  //   return [
+  //     // '<a class="like" href="javascript:void(0)" title="Like">',
+  //     // '<i class="fa fa-heart"></i>',
+  //     // '</a>  ',
+  //     // '<a class="remove" href="javascript:void(0)" title="Remove">',
+  //     // '<i class="fa fa-trash"></i>',
+  //     // '</a>'
+  //     '<a value="" tipo="tipoentrada_" class="vn btn btn-info " data-toggle="modal" data-target="#tipoentrada_modal">Editar</a>',
+  //          '<a value="" tipo="eli_tipoentrada" class="vne btn btn-info " data-toggle="modal" data-target="#elimu">Baja</a>'  
+  //   ].join('')
+  // }
 
 function ponerBaja(val,tipo,e,tabla)
 {
@@ -1087,6 +1105,66 @@ console.log("se supone que termino el for");
     });
 
     }
+    window.tipoEntradasFormatterEvent={
+               'click .vn': function (e, value, row, index) {
+      // alert('You click like action, row: ' + JSON.stringify(row))
+      console.log(value, row, index);
+            let thisElement=e.currentTarget;
+var val=$(thisElement).attr("value");
+      var tipo=$(thisElement).attr("tipo");
+      let tabla="tipoentradaTabla"
+     llenarEditar(value,tipo,e,tabla);
+
+
+
+$('.iden').val(2).trigger('true');
+
+    },
+    'click .vne': function (e, value, row, index) {
+      // $usuariot.bootstrapTable('remove', {
+      //   field: 'id',
+      //   values: [row.id]
+      // })
+      let thisElement=e.currentTarget;
+var val=$(thisElement).attr("value");
+      var tipo=$(thisElement).attr("tipo");
+      let tabla=$("#tipoentradaTabla")
+     ponerBaja(value,tipo,e,tabla);
+
+
+      console.log(value, row, index);
+    }
+    }
+    window.tipoClienteFormatterEvent={
+               'click .vn': function (e, value, row, index) {
+      // alert('You click like action, row: ' + JSON.stringify(row))
+      console.log(value, row, index);
+            let thisElement=e.currentTarget;
+var val=$(thisElement).attr("value");
+      var tipo=$(thisElement).attr("tipo");
+      let tabla="tipoClienteTabla"
+     llenarEditar(value,tipo,e,tabla);
+
+
+
+$('.iden').val(2).trigger('true');
+
+    },
+    'click .vne': function (e, value, row, index) {
+      // $usuariot.bootstrapTable('remove', {
+      //   field: 'id',
+      //   values: [row.id]
+      // })
+      let thisElement=e.currentTarget;
+var val=$(thisElement).attr("value");
+      var tipo=$(thisElement).attr("tipo");
+      let tabla=$("#tipoClienteTabla")
+     ponerBaja(value,tipo,e,tabla);
+
+
+      console.log(value, row, index);
+    }
+    }
 
     window.proveedorFormatterEvent={
 
@@ -1113,6 +1191,37 @@ $('.iden').val(2).trigger('true');
 var val=$(thisElement).attr("value");
       var tipo=$(thisElement).attr("tipo");
       let tabla=$("#sucurll")
+     ponerBaja(value,tipo,e,tabla);
+
+
+      console.log(value, row, index);
+    }
+    }
+
+    window.tipoCobroFormatterEvent ={
+         'click .vn': function (e, value, row, index) {
+      // alert('You click like action, row: ' + JSON.stringify(row))
+      console.log(value, row, index);
+            let thisElement=e.currentTarget;
+var val=$(thisElement).attr("value");
+      var tipo=$(thisElement).attr("tipo");
+      let tabla="tipocobroTabla"
+     llenarEditar(value,tipo,e,tabla);
+
+
+
+$('.iden').val(2).trigger('true');
+
+    },
+    'click .vne': function (e, value, row, index) {
+      // $usuariot.bootstrapTable('remove', {
+      //   field: 'id',
+      //   values: [row.id]
+      // })
+      let thisElement=e.currentTarget;
+var val=$(thisElement).attr("value");
+      var tipo=$(thisElement).attr("tipo");
+      let tabla=$("#tipocobroTabla")
      ponerBaja(value,tipo,e,tabla);
 
 

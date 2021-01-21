@@ -21,6 +21,19 @@ class tipoentrada extends Controller
     		"uss"=>$tipoentrada
     	]);
     }
+    public function tipoentradaTablaTodas()
+    {
+        $tipoentrada=\App\tipoentrada::get();
+
+             foreach ($tipoentrada as $key => $value) {
+        // dd($editorial[$key]->estatusm);
+        $tipoentrada[$key]->estatusm=$value->estatusm==1 ? "Activo" : "Baja";
+      }
+      return response()->json(
+   $tipoentrada
+ 
+);
+    }
     public function ingresartipoentrada(Request $request)
     {
     	$tipoentrada=\App\tipoentrada::create([

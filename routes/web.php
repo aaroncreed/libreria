@@ -112,16 +112,22 @@ route::post("/proveedor_addupdate","proveedor@actualizar");
 route::get("/eli_proveedor/{id}","proveedor@baja");
 
 route::get("/tipocliente_get/{id}","tipocliente@obtenertipocliente");
+route::get("/tipoClienteTablaTodas","tipocliente@tipoClienteTablaTodas");
+
 route::post("/tipocliente_add","tipocliente@ingresartipocliente");
 route::post("/tipocliente_addupdate","tipocliente@actualizar");
 route::get("/eli_tipocliente/{id}","tipocliente@baja");
 
 route::get("/tipocobro_get/{id}","tipocobro@obtenertipocobro");
+route::get("/tipocobroTablaTodas","tipocobro@tipocobroTablaTodas");
+
 route::post("/tipocobro_add","tipocobro@ingresartipocobro");
 route::post("/tipocobro_addupdate","tipocobro@actualizar");
 route::get("/eli_tipocobro/{id}","tipocobro@baja");
 
 route::get("/tipoentrada_get/{id}","tipoentrada@obtenertipoentrada");
+route::get("/tipoentradaTablaTodas","tipoentrada@tipoentradaTablaTodas");
+
 route::post("/tipoentrada_add","tipoentrada@ingresartipoentrada");
 route::post("/tipoentrada_addupdate","tipoentrada@actualizar");
 route::get("/eli_tipoentrada/{id}","tipoentrada@baja");
