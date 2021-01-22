@@ -45,7 +45,7 @@
       
 
       
-     <button class="btn btn-primary btn-lg new" value="casaeditorial_" id="new_casaeditorial"  data-toggle="modal" data-target=".casaeditorial_modal"> Ingresar nueva casaeditorial</button>
+     <button class="btn btn-primary btn-lg new" tabla-actual="usuariot" value="casaeditorial_" id="new_casaeditorial"  data-toggle="modal" data-target=".casaeditorial_modal"> Ingresar nueva casaeditorial</button>
       <div class="panel panel-default">
   <!-- Default panel contents -->
     @include('ingresarLibro/modalConfiguracion/casaeditorial_modal')
@@ -100,7 +100,7 @@
   <div id="clientes" class=" in">
       
   
-        <button class="btn btn-primary btn-lg new" value="clientes_" id="new_clientes" data-toggle="modal" data-target="#clientes_alta"> Ingresar clientes</button>
+        <button class="btn btn-primary btn-lg new" value="clientes_" tabla-actual="proveemt" id="new_clientes" data-toggle="modal" data-target="#clientes_alta"> Ingresar clientes</button>
        <div class="panel panel-default">
   <!-- Default panel contents -->
    @include('ingresarLibro/modalConfiguracion/clientes_modal')
@@ -178,7 +178,7 @@
   <div id="descuentos" class=" in">
       
    
-        <button class="btn btn-primary btn-lg new" value="descuentos_" id="new_descuentos" data-toggle="modal" data-target=".descuentos_modal"> descuentos new</button>
+        <button class="btn btn-primary btn-lg new" tabla-actual="marcat" value="descuentos_" id="new_descuentos" data-toggle="modal" data-target=".descuentos_modal"> descuentos new</button>
        <div class="panel panel-default">
   <!-- Default panel contents -->
   @include('ingresarLibro/modalConfiguracion/descuentos_modal')
@@ -235,7 +235,7 @@
   <div id="medidas" class=" in">
      
   
-        <button class="btn btn-primary btn-lg new" value="medidas_" id="new_medidas" data-toggle="modal" data-target=".medidas_modal"> Ingresar medidas</button>
+        <button class="btn btn-primary btn-lg new" tabla-actual="vehiculot" value="medidas_" id="new_medidas" data-toggle="modal" data-target=".medidas_modal"> Ingresar medidas</button>
        <div class="panel panel-default">
   <!-- Default panel contents -->
   @include('ingresarLibro/modalConfiguracion/medidas_modal')
@@ -284,7 +284,7 @@
 <div id="proveedor" class=" in">
       
      
-      <button class="btn btn-primary btn-lg new" value="proveedor_" id="new_proveedor" data-toggle="modal" data-target=".proveedor_modal"> Ingresar nuevo proveedor</button>
+      <button class="btn btn-primary btn-lg new" tabla-actual="sucurll" value="proveedor_" id="new_proveedor" data-toggle="modal" data-target=".proveedor_modal"> Ingresar nuevo proveedor</button>
    
     
 
@@ -364,7 +364,7 @@
 <div id="tipocliente" class=" in">
       
      
-      <button class="btn btn-primary btn-lg new" value="tipocliente_" id="new_tipocliente" data-toggle="modal" data-target=".tipocliente_modal"> Ingresar nuevo tipo de cliente</button>
+      <button class="btn btn-primary btn-lg new"  tabla-actual="tipoClienteTabla" value="tipocliente_" id="new_tipocliente" data-toggle="modal" data-target=".tipocliente_modal"> Ingresar nuevo tipo de cliente</button>
    
     
 
@@ -421,7 +421,7 @@
 <div id="tipocobro" class=" in">
       
      
-      <button class="btn btn-primary btn-lg new" value="tipocobro_" id="new_tipocobro" data-toggle="modal" data-target=".tipocobro_modal"> Ingresar nuevo tipo de cliente</button>
+      <button class="btn btn-primary btn-lg new" tabla-actual="tipocobroTabla" value="tipocobro_" id="new_tipocobro" data-toggle="modal" data-target=".tipocobro_modal"> Ingresar nuevo tipo de cliente</button>
    
     
 
@@ -477,7 +477,7 @@
 <div id="tipoentrada" class=" in">
       
      
-      <button class="btn btn-primary btn-lg new" value="tipoentrada_" id="new_tipoentrada" data-toggle="modal" data-target=".tipoentrada_modal"> Ingresar nuevo tipo de cliente</button>
+      <button class="btn btn-primary btn-lg new" tabla-actual="tipoentradaTabla" value="tipoentrada_" id="new_tipoentrada" data-toggle="modal" data-target=".tipoentrada_modal"> Ingresar nuevo tipo de cliente</button>
    
     
 
@@ -796,6 +796,7 @@ var data=$('#menuenv').serialize();
  
 request.done(function( msg ) {
   // $( "#log" ).html( msg );
+  $('.modal').modal('hide');
   $("#"+tablaActual).bootstrapTable('refresh')
 
 });
@@ -809,7 +810,8 @@ request.fail(function( jqXHR, textStatus ) {
       $(".new").on("click",function(e){
 
         val=$(this).attr("value");
-
+         let tablaActual=   $(this).attr("tabla-actual")
+         $(".iden").attr("tabla-actual",tablaActual)
         $('#'+val+'dide').val("");
         console.log('#'+val+'add');
         $('#'+val+'add')[0].reset();

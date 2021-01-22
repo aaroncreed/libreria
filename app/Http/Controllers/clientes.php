@@ -52,7 +52,8 @@ class clientes extends Controller
 'Fecalta'=>\Carbon\Carbon::now()->format('Y-m-d'),
 'Fecultventa'=>$request->Fecultventa,
 'Diascre'=>$request->Diascre,
-'Limitecre'=>$request->Limitecre
+'Limitecre'=>$request->Limitecre,
+'estatusm'=>1
     	]);
 
     	return response()->json([

@@ -197,14 +197,14 @@ $resultado=[
   $arreglo["Preciolista" ],
   $arreglo["Peso" ],
   $arreglo["Numeropag" ],
-  $arreglo["fechaColofon" ],
+  array_key_exists("fechaColofon", $arreglo) ? $arreglo["fechaColofon" ] : null,
   $arreglo["Tema" ],
   $arreglo["fecalta" ],
   $arreglo["Descuento" ],
   $arreglo["Ultimoprov" ],
   $arreglo["Sinopsis" ],
   $arreglo["Ubicacion" ],
-  $arreglo["Usralta" ],
+  array_key_exists("Usralta", $arreglo) ? $arreglo["Usralta" ] : \Auth::User()->id_usuario,
   $path
 
         ]);

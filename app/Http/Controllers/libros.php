@@ -172,8 +172,8 @@ return response()->json(["mes"=>"ok"]);
         	$Request->file('fotoportada')!=null ? $Request->file('fotoportada')->storeAs(
     'public/portadas/'.$input["Codbarras"], $Request->file('fotoportada')->getClientOriginalName()
 ) : "";
-            $path = 
-    'portadas/'.$input["Codbarras"]."/".$Request->file('fotoportada')->getClientOriginalName();
+            $path = $Request->file('fotoportada')!=null ?
+    'portadas/'.$input["Codbarras"]."/".$Request->file('fotoportada')->getClientOriginalName() : "";
 
     	 // dd($input);
     		// dd($input["fotoportada"]->getClientOriginalName(),$path);

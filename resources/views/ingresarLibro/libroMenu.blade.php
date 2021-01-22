@@ -91,7 +91,7 @@ librosNuevos -->
             <td>{{$lbb->fecalta}}</td>
                <td>
              
-<img src="{{asset('storage/'.$lbb->fotoportada.'')}}" style="
+<img src="{{  $lbb->fotoportada !='' && !empty($lbb->fotoportada) && !is_null($lbb->fotoportada) ?   asset('storage/'.$lbb->fotoportada.'') : ''}}" style="
     width: 30%;
 ">
                 </td>

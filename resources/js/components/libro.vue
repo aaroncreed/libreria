@@ -39,7 +39,7 @@ ref="form"
       label="Clave de casa editorial"
       required
       
-      
+
 
       :item-text="function(item){return item.Clavecasedit+'-'+item.Desccasedit}"
       :item-value="function(item){ return item}"
@@ -312,7 +312,7 @@ ref="form"
    <v-text-field
       v-model="Descuento"
       name="Descuento"
-      :rules="rulesRequeridasNumero"
+      :rules="rulesRequeridasDescuento"
       ref="Descuento"
       :counter="300"
   
@@ -500,6 +500,10 @@ rulesRequeridas: [
         value => !!value || 'Requerido.',
         value => (value && value>0.00) || 'Min 1',
       ],
+       rulesRequeridasDescuento: [
+        value => !!value || 'Requerido.',
+        value => (value && value>-0.01) || 'Min 0',
+      ],
       ok:false,
 
         date: new Date().toISOString().substr(0, 10),
@@ -527,7 +531,8 @@ cantidad:'################################',
 
 Codbarras:'',
 
-Clavecasedit:'',
+Clavecasedit:[],
+valorActualEditorial:[],
 
 Titulo:'',
 
@@ -539,7 +544,7 @@ ISBN:'',
 
 Inventariable:false,
 
-Claveunimed:'',
+Claveunimed:[],
 medidas:[],
 
   Existencia:'',
@@ -693,11 +698,11 @@ proseguir=this.Peso==undefined ? false : true;
 proseguir=this.Numeropag==undefined ? false : true;
 proseguir=this.Tema==undefined ? false : true;
 proseguir=this.fecalta==undefined ? false : true;
-proseguir=this.Descuento==undefined ? false : true;
+// proseguir=this.Descuento==undefined ? false : true;
 proseguir=this.Ultimoprov==undefined ? false : true;
 proseguir=this.Sinopsis==undefined ? false : true;
 proseguir=this.Ubicacion==undefined ? false : true;
-proseguir=this.fotoportada==undefined ? false : true;
+// proseguir=this.fotoportada==undefined ? false : true;
 // 
 
 if(proseguir)
@@ -809,6 +814,8 @@ data.append('Claveunimed', this.Claveunimed.hasOwnProperty("id_medida") ? this.C
         this.$refs.form.resetValidation()
       },
        llenar (){
+//          obtenerMedidas()
+// obtenerEditoriales()
  console.log("llegue");
         if(this.libroDato!="" && this.libroDato.length>0)
         {
@@ -828,7 +835,10 @@ let libro = JSON.parse(this.libroDato)
 
 this.Codbarras=libro.Codbarras
 
-this.Clavecasedit = libro.Clavecasedit
+let cosa=this.items.filter((des)=>{return des.id_casaEditorial==libro.Clavecasedit});
+this.Clavecasedit =cosa.length >0 ?   cosa[0] : [];
+// this.valorActualEditorial=libro.Clavecasedit
+// libro.Clavecasedit
 
 this.Titulo=libro.Titulo
 
@@ -840,7 +850,11 @@ this.ISBN=libro.ISBN
 
 this.Inventariable=libro.Inventariable
 
-this.Claveunimed =libro.Claveunimed
+
+let cosa2=this.medidas.filter((des)=>{return des.id_medida==libro.Claveunimed});
+this.Claveunimed =cosa2.length >0 ?   cosa2[0] : [];
+
+
 
 this.Existencia=libro.Existencia.toString()
 
@@ -878,8 +892,8 @@ this.$refs.Existencia.$el.getElementsByTagName('input')[0].value=libro.Existenci
 this.$refs.Numeropag.$el.getElementsByTagName('input')[0].value=libro.Numeropag
 // this.Usralta=
 // libro.Usralta
-
-this.fotourlEditar=  this.urlBase+"/"+libro.fotoportada
+let ubicacion=libro.fotoportada!="" ? this.urlBase+"/"+libro.fotoportada: ""
+this.fotourlEditar=  ubicacion
 
         }
       },
@@ -969,6 +983,8 @@ this.fotourlEditar=  this.urlBase+"/"+libro.fotoportada
 
 
                              }
+
+                             self.llenar() 
                             })
                             .catch(function (error) {
                       console.log(error);
@@ -1001,6 +1017,7 @@ let self=this;
 
 
                              }
+                             self.llenar() 
                             })
                             .catch(function (error) {
                       console.log(error);
@@ -1022,10 +1039,19 @@ let self=this;
     },
      mounted() {
             window.vm = this;
-this.obtenerEditoriales()
-this.obtenerMedidas();
-this.clear()
-this.llenar()
+            let self=this;
+self.obtenerEditoriales()
+self.obtenerMedidas();
+self.clear()
+
+
+
+
+  // or
+  // reject ("Error!");
+
+
+
         }
   }
 </script>
