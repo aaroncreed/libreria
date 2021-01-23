@@ -1,11 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
+<div class="" style="height: 900px;">
+    <div class="row" style="height: 300px; background-color: #292929;" >
+    </div>
+    <div class="row justify-content-center" style="    background: url(http://localhost:8000/img/fondo.png);
+    background-position: center;
+    background-size: 58%;
+">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header"></div>
+            <div class="card" style="    background-color: #60b7c6 !important;">
+                <div class="card-header" style="background-color: rgb(41 41 41) !important;"></div>
  <img src="{{asset('img/escudo.png')}}" style=" padding-top: 10px;
     margin: 0 auto;
     width: 20%;">
@@ -14,7 +19,7 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Claveusr') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-right">USUARIO</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="Claveusr" value="{{ old('email') }}" required autocomplete="email" autofocus>
@@ -28,7 +33,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-right">CONTRASEÑA</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
@@ -71,5 +76,12 @@
             </div>
         </div>
     </div>
+        <div class="row" id="fondoAbajo" style="height: 300px; background-color: #60b7c6;" >
+            <script type="text/javascript">
+                location.hash = "fondoAbajo"
+            </script>
+    </div>
 </div>
+<footer>
+    </footer>
 @endsection

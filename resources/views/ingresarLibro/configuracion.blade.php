@@ -2,45 +2,54 @@
 
 @section('content')
 <div class="container">
+    <h2 class="text-center">Configuracion</h2>
 	<div class="card-deck mb-3 text-center">
       
-   <!--      <div class="container content-area">
-            <div class="row">
 
-                <div class="col-12">
-              
-
-<ul class="nav nav-pills justify-content-center">
-<li class="nav-item"><a class="nav-link active show" data-toggle="tab" href="#casaeditorial">casaeditorial</a></li>
-  
-    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#clientes">clientes</a></li>
-    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#descuentos">descuentos</a></li>
-   
-    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#medidas">medidas</a></li>
-    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#proveedor">proveedor</a></li>
-        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#tipocliente">tipo de cliente</a></li>
-        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#tipocobro">tipo de cobro</a></li>
-         <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#tipoentrada">tipo de entrada</a></li>
-    
-        
-   
+<!-- chales -->
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <a class="nav-link active" id="casaeditorial-tab" data-toggle="tab" href="#casaeditorial" role="tab" aria-controls="home" aria-selected="true">Home</a>
+  </li>
+ 
+  <li class="nav-item" role="presentation">
+    <a class="nav-link" id="clientes-tab" data-toggle="tab"  role="tab" aria-controls="contact" aria-selected="false" href="#clientes" >clientes</a>
+   </li>
+   <li class="nav-item" role="presentation">
+   <a class="nav-link" id="descuentos-tab" data-toggle="tab"  role="tab" aria-controls="contact" aria-selected="false" href="#descuentos" >descuentos</a>
+   </li>
+   <li class="nav-item" role="presentation">
+   <a class="nav-link" id="medidas-tab" data-toggle="tab"  role="tab" aria-controls="contact" aria-selected="false" href="#medidas" >medidas</a>
+   </li>
+   <li class="nav-item" role="presentation">
+    <a class="nav-link" id="proveedor-tab" data-toggle="tab"  role="tab" aria-controls="contact" aria-selected="false" href="#proveedor" >proveedor</a>
+   </li>
+   <li class="nav-item" role="presentation">
+    <a class="nav-link" id="tipocliente-tab" data-toggle="tab"  role="tab" aria-controls="contact" aria-selected="false" href="#tipocliente" >tipocliente</a>
+   </li>
+   <li class="nav-item" role="presentation">
+    <a class="nav-link" id="tipocobro-tab" data-toggle="tab"  role="tab" aria-controls="contact" aria-selected="false" href="#tipocobro" >tipocobro</a>
+   </li>
+   <li class="nav-item" role="presentation">
+   <a class="nav-link" id="tipoentrada-tab" data-toggle="tab"  role="tab" aria-controls="contact" aria-selected="false" href="#tipoentrada" >tipoentrada</a>
+  </li>
 </ul>
+<!-- <div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade  show active" id="home" role="tabpanel" aria-labelledby="home-tab">...</div>
+  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+</div> -->
+<!--  -->
 
 
+  <div  class="tab-content container" id="myTabContent" style="width: 100% !important;">
 
-            </div>
-        </div> -->
-            <!--  -->
-  <article>
-
-  <div class="container" style="width: 100% !important;">
-  <h2>Configuracion</h2>
 
 
  
-  <div class="tab-content1">
 
-    <div id="casaeditorial" class=" in active show">
+
+    <div id="casaeditorial" class="tab-pane active"  role="tabpanel" aria-labelledby="casaeditorial-tab">
       
       
 
@@ -96,8 +105,12 @@
 
 <!-- div home-->
     </div>
+
+
+
+
       <!-- provee -->
-  <div id="clientes" class=" in">
+  <div id="clientes" class="tab-pane " role="tabpanel" aria-labelledby="clientes-tab">
       
   
         <button class="btn btn-primary btn-lg new" value="clientes_" tabla-actual="proveemt" id="new_clientes" data-toggle="modal" data-target="#clientes_alta"> Ingresar clientes</button>
@@ -175,7 +188,7 @@
 </div>
 <!-- end -->
   <!-- marca -->
-  <div id="descuentos" class=" in">
+  <div id="descuentos" class="tab-pane " role="tabpanel" aria-labelledby="descuentos-tab">
       
    
         <button class="btn btn-primary btn-lg new" tabla-actual="marcat" value="descuentos_" id="new_descuentos" data-toggle="modal" data-target=".descuentos_modal"> descuentos new</button>
@@ -232,7 +245,7 @@
 <!-- end -->
   
   <!-- menu 2 -->
-  <div id="medidas" class=" in">
+  <div id="medidas" class="tab-pane " role="tabpanel" aria-labelledby="medidas-tab">
      
   
         <button class="btn btn-primary btn-lg new" tabla-actual="vehiculot" value="medidas_" id="new_medidas" data-toggle="modal" data-target=".medidas_modal"> Ingresar medidas</button>
@@ -281,7 +294,7 @@
  
 
 
-<div id="proveedor" class=" in">
+<div id="proveedor" class="tab-pane " role="tabpanel" aria-labelledby="proveedor-tab">
       
      
       <button class="btn btn-primary btn-lg new" tabla-actual="sucurll" value="proveedor_" id="new_proveedor" data-toggle="modal" data-target=".proveedor_modal"> Ingresar nuevo proveedor</button>
@@ -361,7 +374,7 @@
 <!-- end -->
 
 
-<div id="tipocliente" class=" in">
+<div id="tipocliente" class="tab-pane " role="tabpanel" aria-labelledby="tipocliente-tab">
       
      
       <button class="btn btn-primary btn-lg new"  tabla-actual="tipoClienteTabla" value="tipocliente_" id="new_tipocliente" data-toggle="modal" data-target=".tipocliente_modal"> Ingresar nuevo tipo de cliente</button>
@@ -418,7 +431,7 @@
 <!-- end -->
 
 
-<div id="tipocobro" class=" in">
+<div id="tipocobro" class="tab-pane " role="tabpanel" aria-labelledby="tipocobro-tab">
       
      
       <button class="btn btn-primary btn-lg new" tabla-actual="tipocobroTabla" value="tipocobro_" id="new_tipocobro" data-toggle="modal" data-target=".tipocobro_modal"> Ingresar nuevo tipo de cliente</button>
@@ -474,7 +487,7 @@
    
 </div>
 <!-- end -->
-<div id="tipoentrada" class=" in">
+<div id="tipoentrada" class="tab-pane " role="tabpanel" aria-labelledby="tipoentrada-tab">
       
      
       <button class="btn btn-primary btn-lg new" tabla-actual="tipoentradaTabla" value="tipoentrada_" id="new_tipoentrada" data-toggle="modal" data-target=".tipoentrada_modal"> Ingresar nuevo tipo de cliente</button>
@@ -535,8 +548,8 @@ id_tipoEntrada: 6 -->
    
 </div>
 <!-- end -->
-</div>
-</article>
+
+
 
 
 
