@@ -5,16 +5,23 @@
 	    @include('ingresarLibro/modal/ingresarlibro2')
 
 
-	<div class="card text-center">
-  <div class="card-header">
+	<div class="card ">
+  <div class="card-header text-center">
     Ingresar Factura
   </div>
   <div class="card-body">
     <h5 class="card-title">Detalle de Factura</h5>
   <form class="form-horizontal" role="form" id="datos_factura">
-        <div class="form-group row col-md-12">
-          <label for="Proveedor" class="col-md-2 control-label">Proveedor</label>
-          <div class="col-md-6">
+<input type="number" class="form-control d-none" id="iva" value="16">
+<!-- <div class="form-group col-sm-6">
+    <label for="exampleInputEmail1">Email address</label>
+    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div> -->
+
+        <div class="collapse show col-sm-4">
+          <label for="Proveedor" class=" control-label">Proveedor</label>
+          <!-- <div class="col-md-6"> -->
           <select class="form-control " name="Proveedor" id="Proveedor" required="true">
              @if(!empty($proveedor))
                 @foreach($proveedor as $tipocl)
@@ -24,14 +31,13 @@
      @endforeach
      @endif
                 </select>
-          </div>
+         <!--  </div> -->
 
          </div>
-     
-         <div class="row form-group col-sm-12 h-50" id="datosCliente">
-         	          <div class="form-group row col-sm-12">
-          <label for="tipoEntrada" class="col-md-2 control-label">Tipo de Entrada</label>
-          <div class="col-md-6">
+         <div class="col-sm-12 row">
+           <div class="collapse show col-sm-4">
+          <label for="tipoEntrada" class="control-label">Tipo de Entrada</label>
+          <!-- <div class="col-md-6"> -->
           <select class="form-control " name="tipoEntrada" id="tipoEntrada" required="true">
              @if(!empty($tipoentrada))
                 @foreach($tipoentrada as $tipoe)
@@ -41,49 +47,68 @@
      @endforeach
      @endif
                 </select>
-          </div>
+          <!-- </div> -->
 
          </div>
-          <div class="row col-sm-12 h-50">
-              <div id="fechaConsignacionMostrar" class="col-sm-6 collapse show">
-               <label for="fechaConsignacion" class="col-md-6 control-label">Fecha consignacion</label>
-              <div class="col-md-6">
+         </div>
+             
+     
+         <div class="row col-sm-12" id="datosCliente">
+         	     
+          <!-- <div class="row col-sm-12 h-50"> -->
+
+              <div id="fechaConsignacionMostrar" class="collapse show col-sm-4">
+               <label for="fechaConsignacion" class="control-label">Fecha consignacion</label>
+              <!-- <div class="col-md-6"> -->
                 <input type="date" class="form-control " name="fechaConsignacion" id="fechaConsignacion" value="{{ Carbon\Carbon::today('America/Mexico_City')->format('Y-m-d')}}" >
-              </div>
+              <!-- </div> -->
           </div>
-          </div>
+          <!-- </div> -->
          </div>
 
 
-            <div class="form-group row col-md-12">
+            <div class=" row col-md-12 d-flex justify-content-start">
 
-              <label for="fechaEnvio" class="col-md-2 control-label">Fecha Envio</label>
-              <div class="col-md-4">
+             <div class="row col-sm-6">
+              <div class="col-md-6">
+                 <label for="fechaEnvio" class="control-label">Fecha Envio</label>
                 <input type="date" class="form-control " name="fechaEnvio" id="fechaEnvio" value="{{ Carbon\Carbon::today('America/Mexico_City')->format('Y-m-d')}}" required="true">
               </div>
 
-               <label for="fechaRecepcion" class="col-md-2 control-label">Fecha Recepcion</label>
-              <div class="col-md-4">
-                <input type="date" class="form-control " name="fechaRecepcion" id="fechaRecepcion" value="{{ Carbon\Carbon::today('America/Mexico_City')->format('Y-m-d')}}" required="true">
-              </div>
-
-<label for="totalFactura" class="col-md-2 control-label">Total Factura</label>
-              <div class="col-md-4">
+          
+             <div class="col-md-6">
+                <label for="totalFactura" class="control-label">Total Factura</label>
                 <input type="number" class="form-control " name="totalFactura" id="totalFactura" value="" required="true">
               </div>
 
-<label for="Referencia" class="col-md-2 control-label">Referencia</label>
-              <div class="col-md-4">
+            </div>
+             </div>
+               <div class=" row col-md-12 d-flex justify-content-start">
+            <div class="row col-sm-6">
+                <div class="col-md-6">
+                     <label for="fechaRecepcion" class="control-label">Fecha Recepcion</label>
+                <input type="date" class="form-control " name="fechaRecepcion" id="fechaRecepcion" value="{{ Carbon\Carbon::today('America/Mexico_City')->format('Y-m-d')}}" required="true">
+              </div>
+             
+
+
+              <div class="col-md-6">
+                <label for="Referencia" class=" control-label">Referencia</label>
                 <input type="text" class="form-control " name="Referencia" id="Referencia" value="" maxlength="30" required="true">
               </div>
+            </div>
+           
 
             </div>
-<div class="form-group row col-md-12">
-	<label for="Observacion" class="col-md-2 control-label">Observacion</label>
-              <div class="col-md-4">
-           
-                <textarea class="form-control " name="Observacion" id="Observacion" value="" maxlength="60"></textarea>
-              </div>
+<div class="  col-md-8 h-50" style="
+    position: absolute;
+    right: 0;
+">
+	
+              <!-- <div class="col-md-4"> -->
+           <label for="Observacion" class=" control-label">Observacion</label>
+                <textarea class="form-control " rows="7" name="Observacion" id="Observacion" value="" maxlength="60"></textarea>
+              <!-- </div> -->
 </div>
 
 
@@ -97,7 +122,7 @@
 bootstrap.min.js
             </button> -->
             @if(Auth::User()->Nivel!=3)
-          <button id="ingresarProducto" class="btn btn-primary">Ingresar Entrada</button>
+          <button id="ingresarProducto" class="btn btn-primary disabled">Ingresar Entrada</button>
   @endif
 
           </div>
@@ -105,7 +130,7 @@ bootstrap.min.js
       </form>
    
   </div>
-            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">
+            <button type="button" class="btn btn-info col-sm-4" data-toggle="modal" data-target="#myModal">
              <span class="glyphicon glyphicon-search"></span> Agregar productos
             </button>
   <div class="card-footer text-muted">
@@ -153,7 +178,37 @@ bootstrap.min.js
    var proveedor =  {!! json_encode(!empty($proveedor)? $proveedor: "" ) !!};
       var tipoentrada =  {!! json_encode(!empty($tipoentrada)? $tipoentrada: "" ) !!};
 
+function totalLibros()
+{
+    // elemento.parentElement.parentElement.remove();
+let tabla=$("#ProductosNuevos").get();
+console.log();
+let rowss=tabla[0].rows;
+let cantidad=0;
+let total=0;
+rowss.length==0 ? $("#ingresarProducto").addClass("disabled") : "";
+rowss.length==0 ?  $("#totalFactura").val(0) : "";
 
+for (var ia = rowss.length - 1; ia >= 0; ia--) {
+
+// 4
+// 1
+cantidad=rowss[ia].cells[7].innerText
+total+=parseFloat(rowss[ia].cells[9].innerText);
+
+
+}
+let iva=$("#iva").val()!="" ?  parseFloat($("#iva").val() * .010) : 0;
+$("#subtotal").text(total.toFixed(2))
+
+        let completoConIva=iva==0 ? total.toFixed(2) : parseFloat(iva*total) + parseFloat(total)
+
+
+        $("#totalCompleto").text(isNaN(completoConIva.toFixed(2))?"0.00" : completoConIva.toFixed(2)   );
+$("#seCobra").text(completoConIva.toFixed(2)  )
+$("#totalFactura").val(completoConIva.toFixed(2))
+        // console.log(elemento.parentElement.parentElement,"click")
+}
 
     $.ajaxSetup({
         headers: {
@@ -175,9 +230,9 @@ console.log("click",elemento.parentElement.previousSibling.previousSibling.previ
 // elemento.parentElement.previousSibling.previousSibling precio
 console.log(elemento.parentElement.previousSibling.previousSibling.childNodes[0].childNodes[1].value);
 let pu=elemento.parentElement.previousSibling.previousSibling.childNodes[0].childNodes[1].value
-let precioUnitario=pu =="" || NaN ? 0 : pu;
+let precioUnitario=pu =="" || isNaN(pu) ? 0 : pu;
 let cr=elemento.parentElement.previousSibling.previousSibling.previousSibling.previousSibling.childNodes[1].childNodes[1].value;
-let cantidad=cr =="" || NaN ? 0 : cr;
+let cantidad=cr =="" || isNaN(cr) ? 0 : cr;
 // elemento.parentElement.previousSibling.previousSibling.previousSibling.previousSibling.childNodes[1].childNodes[1].value;
 let agregarNuevo=true;
 for (var i = data.length - 1; i >= 0; i--) {
@@ -213,8 +268,10 @@ agregarNuevo=false;
 
 if(agregarNuevo==true)
 {
-    let descuento=(pu*(data[i].Descuento * .01)).toFixed(2);
-    let final =parseFloat(pu).toFixed(2)
+    let descuento=(precioUnitario*(data[i].Descuento * .01)).toFixed(2);
+    let  precioUnitarioArreglado=parseFloat(precioUnitario).toFixed(2);
+    let final =precioUnitarioArreglado * cantidad;
+
     $("#ProductosNuevos").append(
 
 
@@ -227,12 +284,12 @@ if(agregarNuevo==true)
         '</td>">'+
 
           '  <td >'+data[i].Codbarras+'</td>'+
-          '  <td><input type="number" class="form-control cantidad" name="cantidadArticulo" style="text-align:right" value="'+cantidad+'"></td>'+
+          '  <td><input type="number" class="form-control cantidad-libro" name="cantidadArticulo" style="text-align:right" value="'+cantidad+'"></td>'+
      '  <td>'+data[i].Titulo+'</td>'+
-     '  <td><input type="number" step="1" class="form-control cantidad" name="descuentoCompraArticulo" style="text-align:right" value="'+""+'"></td>'+
+     '  <td><input type="number" step="1" class="form-control cantidad-descuento" name="descuentoCompraArticulo" style="text-align:right" value="'+data[i].Descuento+'"></td>'+
      '  <td><input type="number" step="1" class="form-control cantidad" name="descuentoVentaArticulo" style="text-align:right" value="'+""+'"></td>'+
 
-       '  <td>'+pu+'</td>'+
+       '  <td>'+precioUnitario+'</td>'+
         '<td><textarea class="form-control " name="ObservacionArticulo"  value="" maxlength="30"></textarea></td>'+
        '  <td class="cantidadProducto" ><input type="number" class="form-control id_libro d-none" style="text-align:right" name="finalProducto"  value="'+final+'">'+final+'</td>'+
         '  <td><input type="date" class="form-control cantidad" name="fechaColofonArticulo" style="text-align:right"></td>'+
@@ -248,8 +305,12 @@ if(agregarNuevo==true)
 }
 
 
+
+$("#ingresarProducto").removeClass("disabled");
+
+
 let productos=$(".cantidadProducto")
-let iva=0
+let iva=$("#iva").val() * .01;
 // $("#iva").val()!="" ?  parseFloat($("#iva").val() * .010) : 0;
 let summar=0.00;
 
@@ -268,6 +329,121 @@ $("#totalCompleto").text(canti.toFixed(2) );
 $("#totalFactura").val(canti.toFixed(2));
 $("#seCobra").text(canti.toFixed(2) )
     }
+
+
+
+
+
+$("#ProductosNuevos ").on("click",".productosVender td .cantidad-libro",(e)=>{
+  let cantidad=e.target.value==""|| e.target.value<1 ? 1 : e.target.value
+let tr=e.target.parentElement.parentElement
+let tds=tr.children
+let descuento=tds[5].children[0].value
+let precioUnitario=$(tds[7]).text()
+let totaltexto=$(tds[9]).text()
+let total=tds[9].children
+
+
+let descuetoTotal=(parseFloat(descuento) * .01) * parseFloat(precioUnitario)
+
+let respuesta=parseFloat(cantidad) * (parseFloat(precioUnitario) - descuetoTotal )
+let input='<input type="number" class="form-control id_libro d-none" style="text-align:right" name="finalProducto" value="'+respuesta+'">'+respuesta
+let input2='<input type="number" class="form-control id_libro d-none" style="text-align:right" name="precioUnitarioProducto" value="'+precioUnitario+'">'
+
+
+
+$(tds[1]).empty()
+$(tds[1]).append(input2)
+
+
+$(tds[9]).empty()
+$(tds[9]).append(input)
+
+totalLibros()
+})
+$("#ProductosNuevos ").on("click",".productosVender td .cantidad-descuento",(e)=>{
+  let descuento=e.target.value==""|| e.target.value<1 ? 1 : e.target.value 
+let tr=e.target.parentElement.parentElement
+let tds=tr.children
+let cantidad=tds[3].children[0].value
+let precioUnitario=$(tds[7]).text()
+let totaltexto=$(tds[9]).text()
+let total=tds[9].children
+let descuetoTotal=(parseFloat(descuento) * .01) * parseFloat(precioUnitario)
+let respuesta=parseFloat(cantidad) * (parseFloat(precioUnitario) - descuetoTotal )
+
+let input='<input type="number" class="form-control id_libro d-none" style="text-align:right" name="finalProducto" value="'+respuesta+'">'+respuesta
+let input2='<input type="number" class="form-control id_libro d-none" style="text-align:right" name="precioUnitarioProducto" value="'+precioUnitario+'">'
+$(tds[1]).empty()
+$(tds[1]).append(input2)
+
+$(tds[9]).empty()
+$(tds[9]).append(input)
+
+
+totalLibros()
+
+
+
+})
+
+$("#ProductosNuevos ").on("keyup",".productosVender td .cantidad-libro",(e)=>{
+  let cantidad=e.target.value==""|| e.target.value<1 ? 1 : e.target.value
+let tr=e.target.parentElement.parentElement
+let tds=tr.children
+let descuento=tds[5].children[0].value
+let precioUnitario=$(tds[7]).text()
+let totaltexto=$(tds[9]).text()
+let total=tds[9].children
+
+
+let descuetoTotal=(parseFloat(descuento) * .01) * parseFloat(precioUnitario)
+
+let respuesta=parseFloat(cantidad) * (parseFloat(precioUnitario) - descuetoTotal )
+let input='<input type="number" class="form-control id_libro d-none" style="text-align:right" name="finalProducto" value="'+respuesta+'">'+respuesta
+let input2='<input type="number" class="form-control id_libro d-none" style="text-align:right" name="precioUnitarioProducto" value="'+precioUnitario+'">'
+
+
+
+$(tds[1]).empty()
+$(tds[1]).append(input2)
+
+
+$(tds[9]).empty()
+$(tds[9]).append(input)
+
+totalLibros()
+})
+$("#ProductosNuevos ").on("keyup",".productosVender td .cantidad-descuento",(e)=>{
+  let descuento=e.target.value==""|| e.target.value<1 ? 1 : e.target.value 
+let tr=e.target.parentElement.parentElement
+let tds=tr.children
+let cantidad=tds[3].children[0].value
+let precioUnitario=$(tds[7]).text()
+let totaltexto=$(tds[9]).text()
+let total=tds[9].children
+let descuetoTotal=(parseFloat(descuento) * .01) * parseFloat(precioUnitario)
+let respuesta=parseFloat(cantidad) * (parseFloat(precioUnitario) - descuetoTotal )
+
+let input='<input type="number" class="form-control id_libro d-none" style="text-align:right" name="finalProducto" value="'+respuesta+'">'+respuesta
+let input2='<input type="number" class="form-control id_libro d-none" style="text-align:right" name="precioUnitarioProducto" value="'+precioUnitario+'">'
+$(tds[1]).empty()
+$(tds[1]).append(input2)
+
+$(tds[9]).empty()
+$(tds[9]).append(input)
+
+
+totalLibros()
+
+
+
+})
+
+
+
+
+
     function eliminar(elemento)
     {
   elemento.parentElement.parentElement.remove();
@@ -276,6 +452,8 @@ console.log();
 let rowss=tabla[0].rows;
 let cantidad=0;
 let total=0;
+rowss.length==0 ? $("#ingresarProducto").addClass("disabled") : "";
+rowss.length==0 ?  $("#totalFactura").val(0) : "";
 
 for (var ia = rowss.length - 1; ia >= 0; ia--) {
 
@@ -290,7 +468,9 @@ let iva=$("#iva").val()!="" ?  parseFloat($("#iva").val() * .010) : 0;
 $("#subtotal").text(total.toFixed(2))
 
         let completoConIva=iva==0 ? total.toFixed(2) : parseFloat(iva*total) + parseFloat(total)
-        $("#totalCompleto").text(completoConIva.toFixed(2));
+
+
+        $("#totalCompleto").text(isNaN(completoConIva.toFixed(2))?"0.00" : completoConIva.toFixed(2)   );
 $("#seCobra").text(completoConIva.toFixed(2)  )
 
         console.log(elemento.parentElement.parentElement,"click")
@@ -682,7 +862,7 @@ console.log("click",JSON.stringify(unico,formData),JSON.stringify(articulos));
              $("#totalCompleto").text(0);
                $("#datos_factura")[0].reset();
 
-               $('input[type=date]')[0].valueAsDate = '';
+              $('input[type=date]')[0].value=""
                
 
         });
