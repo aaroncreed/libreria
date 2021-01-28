@@ -7,16 +7,17 @@
 
 
 
-<div class="card text-center">
-  <div class="card-header">
+<div class="card ">
+  <div class="card-header text-center">
     Mostrador
   </div>
   <div class="card-body">
   
    <form class="form-horizontal" role="form" id="datos_factura">
         <div class="form-group row">
-          <label for="nombre_cliente" class="col-md-1 control-label">Tipo Cliente</label>
+   
           <div class="col-md-6">
+                   <label for="nombre_cliente" class=" control-label">Tipo Cliente</label>
           <select class="form-control " name="tipocliente" id="tipocliente">
                <option value="0" selected="true" disabled="true">escoger una opcion</option>
              @if(!empty($tipocliente))
@@ -31,50 +32,61 @@
 
          </div>
          <div class="row form-group col-sm-12 h-50" id="datosCliente">
-          <div class="row col-sm-12 h-50">
-              <div id="Credencial" class="col-sm-4 collapse show">
-              <label for="Credencial" class="col-md-4 control-label">Credencial</label>
-              <div class="col-md-12">
+          <div class="row  h-50">
+              <div id="Credencial" class="col-sm-12 collapse show">
+              <label for="Credencial" class=" control-label">Credencial</label>
+    
                 <input type="text" class="form-control " name="Credencial" value="" >
-              </div>
+          
           </div>
           </div>
-          <div class="row col-sm-12 h-50">
-             <div id="Nombrecli" class="col-sm-4 collapse ">
-            <label for="Nombrecli" class="col-md-4 control-label" >Nombre</label>
-              <div class="col-md-12">
+          <div class="pl-5 h-50 form-group">
+             <div id="Nombrecli" class="col-sm-8 collapse ">
+            <label for="Nombrecli" class=" control-label" >Nombre</label>
+            
                 <input type="text" class="form-control " name="Nombrecli"  value="" >
-              </div>
+            
          </div>
-         <div id="Dependencia" class="col-sm-4 collapse ">
-           <label for="Dependencia" class="col-md-4 control-label">Dependencia</label>
-              <div class="col-md-12">
+         <div id="Dependencia" class="col-sm-8 collapse ">
+           <label for="Dependencia" class=" control-label">Dependencia</label>
+  
                 <input type="text" class="form-control " name="Dependencia"  value="" >
-              </div>
+            
          </div>
 
           </div>
 
 
          </div>
-            <div class="form-group row col-md-12">
+         <div class="row col-sm-12">
+            <div class="form-group row col-md-2">
 
-              <label for="fecha" class="col-md-1 control-label">Fecha</label>
-              <div class="col-md-4">
+            
+             
+                  <label for="fecha" class="control-label">Fecha</label>
                 <input type="text" class="form-control " name="fecha" id="fecha" value="{{ Carbon\Carbon::today('America/Mexico_City')->format('Y-m-d')}}" readonly="">
-              </div>
+       
 
             </div>
 
-   <div class="form-group row col-md-12">
 
-              <label for="prod" class="col-md-1 control-label">Producto</label>
-              <div class="col-md-4">
+          </div>
+             <div class="form-group row col-md-5">
+
+           
+              
+                   <label for="prod" class=" control-label">Producto</label>
                 <input type="text" class="form-control " name="prod" id="prod" value="" >
-              </div>
+              
 
             </div>
-
+            <div class="form-group row col-md-5">
+                    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal" style="
+    margin-top: 22px;
+">
+             <span class="glyphicon glyphicon-search"></span> Agregar productos
+            </button>
+          </div>
 
         <div class="col-md-12">
 
@@ -83,12 +95,10 @@
              <span class="glyphicon glyphicon-plus"></span> Nuevo productobootstrap.js
 bootstrap.min.js
             </button> -->
-            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#pagar" id="Cobrar">
+            <button type="button" class="btn btn-primary disabled" data-toggle="modal" data-target="#pagar" id="Cobrar">
             Pagar
             </button>
-            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">
-             <span class="glyphicon glyphicon-search"></span> Agregar productos
-            </button>
+    
 
           </div>
         </div>
@@ -238,13 +248,16 @@ if(data[i].Codbarras==producto)
 
             );
 
+
+
 }else if(data[i].Existencia==0 && data[i].Codbarras==producto){
 mensaje();
 }
 
   }
 
-
+let productosTabla=$("#ProductosNuevos")
+productosTabla[0].rows.length >0 ? $("#Cobrar").removeClass("disabled") : ""
 
 
 let productos=$(".cantidadProducto")
@@ -289,6 +302,7 @@ let rowss=tabla[0].rows;
 let cantidad=0;
 let total=0;
 
+rowss.length >0 ? $("#Cobrar").removeClass("disabled") : $("#Cobrar").addClass("disabled")
 for (var ia = rowss.length - 1; ia >= 0; ia--) {
 
 // 4
@@ -773,7 +787,7 @@ formData.append("venta",JSON.stringify(venta));
             if (ruta=="verificarExistenciaFinal") 
             {
                      // $('#pagar').modal('hide')
-                     imprimir(venta,unico)
+                     imprimir(msg.venta,unico)
             }
                
           }

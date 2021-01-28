@@ -78,7 +78,7 @@
           
              <div class="col-md-6">
                 <label for="totalFactura" class="control-label">Total Factura</label>
-                <input type="number" class="form-control " name="totalFactura" id="totalFactura" value="" required="true">
+                <input type="number" class="form-control " name="totalFactura" id="totalFactura" value="" required="true" readonly="true">
               </div>
 
             </div>
@@ -864,7 +864,7 @@ console.log("click",JSON.stringify(unico,formData),JSON.stringify(articulos));
 
               $('input[type=date]')[0].value=""
                
-
+Swal.fire("Ingreso","Correcto!!","info")
         });
 
         request.fail(function( jqXHR, textStatus ) {

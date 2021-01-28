@@ -188,11 +188,13 @@ return response()->json(["mes"=>"ok"]);
             $producto=json_decode(base64_decode($valor));
             $venta=json_decode(base64_decode($valor2));
          
+         // dd($producto,$venta);
             foreach ($producto as $key => $value) {
                 # code...
                 $libro=explode("-", $value->articulo);
                 $libroEncontrado=Literal::where("id_libro",$libro[0])->first();
-          
+                $producto[$key]->detalle=ventas_detalle::where("fk_libro",$libro[0])->get();
+                      $producto[$key]->libro=  $libroEncontrado;
                     $producto[$key]->titulo=$libroEncontrado->Titulo;
             }
                // dd($producto,$venta);
@@ -277,7 +279,7 @@ return response()->json(["mes"=>"ok"]);
      
             $cobro=Literal::Cobrar($articulos);
 DB::commit();
-            return response()->json(["resultado"=>$cobro]);
+            return response()->json(["resultado"=>$cobro,"venta"=> $guardarVenta]);
         }catch (\Exception $e)
         {
 DB::rollBack();
