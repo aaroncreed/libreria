@@ -148,11 +148,11 @@ ref="form"
       v-model="Existencia"
       name="Existencia"
       ref="Existencia"
-      :rules="rulesRequeridas"
+  
       :counter="32"
       :clearable="true"
       label="Existencia"
-      required
+       :readonly="true"
       v-mask="cantidad"
       
     ></v-text-field>
@@ -690,7 +690,7 @@ proseguir=this.ClaveInterna==undefined ? false : true;
 proseguir=this.ISBN==undefined ? false : true;
 proseguir=this.Inventariable==undefined ? false : true;
 proseguir=this.Claveunimed==undefined ? false : true;
-proseguir=this.Existencia==undefined ? false : true;
+// proseguir=this.Existencia==undefined ? false : true;
 proseguir=this.Puntoreorden==undefined ? false : true;
 proseguir=this.Costo==undefined ? false : true;
 proseguir=this.Preciolista==undefined ? false : true;
@@ -725,7 +725,7 @@ data.append('Inventariable',this.Inventariable)
 
 data.append('Claveunimed', this.Claveunimed.hasOwnProperty("id_medida") ? this.Claveunimed.id_medida : this.Claveunimed )
 
-  data.append('Existencia',this.Existencia)
+  data.append('Existencia',0)
 
   data.append('Puntoreorden',this.Puntoreorden)
 
