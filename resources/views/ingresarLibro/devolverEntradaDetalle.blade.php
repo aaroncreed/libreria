@@ -4,12 +4,12 @@
 @section('content')
 <div class="container">
 
-<div class="card text-center">
-  <div class="card-header">
+<div class="card ">
+  <div class="card-header text-center">
     Ingresar Factura
   </div>
   <div class="card-body">
-    <h5 class="card-title">Detalle de Factura</h5>
+    <h3 class="card-title pb-5">Detalle de Factura</h3>
   <form class="form-horizontal" role="form" id="datos_factura">
                  @if(!empty($entrada))
                 @foreach($entrada as $tipocl)
@@ -65,7 +65,7 @@
                 <input type="date" class="form-control " name="fechaRecepcion" id="fechaRecepcion" value="{{ $tipocl->Fecrecepcion}}" readonly="true">
               </div>
 
-<label for="totalFactura" class="col-md-2 control-label">Total Factura</label>
+          <label for="totalFactura" class="col-md-2 control-label">Total Factura</label>
               <div class="col-md-4">
                 <input type="number" class="form-control " name="totalFactura" id="totalFactura" value="{{$tipocl->Totalfac}}" readonly="true">
               </div>
@@ -82,6 +82,16 @@
            
                 <textarea class="form-control " name="Observacion" id="Observacion" value="{{$tipocl->Observaciones}}" maxlength="60" readonly="true">{{$tipocl->Observaciones}}</textarea>
               </div>
+</div>
+<div class="  col-md-8 " style="
+  /*  position: absolute;
+    right: 0;*/
+">
+  
+              <!-- <div class="col-md-4"> -->
+           <label for="Observacion" class=" control-label">Observacion Salida</label>
+                <textarea class="form-control " rows="7" name="observacion_Salida" id="observacion_Salida" value="" maxlength="60"></textarea>
+              <!-- </div> -->
 </div>
 
 
@@ -370,6 +380,7 @@ let formData = new FormData();
      formData.append("factura", JSON.stringify(unico));
      formData.append("partes", JSON.stringify(articulos));
      formData.append("cantidad",sub);
+     formData.append("observacion",$("#observacion_Salida").val());
 console.log("click",JSON.stringify(unico,formData),JSON.stringify(articulos));
  let request = $.ajax({
             url: "/realizarDevolucion",

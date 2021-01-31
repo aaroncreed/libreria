@@ -162,6 +162,13 @@
       </a>
   
   </li>
+    <li>
+    <a href="/Utilerias" class="submenu-toggle">
+      <i class="glyphicon glyphicon-th-list"></i>
+       <span>Utilerias</span>
+      </a>
+  
+  </li>
   <li>
     <a href="/configuracion">
       <i class="glyphicon glyphicon-picture"></i>

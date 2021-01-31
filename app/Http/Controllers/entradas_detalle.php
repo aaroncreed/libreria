@@ -23,6 +23,7 @@ class entradas_detalle extends Controller
 $factura=json_decode($request->factura);
 $partes=json_decode($request->partes);
 $cantidad=json_encode($request->cantidad);
+$observacion=$request->observacion;
 
 // dd($partes,$cantidad,$factura);
 
@@ -39,18 +40,33 @@ $cantidad=json_encode($request->cantidad);
 // $partes->devolverEntrada
 // $partes->existenciaDevolver
 // $partes->precio
+
+// 	for ($i=0; $i <count($partes->devolverEntrada) ; $i++) { 
+// 	# code...
+// 	dd($factura,$partes,$cantidad,[
+// "fk_emtrada_detalle"=>$partes->devolverEntrada[$i], "cantidad"=>$partes->existenciaDevolver[$i], "fechaDevolucion"=>\Carbon\Carbon::parse($factura->fechaRecepcion)->format('Y-m-d'), "quien"=>\Auth::user()->id_usuario, "dinero"=>$partes->precio[$i] * ($partes->entrada[$i] - $partes->existenciaDevolver[$i])
+// 	]);
+
+// }
+// die;
 try {
 	 \DB::beginTransaction();
 	for ($i=0; $i <count($partes->devolverEntrada) ; $i++) { 
 	# code...
 	devolucion::create([
-"fk_emtrada_detalle"=>$partes->devolverEntrada[$i], "cantidad"=>$partes->existenciaDevolver[$i], "fechaDevolucion"=>\Carbon\Carbon::parse($factura->fechaRecepcion)->format('Y-m-d'), "quien"=>\Auth::user()->id_usuario, "dinero"=>$partes->precio[$i] * ($partes->entrada[$i] - $partes->existenciaDevolver[$i])
+"fk_emtrada_detalle"=>$partes->devolverEntrada[$i], "cantidad"=>$partes->existenciaDevolver[$i], "fechaDevolucion"=>\Carbon\Carbon::parse($factura->fechaRecepcion)->format('Y-m-d'), "quien"=>\Auth::user()->id_usuario, "dinero"=>$partes->precio[$i] * ($partes->entrada[$i] - $partes->existenciaDevolver[$i]),
+"observacion_Salida"=>$$observacion
 	]);
 
 	$detalle=dettt::with("libro","entrada")->where("id_detallleEntrada",$partes->devolverEntrada[$i])->get();
 	
+if($partes->entrada[$i] >  $partes->existenciaDevolver[$i])
+{
+	$actual=0;
+}else{
+	$actual	= $detalle[0]->libro->Existencia - $partes->existenciaDevolver[$i];
+}
 
-$actual	= $detalle[0]->libro->Existencia - $partes->existenciaDevolver[$i];
 
 entradas::where("id_entrada",$detalle[0]->Claveent)->update(["estatusEntrada"=>1]);
 	libros::where('id_libro', $detalle[0]->libro->id_libro)

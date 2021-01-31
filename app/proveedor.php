@@ -35,12 +35,6 @@ public $timestamps = false;
         // values (?,?)', ["123","Editorial Bersunsa"]);
 
     }
-    public static function obtenerProveedor()
-    {
-    	        return DB::select("
-SELECT id_medida,Clavemed,Descmed 
-FROM `medidas` ");
-    }
 
 
 }

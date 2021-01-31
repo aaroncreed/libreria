@@ -36,7 +36,7 @@
               <div id="Credencial" class="col-sm-12 collapse show">
               <label for="Credencial" class=" control-label">Credencial</label>
     
-                <input type="text" class="form-control " name="Credencial" value="" >
+                <input type="text" class="form-control " id="Credencial2" name="Credencial" value="" >
           
           </div>
           </div>
@@ -44,13 +44,13 @@
              <div id="Nombrecli" class="col-sm-8 collapse ">
             <label for="Nombrecli" class=" control-label" >Nombre</label>
             
-                <input type="text" class="form-control " name="Nombrecli"  value="" >
+                <input type="text" class="form-control " id="Nombrecli12" name="Nombrecli"  value="" >
             
          </div>
          <div id="Dependencia" class="col-sm-8 collapse ">
            <label for="Dependencia" class=" control-label">Dependencia</label>
   
-                <input type="text" class="form-control " name="Dependencia"  value="" >
+                <input type="text" class="form-control " id="Dependencia2" name="Dependencia"  value="" >
             
          </div>
 
@@ -88,20 +88,7 @@
             </button>
           </div>
 
-        <div class="col-md-12">
-
-          <div class="pull-right">
-            <!-- <button type="button" class="btn btn-default" data-toggle="modal" data-target="#nuevoProducto">
-             <span class="glyphicon glyphicon-plus"></span> Nuevo productobootstrap.js
-bootstrap.min.js
-            </button> -->
-            <button type="button" class="btn btn-primary disabled" data-toggle="modal" data-target="#pagar" id="Cobrar">
-            Pagar
-            </button>
-    
-
-          </div>
-        </div>
+     
       </form>
 
     <div id="resultados" class="col-md-12" style="margin-top:10px">
@@ -128,10 +115,15 @@ bootstrap.min.js
   <td></td>
 </tr>
 <tr>
+  
   <td class="text-right" colspan="4">IVA </td>
-  <td class="text-right" ><input type="number" disabled name="iva" id="iva" value="16"></td>
-  <td></td>
+  <td class="text-left d-flex justify-content-end" ><input type="number" class="col-sm-8" disabled name="iva" id="iva" value="16"></td>
+
 </tr>
+<tr>
+   <td class="text-right" colspan="4">Descuento:</td>
+    <td class="text-left d-flex justify-content-end" ><input type="number" class="col-sm-8" disabled name="descuentoTipo" id="descuentoTipo" value="0"> </td>
+  </tr>
 <tr>
   <td class="text-right" colspan="4">TOTAL $</td>
   <td class="text-right" id="totalCompleto">0.00</td>
@@ -143,7 +135,20 @@ bootstrap.min.js
 
   </div>
   <div class="card-footer text-muted">
-   
+      <div class="col-md-12">
+
+          <div class="pull-right">
+            <!-- <button type="button" class="btn btn-default" data-toggle="modal" data-target="#nuevoProducto">
+             <span class="glyphicon glyphicon-plus"></span> Nuevo productobootstrap.js
+bootstrap.min.js
+            </button> -->
+            <button type="button" class="btn btn-primary disabled" data-toggle="modal" data-target="#pagar" id="Cobrar">
+            Pagar
+            </button>
+    
+
+          </div>
+        </div>
   </div>
 </div>
 
@@ -457,7 +462,7 @@ let summar=parseFloat($("#subtotal").text());
 
 let cantid = iva==0 ? summar : (iva*summar) + summar
 let canti=parseFloat(cantid - (cantid *(descuentoActual * .010)))
-
+$("#descuentoTipo").val(descuentoActual)
 $("#totalCompleto").text(canti.toFixed(2) );
 $("#seCobra").text(canti.toFixed(2) )
 $(".CantidadPagar").val(canti.toFixed(2));
@@ -472,11 +477,13 @@ $(".CantidadPagar").val(canti.toFixed(2));
         });
 
 
+
        if($(this).val()==5 || $(this).val()==4)
        {
             $("#Credencial").collapse('hide')
             $("#Nombrecli").collapse('show')
               $("#Dependencia").collapse('show')
+              $("#Credencial2").val("")
        }
         if($(this).val()==1 || $(this).val()==2
             || $(this).val()==3 || $(this).val()==6 || $(this).val()==7)
@@ -484,12 +491,17 @@ $(".CantidadPagar").val(canti.toFixed(2));
             $("#Credencial").collapse('show')
              $("#Nombrecli").collapse('hide')
               $("#Dependencia").collapse('hide')
+              $("#Nombrecli12").val("")
+              $("#Dependencia2").val("")
        }
        if($(this).val()==8)
        {
-        $("#Credencial").collapse('hide')
+            $("#Credencial").collapse('hide')
              $("#Nombrecli").collapse('hide')
               $("#Dependencia").collapse('hide')
+              $("#Nombrecli12").val("")
+              $("#Dependencia2").val("")
+              $("#Credencial2").val("")
        }
 
 
@@ -727,9 +739,9 @@ let convertido=JSON.stringify(rowcontenido);
 formData.append("pagos",convertido)
 
 let cl=$("#tipocliente").val()
-let cr=$("#Credencial").val()
-let nombrecl=            $("#Nombrecli").val()
-let depen=              $("#Dependencia").val()
+let cr=$("#Credencial2").val()
+let nombrecl=            $("#Nombrecli12").val()
+let depen=              $("#Dependencia2").val()
 let subt=              $("#subtotal").text()
 let tot=              $("#totalCompleto").text()
 let cam=              $("#cambio").text()

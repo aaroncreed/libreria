@@ -114,7 +114,7 @@
 @if(Auth::User()->Nivel!=3)
         <a class="btn btn-info" href="/reporteSalida/{{$entr->id_entrada}}">Reporte de Devolucion</a>
          <a class="btn btn-info" href="/reporteEntrada/{{$entr->id_entrada}}">Reporte de Entrada</a>
-
+  <a class="btn btn-info" href="/reporteSalidaProvedor/{{$entr->id_entrada}}">Reporte de Devolucion provedor</a>
 @endif
       </td>
        <td>{{$entr->ClaveEnt}}</td>

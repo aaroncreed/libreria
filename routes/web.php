@@ -30,7 +30,8 @@ return redirect('/login');
  Route::get('/ingresar', 'libros@ingresar')->name('ingresar');
  // Route::get('/conf', 'libros@conf')->name('conf');
 Route::get('/home', 'libros@menu')->name('home');
-
+Route::get('/Utilerias', 'libros@Utilerias')->name('Utilerias');
+Route::post("/CancelarTicket","libros@CancelarTicket");
 
  Route::get('/Nuevolibro', 'libros@nuevo')->name('home');
   Route::post('/guardarLibro', 'libros@guardar')->name('glibro');
@@ -49,6 +50,7 @@ Route::get('/devoluciones', 'libros@devoluciones')->name('devoluciones');
 Route::post('/realizarDevolucion','entradas_detalle@realizarDevolucion');
 Route::get('/devolverEntrada/{id}',"entradas@devolverEntrada");
 Route::get('/reporteSalida/{id}',"entradas@reporteSalida");
+Route::get('/reporteSalidaProvedor/{id}',"entradas@reporteSalidaProvedor");
 Route::get('/reporteEntrada/{id}',"entradas@reporteEntrada");
 
 

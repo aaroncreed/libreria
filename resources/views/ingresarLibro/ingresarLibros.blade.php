@@ -78,7 +78,7 @@
           
              <div class="col-md-6">
                 <label for="totalFactura" class="control-label">Total Factura</label>
-                <input type="number" class="form-control " name="totalFactura" id="totalFactura" value="" required="true" readonly="true">
+                <input type="number" class="form-control " min="0" name="totalFactura" id="totalFactura" value="" required="true" >
               </div>
 
             </div>
@@ -100,7 +100,7 @@
            
 
             </div>
-<div class="  col-md-8 h-50" style="
+<div class="  col-md-8 " style="
     position: absolute;
     right: 0;
 ">
@@ -805,7 +805,18 @@ $("#guardar_datos").on("click",function (e) {
 
 $("#ingresarProducto").on("click",function(e){
 e.preventDefault();
-
+let totalFactura=parseFloat($("#totalFactura").val()).toFixed(2)
+let totalCompleto=parseFloat($("#totalCompleto").text()).toFixed(2)
+if(isNaN(totalFactura))
+{
+  Swal.fire("Alto","no tiene total de Factura capturado","warning");
+  return false;
+}
+if(totalFactura!=totalCompleto || totalCompleto==0)
+{
+   Swal.fire("Alto","total de Factura capturado, es diferente al total","warning");
+  return false;
+}
 let partes=$("#articulosFacturaForm").serializeArray()
 let formulario=$("#datos_factura").serializeArray()
 let unico={};

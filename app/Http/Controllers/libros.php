@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\libros as Literal;
 use App\tipocliente;
 use App\tipocobro;
+use App\descuentos;
 use App\casaeditorial;
 use App\proveedor;
 use App\entradas;
@@ -82,6 +83,48 @@ $elMasvendido = $this->maxValueInArray($librosVendidos, "Cantidad");
 
         return view('ingresarLibro/menu',compact("elMasvendido","ventas","ventash","librosNuevos","casaeditorial"));
     }
+
+public function Utilerias()
+    {
+
+        $casaeditorial= casaeditorial::orderBy("Desccasedit","ASC")->get();
+        $ventas= ventas::orderBy("id_venta","desc")->limit("5")->get();
+        $ventash= ventas::orderBy("id_venta","desc")->get();
+        // $ventas_detalle =   ventas_detalle::with("venta","libro") ->orderBy("Clavevent","desc")->orderBy("fk_libro","desc")->get();        
+$librosVendidos=[];
+        $librosNuevos=Literal::orderBy("id_libro","desc")->limit("5")->get();
+
+        $libro=Literal::with("detalleVenta")->orderBy("id_libro","desc")->get();
+ 
+foreach ($libro as $key => $value) {
+    # code...
+  
+   $cantidad=0;
+foreach ($value->detalleVenta as $k => $val) {
+    # code...
+    $cantidad+=$val->Cantidad;
+}
+
+
+    $librosVendidos[$key]=(object) [
+ "Codbarras" => $value->Codbarras,
+    "Clavecasedit" => $value->Clavecasedit,
+    "Titulo" =>$value->Titulo,
+      "Cantidad" => $cantidad
+];
+
+}
+
+$elMasvendido = $this->maxValueInArray($librosVendidos, "Cantidad");
+//  dd($elMasvendido,
+// $ventas,
+// $librosNuevos);
+
+        return view('ingresarLibro/Utilerias',compact("elMasvendido","ventas","ventash","librosNuevos","casaeditorial"));
+    }
+
+
+
     public function index()
     {
          $libros= Literal::orderBy("id_libro","desc")->get();
@@ -125,7 +168,8 @@ $tipoentrada=tipoentrada::get();
 $libros=Literal::get();
 $tipocliente=tipocliente::get();
 $tipocobro=tipocobro::get();
- // dd($libros,$tipocliente,$tipocobro,$casaeditorial);
+$descuento=descuentos::get();
+ // dd($libros,$tipocliente,$tipocobro,$casaeditorial,$descuento);
 
     	return view('ingresarLibro/venderLibro',compact("libros","tipocliente","tipocobro","casaeditorial"));
     }
@@ -199,6 +243,33 @@ return response()->json(["mes"=>"ok"]);
             }
                // dd($producto,$venta);
         return view('ingresarLibro/modal/ticket',compact("producto","venta"));
+    }
+
+    public function CancelarTicket(Request $request)
+    {
+        // dd(ventas::where("id_venta",$request->id)->get());
+                try{
+ DB::beginTransaction();
+ 
+ ventas::where("id_venta",$request->id)->update(['Usrbaja' => \Auth::User()->id_usuario]);
+        $detalle=ventas_detalle::where("Clavevent",$request->id)->get();
+        foreach ($detalle as $key => $value) {
+            # code...
+            // $value->Cantidad
+            // $value->fk_libro
+            $libro=Literal::where("id_libro",$value->fk_libro)->get();
+            $existenciaActual=$libro[0]->Existencia;
+            Literal::where("id_libro",$value->fk_libro)->update(["Existencia"=>$existenciaActual+$value->Cantidad]);
+
+        }
+DB::commit();
+            return response()->json(["resultado"=>true,"venta"=> $request->id]);
+        }catch (\Exception $e)
+        {
+DB::rollBack();
+            return response()->json(["resultado"=>false,"mensaje"=>$e->getMessage()]);
+        }
+
     }
 
     public function verificarExistenciaFinal(Request $request)
@@ -347,6 +418,8 @@ $entradas=json_decode($request->partes);
 
 $numeroEntradas=0;
 $arreglo=[];
+$provedorObtenido=DB::table('proveedor')->where("id_proveedor",$factura->Proveedor)->get();
+// dd($factura,$entradas);
 foreach ($entradas as $key => $value) {
     # code...
 $numeroEntradas=count($value);
@@ -355,7 +428,7 @@ $arreglo[$key]=$value;
 }
 
 // abort(403, 'Unauthorized action.');
-
+    
   $flight = entradas::create([
 "ClaveEnt"=>"",
  "Fecrecepcion"=>\Carbon\Carbon::parse($factura->fechaRecepcion)->format('Y-m-d'),
@@ -365,7 +438,7 @@ $arreglo[$key]=$value;
  "Clavetipent"=>$factura->tipoEntrada,
  "Observaciones"=>$factura->Observacion,
  "Claveprov"=>$factura->Proveedor,
- "Usrrecibio"=>"",
+ "Usrrecibio"=>\Auth::User()->id_usuario,
  "Fecfiniquito"=>\Carbon\Carbon::today('America/Mexico_City')->format('Y-m-d'),
  "fecfinconsigna"=>\Carbon\Carbon::parse($factura->fechaConsignacion)->format('Y-m-d'),
  "Usralta"=>""
@@ -376,7 +449,7 @@ $arreglo[$key]=$value;
   $flight->save();
   $id_factura=$flight->id_entrada;
 
-for ($i=0; $i < count($value); $i++) { 
+for ($i=0; $i < count($entradas->pk_libro); $i++) { 
     $entradas_detalles = new entradas_detalles;
     $entradas_detalles->Claveent=$flight->id_entrada;
   
@@ -387,10 +460,11 @@ $entradas_detalles = entradas_detalles::create(["Claveent"=>$flight->id_entrada,
     "Codigobarr"=>intval($entradas->pk_libro[$i]), 
     "Cantidad"   =>intval($entradas->cantidadArticulo[$i]), 
     "Preciolista"=>floatval($entradas->precioUnitarioProducto[$i]),
-     "Descprov" =>floatval($entradas->descuentoCompraArticulo[$i]), 
-     "Claveprov"=>floatval($entradas->descuentoVentaArticulo[$i])
-     , "Observación"=>$entradas->ObservacionArticulo[$i]
-     , "fechaColofon"=>$colofon]);
+     "Descprov" =>floatval($entradas->descuentoCompraArticulo[$i]),
+     "descuentoVentaArticulo" =>floatval($entradas->descuentoVentaArticulo[$i]),
+     "Claveprov"=>$provedorObtenido[0]->Claveprov,
+      "Observación"=>$entradas->ObservacionArticulo[$i],
+      "fechaColofon"=>$colofon]);
 
 
 

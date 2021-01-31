@@ -11,6 +11,7 @@ class ventas extends Model
     protected $primaryKey='id_venta';
 
        protected $fillable = [
+
     	'Clavevent','Fecventa','Horaventa','Usrventa','Subtotal','IVA','Totalventa','Cobrado','Descuento',
         'Tipocli','Credencial','Nombrecli','Dependencia','Fecbaja','horabaja','Usrbaja','Observaciones'
         

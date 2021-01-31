@@ -9,7 +9,7 @@ class devolucion extends Model
     //
        protected $primaryKey = "id_devolucion";
     protected $table = "devolucion";
-    protected $fillable = [ "fk_emtrada_detalle", "cantidad", "fechaDevolucion", "quien", "dinero"];
+    protected $fillable = [ "fk_emtrada_detalle", "cantidad", "fechaDevolucion", "quien", "dinero","observacion_Salida"];
  public $timestamps = false;
 
 

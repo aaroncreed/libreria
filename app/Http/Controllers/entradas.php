@@ -65,8 +65,34 @@ return $pdf->setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => tr
           'subtotal'=>$subtotal,
           'pagar'=>$pagar
             ];
-// return view('ingresarLibro.pdf.reporteSalida',compact("data"));
-        $pdf = \PDF::loadView('ingresarLibro.pdf.reporteSalida', $data);
+// return view('ingresarLibro.pdf.reporteSalidaVenta',compact("data"));
+            // $pdf = \PDF::loadView('ingresarLibro.pdf.reporteSalida', $data);
+        $pdf = \PDF::loadView('ingresarLibro.pdf.reporteSalidaVenta', $data);
+return $pdf->setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->download(''.$id.'.pdf');
+    }
+    public function reporteSalidaProvedor($id)
+    {
+
+        $entrada=entra::with("catalogoTipoEntrada","catalogoProveedor","detalleDevolucion")->where("id_entrada",$id)->get();
+        // dd($entrada);
+        $cantidad=0;
+        $total=0;
+        $subtotal=0;
+        $descuento=0;
+        $pagar=0;
+           $data = [
+          'title' => 'ReporteDevolucion',
+          'heading' => 'Reporte Devolucion Pagar Proveedor',
+          'content' => $entrada,  
+          'cantidad'=> $cantidad,  
+          'total' => $total,
+          'descuento'=>$descuento,
+          'subtotal'=>$subtotal,
+          'pagar'=>$pagar
+            ];
+// return view('ingresarLibro.pdf.reporteSalidaVenta',compact("data"));
+            $pdf = \PDF::loadView('ingresarLibro.pdf.reporteSalida', $data);
+        // $pdf = \PDF::loadView('ingresarLibro.pdf.reporteSalidaVenta', $data);
 return $pdf->setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->download(''.$id.'.pdf');
     }
 }
