@@ -249,10 +249,14 @@ return response()->json(["mes"=>"ok"]);
     public function CancelarTicket(Request $request)
     {
         // dd(ventas::where("id_venta",$request->id)->get());
+        // dd(\Carbon\Carbon::now('America/Mexico_City')->format('H:i:s.u'));
                 try{
  DB::beginTransaction();
  
- ventas::where("id_venta",$request->id)->update(['Usrbaja' => \Auth::User()->id_usuario]);
+ ventas::where("id_venta",$request->id)->update(['Usrbaja' => \Auth::User()->id_usuario,
+                                                'Fecbaja'=>\Carbon\Carbon::now('America/Mexico_City')->format('Y-m-d'),
+                                                'horabaja'=>\Carbon\Carbon::now('America/Mexico_City')->format('H:i:s.u'),
+]);
         $detalle=ventas_detalle::where("Clavevent",$request->id)->get();
         foreach ($detalle as $key => $value) {
             # code...
