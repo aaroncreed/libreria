@@ -32,7 +32,7 @@
            
         <tr class="nuevoTabla">
             <td class="nuevoTabla  cantidad">  {{$duc->cantidad->cantidad}}</td>
-            <td class="nuevoTabla  producto">  {{$duc->libro->titulo}}</td>
+            <td class="nuevoTabla  producto">  {{$duc->titulo}}</td>
              <td class="nuevoTabla  producto">  {{$duc->libro->Codbarras}}</td>
             <td class="nuevoTabla  precio">  {{$duc->detalle[0]->Precioventa}}</td>
         </tr>

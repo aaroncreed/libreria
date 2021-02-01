@@ -52,7 +52,22 @@
         <td>{{$val->Cobrado}}</td>
        
        <td>{{$val->tipoCliente->Desctipo}}</td>
+
       </tr> 
+   <tr>
+    <td colspan="6"><strong>Libros: </strong></td>
+   </tr>
+        @foreach($val->detalleVentaLibro as $detalle=>$valordetalle)
+        <tr>
+          <td>
+          <td><strong>Cantidad:</strong> </td>
+             <td>{{$valordetalle->Cantidad}}</td>
+             <td><strong>Titulo:</strong> </td>
+             <td colspan="3">{{$valordetalle->libro[0]->Titulo}}</td>
+             </td>
+           </tr>
+        @endforeach
+
       @endforeach
 
 </tbody>

@@ -119,6 +119,7 @@ $elMasvendido = $this->maxValueInArray($librosVendidos, "Cantidad");
 //  dd($elMasvendido,
 // $ventas,
 // $librosNuevos);
+date_default_timezone_set('America/Mexico_City');
 
         return view('ingresarLibro/Utilerias',compact("elMasvendido","ventas","ventash","librosNuevos","casaeditorial"));
     }
@@ -441,7 +442,7 @@ $arreglo[$key]=$value;
  "Usrrecibio"=>\Auth::User()->id_usuario,
  "Fecfiniquito"=>\Carbon\Carbon::today('America/Mexico_City')->format('Y-m-d'),
  "fecfinconsigna"=>\Carbon\Carbon::parse($factura->fechaConsignacion)->format('Y-m-d'),
- "Usralta"=>""
+ "Usralta"=>\Auth::User()->id_usuario
 
   ]);
   $hoy=\Carbon\Carbon::today('America/Mexico_City')->format('Y-m-d');
@@ -469,7 +470,14 @@ $entradas_detalles = entradas_detalles::create(["Claveent"=>$flight->id_entrada,
 
 
 
-
+// 0: {name: "pk_libro", value: "5"}
+// 1: {name: "precioUnitarioProducto", value: "999.99"}
+// 2: {name: "cantidadArticulo", value: "5"}
+// 3: {name: "descuentoCompraArticulo", value: "50"}
+// 4: {name: "descuentoVentaArticulo", value: "50"}
+// 5: {name: "ObservacionArticulo", value: ""}
+// 6: {name: "finalProducto", value: "2499.975"}
+// 7: {name: "fechaColofonArticulo", value: ""}
 
 
 
@@ -479,8 +487,8 @@ $entradas_detalles = entradas_detalles::create(["Claveent"=>$flight->id_entrada,
 
  $libro = Literal::where('id_libro', intval($entradas->pk_libro[$i]))->first();
 $libro->Existencia+=intval($entradas->cantidadArticulo[$i]);
-$libro->Costo=floatval($entradas->descuentoCompraArticulo[$i]);
-$libro->Preciolista=floatval($entradas->precioUnitarioProducto[$i]);
+$libro->Costo=floatval($entradas->precioUnitarioProducto[$i]);
+// $libro->Preciolista=floatval($entradas->precioUnitarioProducto[$i]);
 $libro->Descuento=floatval($entradas->descuentoVentaArticulo[$i]);
 
  $libro->save();

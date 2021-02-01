@@ -15,7 +15,7 @@
 
 <p class="centrado tama">CALLE 60 NO. 469 ENTRE 53 Y 55</p>
 <p class="centrado tama">CENTRO MERIDA YUCATAN MEXICO 97000</p>
-<p class="centrado tama">{{Carbon\Carbon::now("America/Mexico_City")}}</p>
+<p class="centrado tama">{{$venta[0]->Fecventa}}</p>
  <p class="centrado">No. venta: {{$venta[0]->id_venta}}</p>
     <table>
         <thead>

@@ -187,7 +187,7 @@ let rowss=tabla[0].rows;
 let cantidad=0;
 let total=0;
 rowss.length==0 ? $("#ingresarProducto").addClass("disabled") : "";
-rowss.length==0 ?  $("#totalFactura").val(0) : "";
+// rowss.length==0 ?  $("#totalFactura").val(0) : "";
 
 for (var ia = rowss.length - 1; ia >= 0; ia--) {
 
@@ -206,7 +206,7 @@ $("#subtotal").text(total.toFixed(2))
 
         $("#totalCompleto").text(isNaN(completoConIva.toFixed(2))?"0.00" : completoConIva.toFixed(2)   );
 $("#seCobra").text(completoConIva.toFixed(2)  )
-$("#totalFactura").val(completoConIva.toFixed(2))
+// $("#totalFactura").val(completoConIva.toFixed(2))
         // console.log(elemento.parentElement.parentElement,"click")
 }
 
@@ -326,7 +326,7 @@ let cantid = iva==0 ? summar : (iva*summar) + summar
 let canti=parseFloat(cantid)
 
 $("#totalCompleto").text(canti.toFixed(2) );
-$("#totalFactura").val(canti.toFixed(2));
+// $("#totalFactura").val(canti.toFixed(2));
 $("#seCobra").text(canti.toFixed(2) )
     }
 
@@ -453,7 +453,7 @@ let rowss=tabla[0].rows;
 let cantidad=0;
 let total=0;
 rowss.length==0 ? $("#ingresarProducto").addClass("disabled") : "";
-rowss.length==0 ?  $("#totalFactura").val(0) : "";
+// rowss.length==0 ?  $("#totalFactura").val(0) : "";
 
 for (var ia = rowss.length - 1; ia >= 0; ia--) {
 
@@ -557,7 +557,7 @@ for (var i = data.length - 1; i >= 0; i--) {
      '       <input type="number" class="form-control cantidad" style="text-align:right"  value="">'+
  '           </div></td>'+
           '  <td class="col-ms-6"><div class="pull-right">'+
-        '    <input type="text" class="form-control precio_venta" style="text-align:right" value="'+data[i].Preciolista+'">'+
+        '    <input type="text" class="form-control precio_venta" style="text-align:right" value="'+data[i].Costo+'">'+
            ' </div></td>'+
         '    <td class="text-center"><a class="btn btn-info" href="#" onclick="agregar('+data[i].id_libro+',this)"><i class="glyphicon glyphicon-plus">+</i></a></td>'+
           '</tr>'

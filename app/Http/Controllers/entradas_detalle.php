@@ -46,7 +46,8 @@ $observacion=$request->observacion;
 // 	dd($factura,$partes,$cantidad,[
 // "fk_emtrada_detalle"=>$partes->devolverEntrada[$i], "cantidad"=>$partes->existenciaDevolver[$i], "fechaDevolucion"=>\Carbon\Carbon::parse($factura->fechaRecepcion)->format('Y-m-d'), "quien"=>\Auth::user()->id_usuario, "dinero"=>$partes->precio[$i] * ($partes->entrada[$i] - $partes->existenciaDevolver[$i])
 // 	]);
-
+// $i=0;
+// dd($cantidad);
 // }
 // die;
 try {
@@ -55,7 +56,7 @@ try {
 	# code...
 	devolucion::create([
 "fk_emtrada_detalle"=>$partes->devolverEntrada[$i], "cantidad"=>$partes->existenciaDevolver[$i], "fechaDevolucion"=>\Carbon\Carbon::parse($factura->fechaRecepcion)->format('Y-m-d'), "quien"=>\Auth::user()->id_usuario, "dinero"=>$partes->precio[$i] * ($partes->entrada[$i] - $partes->existenciaDevolver[$i]),
-"observacion_Salida"=>$$observacion
+"observacion_Salida"=>$observacion
 	]);
 
 	$detalle=dettt::with("libro","entrada")->where("id_detallleEntrada",$partes->devolverEntrada[$i])->get();
