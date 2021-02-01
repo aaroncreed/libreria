@@ -28,46 +28,69 @@
 <table width="100%" style="width:100%" border="0">
   <thead>
     <tr>
-      <th>Fecha venta</th>
-      <th>Subtotal</th>
-      <th>IVA</th>
-      <th>Descuento</th>
-      <th>Total Venta</th>   
-      <th>Cambio</th>
-      <th>Tipo Cliente</th>
+      <th>Ticket venta</th>
+      <th>Precio Lista</th>
+      <th>Cantidad</th>
+      <th>Titulo</th>
+      <th>Descuento</th>   
+
       
                 
     </tr>
   </thead>
 <tbody>
   @foreach($content as $ke=>$val)
-    <tr>
-<!-- "id_detallleEntrada":4,"Claveent":23,"Codigobarr":2,"Cantidad":9,"Preciolista":"20.00","Descprov":"0.00","Claveprov":"0.00","Observaci\u00f3n":"","fechaColofon":null -->
-        <td>{{$val->Fecventa}}</td>
-        <td>{{$val->Subtotal}}</td>
-        <td>{{$val->IVA}}</td>
-        <td>{{$val->Descuento}}</td>
-        <td>{{$val->Totalventa}}</td>
-     
-        <td>{{$val->Cobrado}}</td>
-       
-       <td>{{$val->tipoCliente->Desctipo}}</td>
-
-      </tr> 
-   <tr>
+  
+<!--    <tr>
     <td colspan="6"><strong>Libros: </strong></td>
-   </tr>
+   </tr> -->
         @foreach($val->detalleVentaLibro as $detalle=>$valordetalle)
         <tr>
-          <td>
-          <td><strong>Cantidad:</strong> </td>
+         <td>{{$val->id_venta}}</td>
+         <td>{{$valordetalle->Precioventa}}</td>
+   
              <td>{{$valordetalle->Cantidad}}</td>
-             <td><strong>Titulo:</strong> </td>
-             <td colspan="3">{{$valordetalle->libro[0]->Titulo}}</td>
-             </td>
+             <td>{{$valordetalle->libro[0]->Titulo}} </td>
+            <td>{{$valordetalle->Descuento}} </td>
            </tr>
         @endforeach
+    
 
+        <!-- <td>{{$val->Fecventa}}</td> -->
+        <tr style="display: none;">
+        <td colspan="6" align=Right><strong>Subtotal:</strong> {{$subtotal+=$val->Subtotal}}</td>
+        </tr>
+  <!--       <tr>
+        <td colspan="6" align=Right><strong>IVA:</strong> {{$val->IVA}}</td>
+        </tr>
+        <tr> -->
+    <!--     <td colspan="6" align=Right><strong>Descuento:</strong> {{$val->Descuento}}</td>
+        </tr> -->
+        <tr style="display: none;">
+        <td colspan="6" align=Right><strong>Total Venta:</strong> {{$totalVenta+=$val->Totalventa}}</td>
+        </tr>
+        <tr style="display: none;">
+        <td colspan="6" align=Right><strong>Cambio:</strong> {{$totaldevuelto+=$val->Cobrado}}</td>
+       </tr>
+       <!-- <td>c: {{$cantidad==$ke+1}} b: {{$cantidad}}  a: {{$ke+1}}</td> -->
+       @if($cantidad==$ke+1)
+        <tr >
+        <td colspan="6" align=Right><strong>Subtotal:</strong> {{$subtotal}}</td>
+        </tr>
+  <!--       <tr>
+        <td colspan="6" align=Right><strong>IVA:</strong> {{$val->IVA}}</td>
+        </tr>
+        <tr> -->
+    <!--     <td colspan="6" align=Right><strong>Descuento:</strong> {{$val->Descuento}}</td>
+        </tr> -->
+        <tr >
+        <td colspan="6" align=Right><strong>Total Venta:</strong> {{$totalVenta}}</td>
+        </tr>
+        <tr >
+        <td colspan="6" align=Right><strong>Cambio:</strong> {{$totaldevuelto}}</td>
+       </tr>
+       @endif
+     
       @endforeach
 
 </tbody>

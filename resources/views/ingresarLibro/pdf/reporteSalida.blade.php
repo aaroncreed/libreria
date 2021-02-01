@@ -41,7 +41,7 @@
 			<th>Precio Lista</th>		
 			<th>Descuento</th>
 			<th>Costo Uni.</th>
-			<th>Impte.</th>
+			<th style="display: none;">Impte.</th>
 			<th style="display: none;">Pagar</th>
 								
 		</tr>
@@ -64,7 +64,7 @@
         <td>{{$val->Preciolista}}</td>
         <td>{{$val->Descprov}}$</td>
         <td>{{ $val->Preciolista - ($val->Descprov >0 ? $val->Preciolista * ($val->Descprov * .010) : 0)}} <div style="display: none;"> {{$descuento  +=($val->Descprov >0 ? $val->Preciolista * ($val->Descprov * .010) : 0)}}</div> </td>
-        <td>{{ $val->Cantidad * ($val->Preciolista - ($val->Descprov >0 ? $val->Preciolista * ($val->Descprov * .010) : 0))}} <div style="display: none;">{{ $total += ($val->Cantidad * ($val->Preciolista - ($val->Descprov >0 ? $val->Preciolista * ($val->Descprov * .010) : 0)))}}</div></td>
+        <td style="display: none;">{{ $val->Cantidad * ($val->Preciolista - ($val->Descprov >0 ? $val->Preciolista * ($val->Descprov * .010) : 0))}} <div style="display: none;">{{ $total += ($val->Cantidad * ($val->Preciolista - ($val->Descprov >0 ? $val->Preciolista * ($val->Descprov * .010) : 0)))}}</div></td>
         <td style="display: none;">	{{$val->devolucion[0]->dinero}} <div style="display: none;"> {{$pagar += $val->devolucion[0]->dinero}}</div></td>
       </tr> 
       @endforeach
@@ -76,7 +76,7 @@
   	<tr>
   		<td colspan="3">Observaciones:</td>
   		<td>Cantidad: {{$cantidad}}</td>
-  		<td>IMPTE. : {{$total}}</td>
+  		<!-- <td>IMPTE. : {{$total}}</td> -->
   	</tr>
   	<tr>
   		<td colspan="3"></td>
@@ -86,13 +86,13 @@
   		<tr>
   		<td colspan="3"></td>
   		<td></td>
-  		<td>SubTotal: {{$descuento + $total }}</td>
+  		<!-- <td>SubTotal: {{$descuento + $total }}</td> -->
   	</tr>
   	</tr>
   		<tr>
   		<td colspan="3"></td>
   		<td></td>
-  		<td>Total: {{ $total }}</td>
+  		<!-- <td>Total: {{ $total }}</td> -->
   	</tr>
 </tr>
   		<tr>

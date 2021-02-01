@@ -27,19 +27,24 @@ class ventas_detalle extends Controller
 });
         $resultado= !empty($proveedor) && $proveedor!="" ? $filtered : $entrada;
         // dd($filtered);
-        $cantidad=0;
+        $cantidad=count($resultado);
         $total=0;
         $subtotal=0;
         $descuento=0;
         $pagar=0;
+        // dd($cantidad,$resultado);
+//         subtotal
+// totalVenta
+// totaldevuelto
            $data = [
           'title' => 'Reporte de venta',
           'heading' => 'Reporte de Venata',
           'content' => $resultado,  
-          // 'cantidad'=> $cantidad,  
-          // 'total' => $total,
-          // 'descuento'=>$descuento,
-          // 'subtotal'=>$subtotal,
+          ///
+          'cantidad'=> $cantidad,  
+          'subtotal' => $total,
+          'totalVenta'=>$descuento,
+          'totaldevuelto'=>$subtotal,
           // 'pagar'=>$pagar
             ];
 // return view('ingresarLibro.pdf.reporteSalida',compact("data"));

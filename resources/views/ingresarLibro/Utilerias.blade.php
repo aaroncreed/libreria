@@ -68,11 +68,11 @@ librosNuevos -->
         </div>
         <div class="panel-body">
         <form id="reporte">
-           <div class="form-group col-md-6 d-none">
+           <div class="form-group col-md-6">
             <label for="inicio">Fecha inicio</label>
           <input type="date" id="inicio" class="form-control" name="inicio"  value="<?php echo date('Y-m-d'); ?>" />
         </div>
-         <div class="form-group col-md-6 d-none">
+         <div class="form-group col-md-6 ">
           <label for="fin">Fecha fin</label>
           <input type="date" id="fin" class="form-control" name="fin" value="<?php echo date("Y-m-d", strtotime("+1 day")); ?>" >
         </div>

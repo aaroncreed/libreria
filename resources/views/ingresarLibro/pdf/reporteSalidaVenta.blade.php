@@ -63,9 +63,22 @@
         </td>
         <!-- <td>{{$val->Preciolista}}</td> -->
         <td>{{$val->Descprov}}%</td>
-        <td>{{ $val->Preciolista }} <div style="display: none;"> {{$descuento  +=($val->Descprov >0 ? $val->Preciolista * ($val->Descprov * .010) : 0)}}</div> </td>
-        <td>{{ $val->Descprov >0 ? (($val->Descprov >0 ? $val->Preciolista * ($val->Descprov * .010) : 0)) : 0}} <div style="display: none;">{{ $total += ($val->devolucion[0]->cantidad * ($val->Preciolista - ($val->Descprov >0 ? $val->Preciolista * ($val->Descprov * .010) : 0)))}}</div></td>
-        <td>	{{ $val->Descprov >0 ? ($val->Preciolista - ($val->Descprov >0 ? $val->Preciolista * ($val->Descprov * .010) : 0)) : 0}} <div style="display: none;"> {{$pagar += $val->devolucion[0]->cantidad  >0 ? ($val->Preciolista - ($val->Descprov >0 ? $val->Preciolista * ($val->Descprov * .010) : 0)) : 0}}</div></td>
+        <td>{{ $val->Preciolista }}
+         <div style="display: none;"> {{$descuento  +=($val->Descprov >0 ? $val->Preciolista * ($val->Descprov * .010) : 0)}}</div> 
+       </td>
+        <td>{{ ($val->Descprov >0 ? $val->Preciolista * ($val->Descprov * .010) : 0) }} 
+
+          <div style="display: none;">
+            {{ $total += ($val->devolucion[0]->cantidad * ($val->Preciolista - ($val->Descprov >0 ? $val->Preciolista * ($val->Descprov * .010) : 0)))}}
+          </div>
+        </td>
+
+
+        <td>	{{ $val->devolucion[0]->cantidad * ($val->Preciolista - ($val->Descprov >0 ? $val->Preciolista * ($val->Descprov * .010) : 0)) }} 
+          <div style="display: none;">{{$subtotal+= $val->devolucion[0]->cantidad * $val->Preciolista}}</div>
+          <div style="display: none;"> {{$pagar += $val->devolucion[0]->cantidad  >0 ? ($val->Preciolista - ($val->Descprov >0 ? $val->Preciolista * ($val->Descprov * .010) : 0)) : 0}}
+          </div>
+        </td>
       </tr> 
       @endforeach
 
@@ -81,7 +94,7 @@
   	<tr>
   		<td colspan="3"></td>
   		<td></td>
-  		<td>IMPTE. : {{$total}}</td>
+  		<td>Total Bruto. : {{$subtotal}} </td>
   	</tr>
   		<tr>
   		<td colspan="3"></td>
@@ -92,13 +105,13 @@
   		<tr>
   		<td colspan="3"></td>
   		<td></td>
-  		<td>Total: {{ $total }}</td>
+  		<td>Total Descuento: {{ $descuento }}</td>
   	</tr>
 </tr>
   		<tr>
   		<td colspan="3"></td>
   		<td></td>
-  		<td>Importe Total: {{ $pagar }}</td>
+  		<td>Importe Total: {{$total}}</td>
   	</tr>
    
 
